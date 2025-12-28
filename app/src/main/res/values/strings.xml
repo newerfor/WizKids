@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">WizKids</string>
+    <string name="title_activity_add_new_child">AddNewChildActivity</string>
+    <string name="title_activity_child_information">ChildInformation</string>
+    <string name="title_activity_add_new_or_change_child">AddNewOrChangeChildActivity</string>
+    <string name="title_activity_calendar">CalendarActivity</string>
+    <string name="title_activity_upcomin_dates">UpcominDatesActivity</string>
+</resources>
