@@ -33,7 +33,7 @@ class DateHelper {
             if (day < 10) {
                 "0$day.$mounth.$year"
             } else {
-                "$day.0$mounth.$year"
+                if(mounth < 10) "$day.0$mounth.$year" else ("$day.$mounth.$year")
             }
         }
     }
