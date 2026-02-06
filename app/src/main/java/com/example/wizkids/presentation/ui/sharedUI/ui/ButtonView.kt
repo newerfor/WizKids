@@ -1,16 +1,19 @@
 package com.example.wizkids.presentation.ui.sharedUI.ui
 
+import android.R.attr.button
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.wizkids.presentation.sharedUI.TextFont
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.BUTTON_VISIBLE_DEFAULT_PADDING
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.BUTTON_VISIBLE_WEIGHT
+import com.example.wizkids.ui.theme.darkHeader
 
 class ButtonView {
     @Composable
@@ -23,9 +26,10 @@ class ButtonView {
             for (button in buttonNames) {
                 Button(
                     onClick = button.value,
-                    Modifier
-                        .weight(BUTTON_VISIBLE_WEIGHT)
-                        .padding(end = padding.dp)
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = darkHeader
+                    ),
+                    modifier = Modifier.weight(BUTTON_VISIBLE_WEIGHT).padding(end = padding.dp)
                 ) {
                     textFont.WhiteText(button.key)
                 }
