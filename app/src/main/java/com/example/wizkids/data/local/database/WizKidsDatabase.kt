@@ -10,7 +10,10 @@ import com.example.wizkids.data.local.entity.ChildEntity
 import com.example.wizkids.data.local.entity.UserEntity
 import com.example.wizkids.data.local.entity.VisitEntity
 
-@Database(entities = [ChildEntity::class, VisitEntity::class, UserEntity::class], version = DATABASE_VERSION)
+@Database(
+    entities = [ChildEntity::class, VisitEntity::class, UserEntity::class],
+    version = DATABASE_VERSION
+)
 @TypeConverters(Converters::class)
 abstract class WizKidsDatabase : RoomDatabase() {
     abstract fun wizKidsDao(): WizKidsDao

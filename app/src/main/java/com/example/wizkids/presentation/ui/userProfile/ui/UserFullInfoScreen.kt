@@ -11,8 +11,8 @@ import com.example.wizkids.domain.model.DomainDocumentsModel
 import com.example.wizkids.domain.model.DomainUserModel
 import com.example.wizkids.presentation.UserProfile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME
 import com.example.wizkids.presentation.UserProfile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardValueGrayAndWhiteText
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
+import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardValueGrayAndWhiteText
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationImageAndPayStatus
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
 import com.example.wizkids.presentation.sharedUI.InputInformationCard
@@ -34,18 +34,19 @@ class UserFullInfoScreen {
         userViewModel: UserViewModel
     ) {
         val mutableImage = remember { mutableStateOf<String?>(userInfo.imagePath) }
-        val currentYear = LocalDate.now().year
         var mutableDocs = remember { mutableStateListOf<DomainDocumentsModel>() }
         val parts = userInfo.name.trim().split(" ")
-        val userFirstName = remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME]) }
-        val userLastName = remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME]) }
+        val userFirstName =
+            remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME]) }
+        val userLastName =
+            remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME]) }
         mutableDocs.addAll(userInfo.documents)
         ChildInformationCardBackGround().InformationCardbackGround {
             ChildInformationImageAndPayStatus().InformationImageAndPayStatus(
                 textFont,
                 mutableImage,
                 firstName = userFirstName,
-                lastName =userLastName
+                lastName = userLastName
             )
             InputInformationCard().AddInformationCard(
                 stringResource(R.string.basic_information),

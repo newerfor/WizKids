@@ -16,7 +16,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.wizkids.R
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant
 import com.example.wizkids.presentation.sharedUI.TextFieldVisible
 import com.example.wizkids.presentation.sharedUI.TextFont
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_FINANCE

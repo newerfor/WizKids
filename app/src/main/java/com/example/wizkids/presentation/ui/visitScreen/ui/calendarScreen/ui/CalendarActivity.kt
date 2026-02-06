@@ -2,7 +2,6 @@ package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -18,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
+import com.example.wizkids.R
 import com.example.wizkids.presentation.dateScreeen.ui.VisitControlState
 import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_MAIN_CONTAINER_WEIGHT
 import com.example.wizkids.presentation.sharedUI.NavHelper
@@ -26,7 +26,7 @@ import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
 import com.example.wizkids.ui.theme.WizKidsTheme
 import org.koin.androidx.compose.koinViewModel
-import com.example.wizkids.R
+
 class CalendarActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,13 +39,18 @@ class CalendarActivity : ComponentActivity() {
                     Column(Modifier.weight(CALENDAR_ACTIVITY_MAIN_CONTAINER_WEIGHT)) {
                         CalendarScreen(context = context)
                     }
-                    Column(Modifier.fillMaxWidth(),Arrangement.Bottom,Alignment.CenterHorizontally){
+                    Column(
+                        Modifier.fillMaxWidth(),
+                        Arrangement.Bottom,
+                        Alignment.CenterHorizontally
+                    ) {
                         NavHelper().Footer(context = context)
                     }
                 }
             }
         }
     }
+
     @Composable
     fun CalendarScreen(
         visitViewModel: VisitViewModel = koinViewModel(),
@@ -59,8 +64,16 @@ class CalendarActivity : ComponentActivity() {
         LaunchedEffect(Unit) {
             visitViewModel.getVisit()
         }
-        VisitControlState().ControlState(visitUiState,textFont,visitViewModel){ visit->
-            CalendarCard().Calendar(visit,textFont,allChildUiState,childByIdUiState,visitViewModel,context,childViewModel)
+        VisitControlState().ControlState(visitUiState, textFont, visitViewModel) { visit ->
+            CalendarCard().Calendar(
+                visit,
+                textFont,
+                allChildUiState,
+                childByIdUiState,
+                visitViewModel,
+                context,
+                childViewModel
+            )
         }
     }
 }

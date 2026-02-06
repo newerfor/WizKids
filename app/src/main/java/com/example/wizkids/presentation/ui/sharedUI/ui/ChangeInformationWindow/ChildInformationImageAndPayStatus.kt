@@ -37,14 +37,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-
 import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_DEFAULT_VALUE_PAY_STATUS
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_BALANCE_DEBT_VALUE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_DEBT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_NOT_PAYED
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAYED
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAY_SOON
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_INITIAL_FIRST_NAME_INDEX
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_INITIAL_SECOND_NAME_INDEX
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_SHAPE
@@ -58,12 +51,7 @@ import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstan
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_SPACER_HEIGHT
 import com.example.wizkids.presentation.ui.sharedUI.ui.ChildPayStatusHelper
-import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.lightGray
-import com.example.wizkids.ui.theme.payDebt
-import com.example.wizkids.ui.theme.payFalse
-import com.example.wizkids.ui.theme.payLater
-import com.example.wizkids.ui.theme.payTrue
 import com.example.wizkids.ui.theme.redColor
 import com.example.wizkids.util.ImageHelper
 import java.util.UUID
@@ -79,7 +67,7 @@ class ChildInformationImageAndPayStatus {
         isChangeAct: Boolean = false,
         firstName: MutableState<String>,
         lastName: MutableState<String>
-        ){
+    ) {
         var payStatus by remember { mutableStateOf("") }
         var payColor by remember { mutableStateOf(Color.Transparent) }
         var imageUri by remember { mutableStateOf<Uri?>(null) }
@@ -94,16 +82,16 @@ class ChildInformationImageAndPayStatus {
                 if (uri != null) {
                     val fileName = "${UUID.randomUUID()}.jpg"
                     childImage?.value =
-                        ImageHelper().saveImageToLocalStorage(context, uri, fileName,childImage)
+                        ImageHelper().saveImageToLocalStorage(context, uri, fileName, childImage)
                             .toString()
                 }
             }
         )
         LaunchedEffect(balance) {
-            payStatus = ChildPayStatusHelper().calculatePayStatus(balance?:0, price?:0)
-            payColor =ChildPayStatusHelper().colorPayStatus(payStatus)
+            payStatus = ChildPayStatusHelper().calculatePayStatus(balance ?: 0, price ?: 0)
+            payColor = ChildPayStatusHelper().colorPayStatus(payStatus)
         }
-        Column(Modifier.fillMaxWidth()){
+        Column(Modifier.fillMaxWidth()) {
             Column(
                 Modifier.fillMaxWidth(),
                 Arrangement.Center,
@@ -116,14 +104,16 @@ class ChildInformationImageAndPayStatus {
                         .border(
                             width = if (childImageError) INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH_ERROR.dp else INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH.dp,
                             color = if (childImageError) redColor else lightGray,
-                            shape = RoundedCornerShape(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_SHAPE.dp)
+                            shape = RoundedCornerShape(
+                                INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_SHAPE.dp
+                            )
                         )
                         .background(lightGray)
                         .clickable(
                             interactionSource = remember { MutableInteractionSource() },
                             indication = rememberRipple()
                         ) {
-                            if(isChangeAct){
+                            if (isChangeAct) {
                                 launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
                             }
                         },
@@ -137,21 +127,23 @@ class ChildInformationImageAndPayStatus {
                             tint = redColor
                         )
                     }
-                    if(childImage?.value==null || childImage.value==""){
-                        textFont.ItalyText("${
-                            if(firstName.value.isNotEmpty()){
-                                firstName.value[INFORMATION_INITIAL_FIRST_NAME_INDEX]
-                            }else{
-                                ""
-                            }
-                        } ${
-                            if(lastName.value.isNotEmpty()){
-                                lastName.value[INFORMATION_INITIAL_SECOND_NAME_INDEX]
-                            }else{
-                                ""
-                            }
-                        }")
-                    }else{
+                    if (childImage?.value == null || childImage.value == "") {
+                        textFont.ItalyText(
+                            "${
+                                if (firstName.value.isNotEmpty()) {
+                                    firstName.value[INFORMATION_INITIAL_FIRST_NAME_INDEX]
+                                } else {
+                                    ""
+                                }
+                            } ${
+                                if (lastName.value.isNotEmpty()) {
+                                    lastName.value[INFORMATION_INITIAL_SECOND_NAME_INDEX]
+                                } else {
+                                    ""
+                                }
+                            }"
+                        )
+                    } else {
                         childImage.value?.let { image ->
                             if (image.isNotEmpty()) {
                                 AsyncImage(
@@ -166,9 +158,23 @@ class ChildInformationImageAndPayStatus {
                 }
             }
             Spacer(Modifier.height(INFORMATION_IMAGE_AND_PAY_STATUS_SPACER_HEIGHT.dp))
-            Column(Modifier.fillMaxWidth(),Arrangement.Center,Alignment.CenterHorizontally){
-                Column(Modifier.clip(RoundedCornerShape(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_CLIP.dp)).background(payColor)){
-                    textFont.WhiteText(payStatus, modifier = Modifier.padding(horizontal = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_HORIZONTAL.dp, vertical = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL.dp))
+            Column(Modifier.fillMaxWidth(), Arrangement.Center, Alignment.CenterHorizontally) {
+                Column(
+                    Modifier
+                        .clip(
+                            RoundedCornerShape(
+                                INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_CLIP.dp
+                            )
+                        )
+                        .background(payColor)
+                ) {
+                    textFont.WhiteText(
+                        payStatus,
+                        modifier = Modifier.padding(
+                            horizontal = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_HORIZONTAL.dp,
+                            vertical = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL.dp
+                        )
+                    )
                 }
             }
         }

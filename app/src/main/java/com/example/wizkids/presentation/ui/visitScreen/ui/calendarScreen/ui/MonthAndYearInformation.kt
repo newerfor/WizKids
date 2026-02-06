@@ -30,11 +30,21 @@ import com.example.wizkids.ui.theme.whiteColor
 
 class MonthAndYearInformation {
     @Composable
-    fun MonthAndYearCard(textFont: TextFont, monthNumber: MutableState<Int>, yearNumber: MutableState<Int>) {
-        Row(Modifier.fillMaxWidth()){
+    fun MonthAndYearCard(
+        textFont: TextFont,
+        monthNumber: MutableState<Int>,
+        yearNumber: MutableState<Int>
+    ) {
+        Row(Modifier.fillMaxWidth()) {
             textFont.ItalyText("${DateHelper().getMonthName(monthNumber.value)} ${yearNumber.value}")
-            Row(Modifier.fillMaxWidth().clip(RoundedCornerShape(CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_CLIP.dp)).padding(end = CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_PADDING_END.dp),horizontalArrangement = Arrangement.End){
-                Row(Modifier.background(lightGray)){
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_CLIP.dp))
+                    .padding(end = CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_PADDING_END.dp),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Row(Modifier.background(lightGray)) {
                     Icon(
                         imageVector = Icons.Filled.KeyboardArrowLeft,
                         contentDescription = "",
@@ -43,7 +53,7 @@ class MonthAndYearInformation {
                             indication = rememberRipple()
                         ) {
                             monthNumber.value = DateHelper().getPreviousMonth(monthNumber.value)
-                            if(monthNumber.value == MAX_MONTH_COUNT) yearNumber.value--
+                            if (monthNumber.value == MAX_MONTH_COUNT) yearNumber.value--
                         },
                         tint = whiteColor
                     )
@@ -55,7 +65,7 @@ class MonthAndYearInformation {
                             indication = rememberRipple()
                         ) {
                             monthNumber.value = DateHelper().getNextMonth(monthNumber.value)
-                            if(monthNumber.value == MIN_MONTH_COUNT) yearNumber.value++
+                            if (monthNumber.value == MIN_MONTH_COUNT) yearNumber.value++
                         },
                         tint = whiteColor
                     )

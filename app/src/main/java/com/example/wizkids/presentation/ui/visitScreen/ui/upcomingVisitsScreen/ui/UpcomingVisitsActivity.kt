@@ -96,7 +96,7 @@ class UpcomingVisitsActivity : ComponentActivity() {
         }
         val visitUiState by visitViewModel.visitUiState.collectAsState()
         val childByIdUiState by childViewModel.childByIdState.collectAsState()
-        VisitControlState().ControlState(visitUiState, textFont,visitViewModel) { visit ->
+        VisitControlState().ControlState(visitUiState, textFont, visitViewModel) { visit ->
             UpcomingVisitsCard().UpcomingVisits(
                 visit,
                 textFont,

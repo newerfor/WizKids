@@ -18,7 +18,12 @@ import com.example.wizkids.ui.theme.textWhite
 
 class TextFont {
     @Composable
-    fun WhiteText(text:String, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Companion.Start,fontSize: Int = DEFAULT_FONT_SIZE){
+    fun WhiteText(
+        text: String,
+        modifier: Modifier = Modifier,
+        textAlign: TextAlign = TextAlign.Companion.Start,
+        fontSize: Int = DEFAULT_FONT_SIZE
+    ) {
         Text(
             text, color = textWhite, fontFamily = Inter,
             fontSize = fontSize.sp,
@@ -27,8 +32,14 @@ class TextFont {
             textAlign = textAlign
         )
     }
+
     @Composable
-    fun GrayText(text:String, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Companion.Start,fontSize: Int = DEFAULT_FONT_SIZE ){
+    fun GrayText(
+        text: String,
+        modifier: Modifier = Modifier,
+        textAlign: TextAlign = TextAlign.Companion.Start,
+        fontSize: Int = DEFAULT_FONT_SIZE
+    ) {
         Text(
             text = text,
             fontFamily = Inter,
@@ -39,8 +50,13 @@ class TextFont {
             textAlign = textAlign
         )
     }
+
     @Composable
-    fun ItalyText(text: String, modifier: Modifier = Modifier,fontSize: Int = DEFAULT_FONT_SIZE_ITALY_TEXT){
+    fun ItalyText(
+        text: String,
+        modifier: Modifier = Modifier,
+        fontSize: Int = DEFAULT_FONT_SIZE_ITALY_TEXT
+    ) {
         Text(
             text = text,
             fontFamily = Inter,
@@ -51,9 +67,12 @@ class TextFont {
             modifier = modifier
         )
     }
+
     @Composable
-    fun BlueText(text:String, modifier: Modifier = Modifier,
-                 textAlign: TextAlign = TextAlign.Companion.Start,fontSize: Int = DEFAULT_FONT_SIZE ){
+    fun BlueText(
+        text: String, modifier: Modifier = Modifier,
+        textAlign: TextAlign = TextAlign.Companion.Start, fontSize: Int = DEFAULT_FONT_SIZE
+    ) {
         Text(
             text, color = ButtonAndInfoBlue, fontFamily = Inter,
             fontSize = fontSize.sp,
@@ -62,8 +81,14 @@ class TextFont {
             textAlign = textAlign
         )
     }
+
     @Composable
-    fun WhiteSortedText(text:String, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Companion.Start,fontSize: Int = DEFAULT_FONT_SIZE){
+    fun WhiteSortedText(
+        text: String,
+        modifier: Modifier = Modifier,
+        textAlign: TextAlign = TextAlign.Companion.Start,
+        fontSize: Int = DEFAULT_FONT_SIZE
+    ) {
         Text(
             text, color = textWhite, fontFamily = Inter,
             fontSize = fontSize.sp,
@@ -73,9 +98,15 @@ class TextFont {
             maxLines = 1
         )
     }
+
     @Composable
-    fun UnColorText(text:String, modifier: Modifier = Modifier, textAlign: TextAlign = TextAlign.Companion.Start, fontSize: Int = DEFAULT_FONT_SIZE, color: Color,
-    ){
+    fun UnColorText(
+        text: String,
+        modifier: Modifier = Modifier,
+        textAlign: TextAlign = TextAlign.Companion.Start,
+        fontSize: Int = DEFAULT_FONT_SIZE,
+        color: Color,
+    ) {
         Text(
             text, color = color, fontFamily = Inter,
             fontSize = fontSize.sp,

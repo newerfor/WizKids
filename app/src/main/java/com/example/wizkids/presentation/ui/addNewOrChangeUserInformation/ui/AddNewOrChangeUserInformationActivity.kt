@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -15,7 +14,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.example.wizkids.R
-import com.example.wizkids.presentation.addNewOrChangeUserInformation.ui.UserInfoControlState
 import com.example.wizkids.presentation.sharedUI.NavHelper
 import com.example.wizkids.presentation.sharedUI.TextFont
 import com.example.wizkids.presentation.viewModel.user.UserViewModel

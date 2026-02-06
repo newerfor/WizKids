@@ -4,7 +4,7 @@ import com.example.wizkids.domain.mapper.GetDomainMapper
 import com.example.wizkids.domain.model.DomainChildModel
 import com.example.wizkids.domain.repository.GetDataRepository
 
-class GetChildrenUseCase (
+class GetChildrenUseCase(
     private val repository: GetDataRepository,
     private val mapper: GetDomainMapper,
 ) {
@@ -14,12 +14,13 @@ class GetChildrenUseCase (
         maxAge: Int?,
         balanceOperator: String?,
         hasPayStatusDebt: Boolean?
-    ):Result<List<DomainChildModel?>> = runCatching {
+    ): Result<List<DomainChildModel?>> = runCatching {
         repository.getChildrenData(
             searchName = searchName,
             minAge = minAge,
             maxAge = maxAge,
-            balanceOperator =balanceOperator,
-            hasPayStatusDebt=hasPayStatusDebt).map { mapper.mapDataChildModelToDomainChildModel(it) }
+            balanceOperator = balanceOperator,
+            hasPayStatusDebt = hasPayStatusDebt
+        ).map { mapper.mapDataChildModelToDomainChildModel(it) }
     }
 }

@@ -266,8 +266,8 @@ class MainActFiltersAndSorted {
                         tint = grayColor
                     )
                 },
-                textColor =blackColor ,
-                ) { newText -> nameSearch.value = newText }
+                textColor = blackColor,
+            ) { newText -> nameSearch.value = newText }
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard
 
-import android.util.Log.i
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -25,11 +24,9 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -68,7 +65,6 @@ import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConsta
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_SIZE
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_SPACER_HEIGHT
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_SPACER_IMAGE_TO_DOCS_INFO_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_BUTTON_WEIGHT
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_CLIP
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_HEIGHT
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_PADDING
@@ -104,9 +100,21 @@ class ChildDocumentInformationWindow {
                 imageList.addAll(docs.value!!.imagePaths)
             }
         }
-        var selectedImageIndex by remember { mutableStateOf(DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_INDEX) }
-        var docsName by remember { mutableStateOf(docs.value?.name ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME) }
-        var docsInfo by remember { mutableStateOf(docs.value?.description ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION) }
+        var selectedImageIndex by remember {
+            mutableStateOf(
+                DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_INDEX
+            )
+        }
+        var docsName by remember {
+            mutableStateOf(
+                docs.value?.name ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME
+            )
+        }
+        var docsInfo by remember {
+            mutableStateOf(
+                docs.value?.description ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
+            )
+        }
         val context = LocalContext.current
         var hasDocsImageError by remember { mutableStateOf(false) }
         var hasDocsNameError by remember { mutableStateOf(false) }
@@ -123,7 +131,8 @@ class ChildDocumentInformationWindow {
                     )
                     imagePath?.let { path ->
                         imageList.add(path)
-                        selectedImageIndex = imageList.size - DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_MINUS_INDEX
+                        selectedImageIndex =
+                            imageList.size - DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_MINUS_INDEX
                     }
                 }
             }
@@ -139,18 +148,32 @@ class ChildDocumentInformationWindow {
                     .padding(DOCUMENT_INFORMATION_WINDOW_DIALOG_PADDING.dp)
                     .verticalScroll(rememberScrollState())
             ) {
-                Row(Modifier.fillMaxWidth().padding(vertical = DOCUMENT_LEAVE_ICON_PADDING_VERTICAL.dp)) {
-                   Column(Modifier.background(grayColor)){
-                       Icon(Icons.Filled.KeyboardArrowLeft, contentDescription = "", Modifier.clickable(
-                           interactionSource = remember { MutableInteractionSource() },
-                           indication = rememberRipple()
-                       ) {
-                           openDocumentWindow.value = false
-                           if(docs.value==null) {
-                               imageList.map { imagePath -> ImageHelper().deleteImageByPath(imagePath) }
-                           }
-                       }.size(DOCUMENT_LEAVE_ICON_SIZE.dp))
-                   }
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = DOCUMENT_LEAVE_ICON_PADDING_VERTICAL.dp)
+                ) {
+                    Column(Modifier.background(grayColor)) {
+                        Icon(
+                            Icons.Filled.KeyboardArrowLeft,
+                            contentDescription = "",
+                            Modifier
+                                .clickable(
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = rememberRipple()
+                                ) {
+                                    openDocumentWindow.value = false
+                                    if (docs.value == null) {
+                                        imageList.map { imagePath ->
+                                            ImageHelper().deleteImageByPath(
+                                                imagePath
+                                            )
+                                        }
+                                    }
+                                }
+                                .size(DOCUMENT_LEAVE_ICON_SIZE.dp)
+                        )
+                    }
                 }
                 Box(
                     Modifier
@@ -201,7 +224,9 @@ class ChildDocumentInformationWindow {
                 Spacer(modifier = Modifier.height(DOCUMENT_INFORMATION_WINDOW_IMAGE_SPACER_HEIGHT.dp))
                 LazyRow(
                     modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_PADDING_HORIZONTAL.dp)
+                    horizontalArrangement = Arrangement.spacedBy(
+                        DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_PADDING_HORIZONTAL.dp
+                    )
                 ) {
                     itemsIndexed(imageList) { index, image ->
                         Box(
@@ -225,8 +250,14 @@ class ChildDocumentInformationWindow {
                     item {
                         Box(
                             Modifier
-                                .size(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE.dp)
-                                .clip(RoundedCornerShape(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_CLIP.dp))
+                                .size(
+                                    DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE.dp
+                                )
+                                .clip(
+                                    RoundedCornerShape(
+                                        DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_CLIP.dp
+                                    )
+                                )
                                 .background(grayColor)
                                 .clickable(
                                     interactionSource = remember { MutableInteractionSource() },
@@ -241,13 +272,19 @@ class ChildDocumentInformationWindow {
                             Icon(
                                 imageVector = Icons.Filled.Add,
                                 contentDescription = "",
-                                Modifier.size(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_SIZE.dp),
+                                Modifier.size(
+                                    DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_SIZE.dp
+                                ),
                                 tint = blueColor
                             )
                         }
                     }
                 }
-                Spacer(modifier = Modifier.height(DOCUMENT_INFORMATION_WINDOW_SPACER_IMAGE_TO_DOCS_INFO_HEIGHT.dp))
+                Spacer(
+                    modifier = Modifier.height(
+                        DOCUMENT_INFORMATION_WINDOW_SPACER_IMAGE_TO_DOCS_INFO_HEIGHT.dp
+                    )
+                )
                 InputInformationCard().AddInformationCard(
                     stringResource(R.string.name_document_add_name_docs_label),
                     textFont,
@@ -260,8 +297,8 @@ class ChildDocumentInformationWindow {
                             textFont,
                             stringResource(R.string.name_name_other_hint),
                             trailingIcon = hasDocsNameError
-                        ) {
-                            newText -> docsName = newText
+                        ) { newText ->
+                            docsName = newText
                             hasDocsNameError = false
                         }
                     } else {
@@ -281,8 +318,8 @@ class ChildDocumentInformationWindow {
                             textFont,
                             stringResource(R.string.information_on_docs_hint),
                             trailingIcon = hasDocsInfoError
-                        ) {
-                            newText -> docsInfo = newText
+                        ) { newText ->
+                            docsInfo = newText
                             hasDocsInfoError = false
                         }
                     } else {
@@ -292,20 +329,25 @@ class ChildDocumentInformationWindow {
                 Column {
                     if (isChangeAct) {
                         Column {
-                            val buttonMap =if(docs.value!=null && documentList!=null){
+                            val buttonMap = if (docs.value != null && documentList != null) {
                                 mapOf<String, () -> Unit>(
                                     stringResource(R.string.apply_button) to {
-                                        if(imageList.isEmpty()){
+                                        if (imageList.isEmpty()) {
                                             hasDocsImageError = true
                                         }
-                                        if(docsName.isEmpty()){hasDocsNameError = true}
-                                        if(docsInfo.isEmpty()){hasDocsInfoError = true}
-                                        if(!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError){
+                                        if (docsName.isEmpty()) {
+                                            hasDocsNameError = true
+                                        }
+                                        if (docsInfo.isEmpty()) {
+                                            hasDocsInfoError = true
+                                        }
+                                        if (!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError) {
                                             val newDocument = DomainDocumentsModel(
                                                 name = docsName,
                                                 description = docsInfo,
                                                 imagePaths = imageList.toList(),
-                                                id = docs.value?.id ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
+                                                id = docs.value?.id
+                                                    ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
                                             )
                                             onSave(newDocument)
                                             openDocumentWindow.value = false
@@ -314,29 +356,38 @@ class ChildDocumentInformationWindow {
                                     },
                                     stringResource(R.string.delete_button) to {
                                         {
-                                            imageList.map { imagePath -> ImageHelper().deleteImageByPath(imagePath) }
+                                            imageList.map { imagePath ->
+                                                ImageHelper().deleteImageByPath(
+                                                    imagePath
+                                                )
+                                            }
                                             imageList.clear()
-                                            documentList.removeAt(docs.value!!.id-DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_REMOVE_INDEX)
+                                            documentList.removeAt(docs.value!!.id - DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_REMOVE_INDEX)
                                             docs.value = null
                                             openDocumentWindow.value = false
                                             hasDocsImageError = false
                                         }
                                     },
                                 )
-                            }else{
+                            } else {
                                 mapOf(
                                     stringResource(R.string.apply_button) to {
-                                        if(imageList.isEmpty()){
+                                        if (imageList.isEmpty()) {
                                             hasDocsImageError = true
                                         }
-                                        if(docsName.isEmpty()){hasDocsNameError = true}
-                                        if(docsInfo.isEmpty()){hasDocsInfoError = true}
-                                        if(!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError){
+                                        if (docsName.isEmpty()) {
+                                            hasDocsNameError = true
+                                        }
+                                        if (docsInfo.isEmpty()) {
+                                            hasDocsInfoError = true
+                                        }
+                                        if (!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError) {
                                             val newDocument = DomainDocumentsModel(
                                                 name = docsName,
                                                 description = docsInfo,
                                                 imagePaths = imageList.toList(),
-                                                id = docs.value?.id ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
+                                                id = docs.value?.id
+                                                    ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
                                             )
                                             onSave(newDocument)
                                             openDocumentWindow.value = false
@@ -345,7 +396,11 @@ class ChildDocumentInformationWindow {
                                     },
                                 )
                             }
-                            Column(Modifier.fillMaxWidth(),Arrangement.Center,Alignment.CenterHorizontally) {
+                            Column(
+                                Modifier.fillMaxWidth(),
+                                Arrangement.Center,
+                                Alignment.CenterHorizontally
+                            ) {
                                 textFont.BlueText(
                                     stringResource(R.string.reset_text), Modifier.clickable(
                                         interactionSource = remember { MutableInteractionSource() },
@@ -360,7 +415,7 @@ class ChildDocumentInformationWindow {
                                             DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
                                     })
                             }
-                            ButtonView().ButtonVisibleRow(buttonMap,textFont)
+                            ButtonView().ButtonVisibleRow(buttonMap, textFont)
                         }
                     }
                 }

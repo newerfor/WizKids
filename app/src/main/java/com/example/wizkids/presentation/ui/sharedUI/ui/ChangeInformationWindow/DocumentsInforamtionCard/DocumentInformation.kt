@@ -34,7 +34,11 @@ import com.example.wizkids.ui.theme.lightBlue
 
 class DocumentInformation {
     @Composable
-    fun AddOrWatchDocumentInformation(textFont: TextFont, documents: MutableList<DomainDocumentsModel>, isChangeAct: Boolean){
+    fun AddOrWatchDocumentInformation(
+        textFont: TextFont,
+        documents: MutableList<DomainDocumentsModel>,
+        isChangeAct: Boolean
+    ) {
         var openWindowAddDocument = remember { mutableStateOf(false) }
         var docsInfo = remember { mutableStateOf<DomainDocumentsModel?>(null) }
         var editingIndex = remember { mutableStateOf<Int?>(null) }
@@ -43,7 +47,7 @@ class DocumentInformation {
                 .horizontalScroll(rememberScrollState())
         ) {
             documents.forEachIndexed { index, docs -> // Получаем индекс
-                ChildDocumetsInformation().DocumentsCard(
+                ChildDocumentsInformation().DocumentsCard(
                     textFont = textFont,
                     docs = docs,
                     onClick = {
@@ -53,17 +57,24 @@ class DocumentInformation {
                     }
                 )
             }
-            if(isChangeAct){
+            if (isChangeAct) {
                 Column(
                     Modifier.Companion
                         .fillMaxHeight()
-                        .padding(vertical = ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_MAIN_CONTAINER_VERTICAL_PADDING.dp), Arrangement.Center
+                        .padding(vertical = ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_MAIN_CONTAINER_VERTICAL_PADDING.dp),
+                    Arrangement.Center
                 ) {
                     Box(
                         contentAlignment = Alignment.Companion.Center,
                         modifier = Modifier.Companion
                             .padding(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_PADDING.dp)
-                            .border(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_WIDTH.dp, lightBlue, RoundedCornerShape(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_SHAPE.dp))
+                            .border(
+                                ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_WIDTH.dp,
+                                lightBlue,
+                                RoundedCornerShape(
+                                    ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_SHAPE.dp
+                                )
+                            )
                     ) {
                         IconButton(
                             onClick = {
@@ -85,7 +96,9 @@ class DocumentInformation {
                             .border(
                                 ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_WIDTH.dp,
                                 lightBlue,
-                                androidx.compose.foundation.shape.RoundedCornerShape(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_SHAPE.dp)
+                                androidx.compose.foundation.shape.RoundedCornerShape(
+                                    ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_SHAPE.dp
+                                )
                             )
                     ) {
                         IconButton(
@@ -102,7 +115,7 @@ class DocumentInformation {
             }
 
         }
-        if(openWindowAddDocument.value){
+        if (openWindowAddDocument.value) {
             ChildDocumentInformationWindow().DocumentInformationWindow(
                 textFont = textFont,
                 openDocumentWindow = openWindowAddDocument,
@@ -110,10 +123,10 @@ class DocumentInformation {
                 documentList = documents,
                 isChangeAct = isChangeAct,
                 inAddIndex = documents.size,
-                onSave = {docs->
-                    if(docsInfo.value == null){
+                onSave = { docs ->
+                    if (docsInfo.value == null) {
                         documents.add(docs)
-                    }else{
+                    } else {
                         documents[editingIndex.value!!] = docs
                         docsInfo.value = null
                     }

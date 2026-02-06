@@ -1,7 +1,6 @@
 package com.example.wizkids.presentation.main.constant
 
 object MainLogicConstant {
-    const val MAIN_ACTIVITY_DateStringFormat = "%02d.%02d.%d"
     const val MAIN_ACTIVITY_DEFAULT_VALUE_SELECTED_OPTION_SORT = ""
     const val MAIN_ACTIVITY_DEFAULT_VALUE_NAME_SEARCH = ""
     const val MAIN_ACTIVITY_DEFAULT_VALUE_FIRST_YEAR = 0
@@ -11,13 +10,13 @@ object MainLogicConstant {
     const val MAIN_ACTIVITY_VALUE_PAY_STATUS_PAID = "<"
     const val MAIN_ACTIVITY_KEY_PAY_STATUS_NOT_PAID = "Не Оплачено"
     const val MAIN_ACTIVITY_VALUE_PAY_STATUS_NOT_PAID = ">"
-    const val MAIN_ACTIVITY_KEY_PAY_STATUS_PAYMENT_SOON ="Оплата в след.визит"
+    const val MAIN_ACTIVITY_KEY_PAY_STATUS_PAYMENT_SOON = "Оплата в след.визит"
     const val MAIN_ACTIVITY_VALUE_PAY_STATUS_PAYMENT_SOON = "="
-    val MAIN_ACTIVITY_KEY_PAY_STATUS_PAYMENT_DEBT ="Долг"
+    val MAIN_ACTIVITY_KEY_PAY_STATUS_PAYMENT_DEBT = "Долг"
     val MAIN_ACTIVITY_KEY_SORTED_BY_NAME_ASC = "По имени (А-Я)"
     val MAIN_ACTIVITY_KEY_SORTED_BY_NAME_DESC = "По имени (Я-А)"
-    val MAIN_ACTIVITY_KEY_SORTED_BY_DATE_VISIT_ASC ="По дате записи (по возрастанию)"
-    val MAIN_ACTIVITY_KEY_SORTED_BY_DATE_VISIT_DESC ="По дате записи (по убыванию)"
+    val MAIN_ACTIVITY_KEY_SORTED_BY_DATE_VISIT_ASC = "По дате записи (по возрастанию)"
+    val MAIN_ACTIVITY_KEY_SORTED_BY_DATE_VISIT_DESC = "По дате записи (по убыванию)"
     val MAIN_ACTIVITY_KEY_SORTED_BY_AGE_ASC = "По возрасту (по возрастанию)"
     val MAIN_ACTIVITY_KEY_SORTED_BY_AGE_DESC = "По возрасту (по убыванию)"
     val MAIN_ACTIVITY_VALUE_STATUS_LIST = listOf(
@@ -26,7 +25,7 @@ object MainLogicConstant {
         MAIN_ACTIVITY_KEY_PAY_STATUS_PAYMENT_SOON,
         MAIN_ACTIVITY_KEY_PAY_STATUS_PAYMENT_DEBT
     )
-     val MAIN_ACTIVITY_VALUE_SORTED_LIST = listOf(
+    val MAIN_ACTIVITY_VALUE_SORTED_LIST = listOf(
         MAIN_ACTIVITY_KEY_PAY_STATUS_PAYMENT_DEBT,
         MAIN_ACTIVITY_KEY_SORTED_BY_NAME_ASC,
         MAIN_ACTIVITY_KEY_SORTED_BY_NAME_DESC,

@@ -34,43 +34,29 @@ import org.koin.dsl.module
 
 object AppModule {
     val module = module {
-        // 1. Database
         single { DataBaseProvider.getDatabase(androidContext()) }
-
-        // 2. DAO (единый)
         single<WizKidsDao> { get<WizKidsDatabase>().wizKidsDao() }
-
-        // 3. Mappers
         factory { GetMapper() }
         factory { SaveMapper() }
         factory { Converters() }
         factory { GetDomainMapper() }
         factory { SaveDomainMapper() }
-
-        // 4. Data Sources / Repositories
-        single<DeleteDataRepository> { DeleteDataRepositoryImpl( get()) }
+        single<DeleteDataRepository> { DeleteDataRepositoryImpl(get()) }
         single<GetDataRepository> { GetDataRepositoryImpl(get(), get()) }
         single<SaveDataRepository> { SaveDataRepositoryImpl(get(), get()) }
-
-        // 5. Get Use Cases
-        factory { GetChildByIdUseCase(get(),get()) }
-        factory { GetChildrenUseCase(get(),get()) }
-        factory { GetVisitsUseCase(get(),get()) }
-        factory { GetUserUseCase(get(),get()) }
-
-        // 6. Save Use Cases (добавил SaveDateUseCase, которого у вас не было)
-        factory { SaveChildUseCase(get(),get()) }
-        factory { SaveVisitUseCase(get(),get()) }
-        factory { SaveUserUseCase(get(),get()) }
-        factory { GetVisitByChildIdUseCase(get(),get()) }
+        factory { GetChildByIdUseCase(get(), get()) }
+        factory { GetChildrenUseCase(get(), get()) }
+        factory { GetVisitsUseCase(get(), get()) }
+        factory { GetUserUseCase(get(), get()) }
+        factory { SaveChildUseCase(get(), get()) }
+        factory { SaveVisitUseCase(get(), get()) }
+        factory { SaveUserUseCase(get(), get()) }
+        factory { GetVisitByChildIdUseCase(get(), get()) }
         factory { DeleteVisitByIdUseCase(get()) }
         factory { DeleteUserUseCase(get()) }
         factory { DeleteChildByIdUseCase(get()) }
-
-
-        // 7. ViewModel
-        viewModel { ChildViewModel(get(),get(),get(),get()) }
-        viewModel { VisitViewModel(get(),get(),get(),get()) }
-        viewModel { UserViewModel(get(),get(),get()) }
+        viewModel { ChildViewModel(get(), get(), get(), get()) }
+        viewModel { VisitViewModel(get(), get(), get(), get()) }
+        viewModel { UserViewModel(get(), get(), get()) }
     }
 }

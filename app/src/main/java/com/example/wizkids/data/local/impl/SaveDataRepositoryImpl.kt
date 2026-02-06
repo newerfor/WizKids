@@ -16,16 +16,18 @@ class SaveDataRepositoryImpl(
         visits: List<VisitModel>,
     ) {
         val generetedId = dao.saveChild(mapper.mapChildModelToEntity(child))
-        if(generetedId != null){
+        if (generetedId != null) {
             visits.forEach { visit ->
                 saveVisitData(visit, generetedId.toInt())
             }
         }
     }
+
     override suspend fun saveVisitData(visit: VisitModel, childId: Int) {
         dao.saveVisit(mapper.mapVisitModelToEntity(visit, childId))
 
     }
+
     override suspend fun saveUserData(user: UserModel) {
         dao.saveUser(mapper.mapUserModelToEntity(user))
     }

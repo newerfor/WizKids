@@ -19,6 +19,7 @@ class ChildPayStatusHelper {
             else -> INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_NOT_PAYED
         }
     }
+
     fun colorPayStatus(payStatus: String): Color {
         return when (payStatus) {
             INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_DEBT -> payDebt

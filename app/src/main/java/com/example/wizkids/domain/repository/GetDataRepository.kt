@@ -13,6 +13,7 @@ interface GetDataRepository {
         balanceOperator: String?,
         hasPayStatusDebt: Boolean?
     ): List<ChildModel>
+
     suspend fun getVisitData(visitsList: List<String>?): List<VisitModel>
     suspend fun getUserData(): UserModel?
     suspend fun getVisitByChildIdData(id: Int): List<VisitModel>

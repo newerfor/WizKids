@@ -10,10 +10,11 @@ class IntentHelper {
         val intent = Intent(context, actClass)
         context.startActivity(intent)
     }
+
     fun intentStartById(NameActivity: String, context: Context, id: Int?) {
         val actClass = Class.forName(NameActivity)
         val intent = Intent(context, actClass)
-        intent.putExtra(ID_KEY,id.toString())
+        intent.putExtra(ID_KEY, id.toString())
         context.startActivity(intent)
     }
 }

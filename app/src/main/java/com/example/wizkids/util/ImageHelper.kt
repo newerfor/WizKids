@@ -37,6 +37,7 @@ class ImageHelper {
             return null
         }
     }
+
     fun deleteImageByPath(filePath: String): Boolean {
         return try {
             val file = File(filePath)

@@ -21,14 +21,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.wizkids.R
+import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CONTAINER_HORIZONTAL_PADDING
 import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CONTAINER_WEIGHT
 import com.example.wizkids.presentation.sharedUI.NavHelper
 import com.example.wizkids.presentation.sharedUI.TextFont
+import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 import com.example.wizkids.ui.theme.WizKidsTheme
 import org.koin.androidx.compose.koinViewModel
-import com.example.wizkids.R
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CONTAINER_HORIZONTAL_PADDING
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,12 +40,19 @@ class MainActivity : ComponentActivity() {
             WizKidsTheme {
                 val context = LocalContext.current
                 Column(Modifier.fillMaxSize()) {
-                    NavHelper().Header(stringResource(R.string.main_activity_title),stringResource(R.string.main_activity_subtitle))
+                    NavHelper().Header(
+                        stringResource(R.string.main_activity_title),
+                        stringResource(R.string.main_activity_subtitle)
+                    )
                     Column(Modifier.weight(MAIN_ACTIVITY_MAIN_CONTAINER_WEIGHT)) {
                         ChildScreen(context = context)
                     }
-                    Column(Modifier.fillMaxWidth(),Arrangement.Bottom,Alignment.CenterHorizontally){
-                       NavHelper().Footer(context = context)
+                    Column(
+                        Modifier.fillMaxWidth(),
+                        Arrangement.Bottom,
+                        Alignment.CenterHorizontally
+                    ) {
+                        NavHelper().Footer(context = context)
                     }
                 }
             }
@@ -60,11 +67,15 @@ class MainActivity : ComponentActivity() {
     ) {
         val childUiState by childViewModel.childUiState.collectAsState()
         Column(
-            Modifier.fillMaxWidth().padding(horizontal = MAIN_ACTIVITY_MAIN_CONTAINER_HORIZONTAL_PADDING.dp).verticalScroll(
-                ScrollState(1)
-            )) {
-            MainActFiltersAndSorted().Filters(textFont,childViewModel)
-            AllChildSpace().AllChild(textFont, childUiState,context,childViewModel)
+            Modifier
+                .fillMaxWidth()
+                .padding(horizontal = MAIN_ACTIVITY_MAIN_CONTAINER_HORIZONTAL_PADDING.dp)
+                .verticalScroll(
+                    ScrollState(1)
+                )
+        ) {
+            MainActFiltersAndSorted().Filters(textFont, childViewModel)
+            AllChildSpace().AllChild(textFont, childUiState, context, childViewModel)
         }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.wizkids.presentation.sharedUI
 
-import android.R.attr.textColor
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -74,8 +73,9 @@ class TextFieldVisible {
                     )
                 }
             },
-         )
+        )
     }
+
     @Composable
     fun NumberOutlineField(
         value: String,
@@ -123,9 +123,15 @@ class TextFieldVisible {
             }
         )
     }
+
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
-    fun DropMenuField(expanded: MutableState<Boolean>, selectedValue: MutableState<String>,textFont: TextFont, optionList: List<String>) {
+    fun DropMenuField(
+        expanded: MutableState<Boolean>,
+        selectedValue: MutableState<String>,
+        textFont: TextFont,
+        optionList: List<String>
+    ) {
         ExposedDropdownMenuBox(
             modifier = Modifier.padding(DROW_MENU_EXPOSED_MENU_PADDING.dp),
             expanded = expanded.value,
@@ -162,7 +168,7 @@ class TextFieldVisible {
             ) {
                 optionList.forEach { item ->
                     DropdownMenuItem(
-                        text = { textFont.WhiteText(item)},
+                        text = { textFont.WhiteText(item) },
                         onClick = {
                             selectedValue.value = item
                             expanded.value = false

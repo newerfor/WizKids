@@ -1,7 +1,6 @@
 package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
 
 import android.content.Context
-import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -33,7 +32,7 @@ class CalendarCard {
         var monthNumber = remember { mutableStateOf(DateHelper().getMonthNumber()) }
         var yearNumber = remember { mutableStateOf(DateHelper().getYearNumber()) }
         ChildInformationCardBackGround().InformationCardbackGround {
-            MonthAndYearInformation().MonthAndYearCard(textFont,monthNumber,yearNumber)
+            MonthAndYearInformation().MonthAndYearCard(textFont, monthNumber, yearNumber)
             DayInMounthInformation().DayInMonth(
                 visitInfo, monthNumber, yearNumber, textFont,
                 visitViewModel = visitViewModel,
@@ -45,8 +44,9 @@ class CalendarCard {
             ButtonView().ButtonVisibleRow(
                 mapOf(
                     stringResource(R.string.go_to_upcoming_dates) to {
-                        IntentHelper().intentStart(KEY_ACTIVITY_UPCOMING_VISITS,context)
-                    },),
+                        IntentHelper().intentStart(KEY_ACTIVITY_UPCOMING_VISITS, context)
+                    },
+                ),
                 textFont
             )
         }

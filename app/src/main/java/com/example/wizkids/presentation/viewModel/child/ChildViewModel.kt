@@ -19,7 +19,7 @@ class ChildViewModel(
     private val saveChildUseCase: SaveChildUseCase,
     private val deleteChildByIdUseCase: DeleteChildByIdUseCase,
     private val getChildByIdUseCase: GetChildByIdUseCase
-): ViewModel() {
+) : ViewModel() {
     private val _childUiState = MutableStateFlow<ChildrenUiState>(ChildrenUiState.Loading)
     val childUiState: StateFlow<ChildrenUiState> = _childUiState.asStateFlow()
     private val _childByIdState = MutableStateFlow<ChildByIdUiState>(ChildByIdUiState.Loading)
@@ -74,60 +74,71 @@ class ChildViewModel(
             }
         }
     }
-    fun deleteChild(id:Int){
+
+    fun deleteChild(id: Int) {
         viewModelScope.launch {
             deleteChildByIdUseCase(id)
         }
     }
+
     fun getChildById(id: Int?) {
         viewModelScope.launch {
             try {
                 _childByIdState.value = ChildByIdUiState.Loading
                 val result = getChildByIdUseCase(id)
-                result.onSuccess{child->
-                    if(child!=null){
+                result.onSuccess { child ->
+                    if (child != null) {
                         _childByIdState.value = ChildByIdUiState.Success(child)
-                    }else{
+                    } else {
                         _childByIdState.value = ChildByIdUiState.Empty
                     }
-                }.onFailure{error->
+                }.onFailure { error ->
                     _childByIdState.value = ChildByIdUiState.Error(error.toString())
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 _childByIdState.value = ChildByIdUiState.Error(e.toString())
             }
         }
     }
 
-    fun saveChild(child: DomainChildModel, visit: List<DomainVisitModel>){
+    fun saveChild(child: DomainChildModel, visit: List<DomainVisitModel>) {
         viewModelScope.launch {
             saveChildUseCase(
-                child =child ,
+                child = child,
                 visits = visit
             )
         }
     }
-    fun childrenSorted(selectedOptionSort: SortedOption?){
-        when(selectedOptionSort){
+
+    fun childrenSorted(selectedOptionSort: SortedOption?) {
+        when (selectedOptionSort) {
             SortedOption.BY_NAME_ASC -> {
-                _children.value.sortedBy  { it.name }
+                _children.value.sortedBy { it.name }
             }
+
             SortedOption.BY_NAME_DESC -> {
                 _children.value.sortedByDescending { it.name }
             }
+
             SortedOption.BY_DATE_ASC -> {
                 _children.value.sortedBy { it.dateOfBirth }
             }
+
             SortedOption.BY_DATE_DESC -> {
                 _children.value.sortedByDescending { it.dateOfBirth }
             }
+
             SortedOption.BY_AGE_ASC -> {
                 _children.value.sortedBy { AgeHelper().getAgeFromDate(it.dateOfBirth) }
             }
-            SortedOption.BY_AGE_DESC ->{
+
+            SortedOption.BY_AGE_DESC -> {
                 _children.value.sortedByDescending { AgeHelper().getAgeFromDate(it.dateOfBirth) }
             }
-            null -> {_children.value}
+
+            null -> {
+                _children.value
+            }
         }
     }
 }

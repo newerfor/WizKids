@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -53,14 +52,21 @@ class DayInMounthInformation {
         childViewModel: ChildViewModel,
     ) {
         val dayList = DateHelper().getDaysInMonth(monthNumber.value, yearNumber.value)
-        Row(Modifier
-            .fillMaxWidth()
-            .padding(8.dp)){
-            for(dayNaming in DateHelper().getWeekdaysNamesForMonth(monthNumber.value,yearNumber.value)){
-                Column(Modifier
-                    .weight(1f)
-                    .padding(start = 12.dp)){
-                    textFont.WhiteText(dayNaming,textAlign =TextAlign.Center)
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            for (dayNaming in DateHelper().getWeekdaysNamesForMonth(
+                monthNumber.value,
+                yearNumber.value
+            )) {
+                Column(
+                    Modifier
+                        .weight(1f)
+                        .padding(start = 12.dp)
+                ) {
+                    textFont.WhiteText(dayNaming, textAlign = TextAlign.Center)
                 }
             }
         }
@@ -71,7 +77,7 @@ class DayInMounthInformation {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            items(dayList) { day->
+            items(dayList) { day ->
                 DayCard(
                     textFont, day, monthNumber, yearNumber, visitInfo,
                     visitViewModel = visitViewModel,
@@ -84,6 +90,7 @@ class DayInMounthInformation {
         }
 
     }
+
     @Composable
     fun DayCard(
         textFont: TextFont,
@@ -96,37 +103,40 @@ class DayInMounthInformation {
         context: Context,
         childByIdUiState: ChildByIdUiState,
         childViewModel: ChildViewModel,
-    ){
+    ) {
         val dateToday = DateHelper().getDateToday()
         var openWindowVisit = remember { mutableStateOf(false) }
-        var openWindowAddVisit= remember { mutableStateOf(false) }
-        Column(Modifier
-            .background(
-                DayColorState(
-                    DateHelper().GetFullDate(
-                        dayNumber,
-                        monthNumber.value,
-                        yearNumber.value
-                    ), visitInfo
+        var openWindowAddVisit = remember { mutableStateOf(false) }
+        Column(
+            Modifier
+                .background(
+                    DayColorState(
+                        DateHelper().GetFullDate(
+                            dayNumber,
+                            monthNumber.value,
+                            yearNumber.value
+                        ), visitInfo
+                    )
                 )
-            )
-            .border(
-                if ("$dayNumber.${monthNumber.value}.${yearNumber.value}" == dateToday) 5.dp else 0.dp,
-                blackColor
-            )
-            .clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple()
+                .border(
+                    if ("$dayNumber.${monthNumber.value}.${yearNumber.value}" == dateToday) 5.dp else 0.dp,
+                    blackColor
+                )
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple()
+                ) {
+                    openWindowVisit.value = true
+                }) {
+            Column(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(12.dp), Arrangement.Center, Alignment.CenterHorizontally
             ) {
-                openWindowVisit.value = true
-            }){
-            Column(Modifier
-                .fillMaxWidth()
-                .padding(12.dp),Arrangement.Center,Alignment.CenterHorizontally){
-                textFont.WhiteText(dayNumber.toString(),fontSize=14)
+                textFont.WhiteText(dayNumber.toString(), fontSize = 14)
             }
         }
-        if(openWindowVisit.value){
+        if (openWindowVisit.value) {
             VisitInfo().VisitWindow(
                 openWindowVisit,
                 DateHelper().GetFullDate(dayNumber, monthNumber.value, yearNumber.value),
@@ -139,7 +149,7 @@ class DayInMounthInformation {
                 childViewModel = childViewModel
             )
         }
-        if(openWindowAddVisit.value){
+        if (openWindowAddVisit.value) {
             CreateANewVisit().CreateANewVisitWindow(
                 openWindowAddVisit,
                 visitViewModel = visitViewModel,
@@ -152,16 +162,17 @@ class DayInMounthInformation {
             )
         }
     }
+
     @Composable
-    fun DayColorState(currentDate: String, dateInfo: List<DomainVisitModel>): Color{
-       return if(DateHelper().isWeekend(currentDate)){
-           grayColor
-       }else{
-           if (dateInfo.any {dateInfo -> dateInfo.date == currentDate }) {
-               greenColor
-           } else {
-               lightBlue
-           }
-       }
+    fun DayColorState(currentDate: String, dateInfo: List<DomainVisitModel>): Color {
+        return if (DateHelper().isWeekend(currentDate)) {
+            grayColor
+        } else {
+            if (dateInfo.any { dateInfo -> dateInfo.date == currentDate }) {
+                greenColor
+            } else {
+                lightBlue
+            }
+        }
     }
 }

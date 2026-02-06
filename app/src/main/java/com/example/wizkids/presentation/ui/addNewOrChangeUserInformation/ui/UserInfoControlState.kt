@@ -2,11 +2,10 @@ package com.example.wizkids.presentation.addNewOrChangeUserInformation.ui
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import com.example.wizkids.presentation.addNewOrChangeUserInformation.ui.UserAddInfoScreen
 import com.example.wizkids.presentation.sharedUI.TextFont
+import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
 import com.example.wizkids.presentation.viewModel.user.UserUiState
 import com.example.wizkids.presentation.viewModel.user.UserViewModel
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
 
 class UserInfoControlState {
     @Composable
@@ -27,7 +26,7 @@ class UserInfoControlState {
             }
 
             is UserUiState.Error -> {
-                StateHelper.ErrorMassage(textFont = textFont){
+                StateHelper.ErrorMassage(textFont = textFont) {
                     viewModel.getUser()
                 }
             }

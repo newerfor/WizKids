@@ -1,8 +1,8 @@
 package com.example.wizkids.domain.model
 
-data class DomainDocumentsModel (
+data class DomainDocumentsModel(
     val id: Int,
-    val name: String,                 // название документа
-    val description: String,          // Info → description
+    val name: String,
+    val description: String,
     val imagePaths: List<String>
 )

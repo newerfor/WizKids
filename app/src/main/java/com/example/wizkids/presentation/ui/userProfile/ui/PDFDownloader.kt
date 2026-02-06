@@ -51,6 +51,7 @@ class PDFDownloader(private val context: Context) {
             e.printStackTrace()
         }
     }
+
     private fun drawBackground(canvas: Canvas) {
         // Градиентный фон
         val gradient = LinearGradient(

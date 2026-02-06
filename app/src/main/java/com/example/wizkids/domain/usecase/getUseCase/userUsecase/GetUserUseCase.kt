@@ -4,11 +4,11 @@ import com.example.wizkids.domain.mapper.GetDomainMapper
 import com.example.wizkids.domain.model.DomainUserModel
 import com.example.wizkids.domain.repository.GetDataRepository
 
-class GetUserUseCase (
+class GetUserUseCase(
     private val repository: GetDataRepository,
     private val mapper: GetDomainMapper
 ) {
-    suspend operator fun invoke():Result<DomainUserModel?> = runCatching {
+    suspend operator fun invoke(): Result<DomainUserModel?> = runCatching {
         mapper.mapDataUserModelToDomainUserModel(repository.getUserData())
     }
 }

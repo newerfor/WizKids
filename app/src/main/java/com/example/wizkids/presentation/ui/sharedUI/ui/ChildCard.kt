@@ -26,7 +26,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale.Companion.Crop
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -39,10 +38,6 @@ import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConsta
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_FIRST_NAME
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_LAST_NAME
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_TAKE_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_DEBT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_NOT_PAYED
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAYED
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAY_SOON
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_BORDER_WIDTH
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_CLIP
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_PADDING
@@ -68,10 +63,6 @@ import com.example.wizkids.ui.theme.blueColor
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.lightGray
-import com.example.wizkids.ui.theme.payDebt
-import com.example.wizkids.ui.theme.payFalse
-import com.example.wizkids.ui.theme.payLater
-import com.example.wizkids.ui.theme.payTrue
 import com.example.wizkids.util.AgeHelper
 
 class ChildView {
@@ -85,7 +76,7 @@ class ChildView {
         onClick: (Int) -> Unit,
     ) {
         for (child in allChild) {
-            ChildCard(child, textFont, context, isMainActivity,childViewModel, onClick)
+            ChildCard(child, textFont, context, isMainActivity, childViewModel, onClick)
         }
     }
 
@@ -111,7 +102,7 @@ class ChildView {
         var payStatusColor by remember { mutableStateOf(grayColor) }
         LaunchedEffect(balance.value) {
             payStatus = ChildPayStatusHelper().calculatePayStatus(balance.value, child.visitPrice)
-            payStatusColor =ChildPayStatusHelper().colorPayStatus (payStatus)
+            payStatusColor = ChildPayStatusHelper().colorPayStatus(payStatus)
         }
         Column(
             modifier = Modifier
@@ -237,19 +228,21 @@ class ChildView {
                             stringResource(R.string.balance),
                             balance.value
                         ) { newBalance ->
-                            Log.d("sajergnsdkejgb",newBalance.toString())
+                            Log.d("sajergnsdkejgb", newBalance.toString())
                             balance.value = newBalance
-                            childViewModel.saveChild(DomainChildModel(
-                                id = child.id,
-                                imagePath = child.imagePath,
-                                name = child.name,
-                                additionalInfo =child.additionalInfo,
-                                dateOfBirth = child.dateOfBirth,
-                                documents = child.documents,
-                                learningStages = child.learningStages,
-                                visitPrice = child.visitPrice,
-                                currentBalance = balance.value,
-                            ),childVisitComing)
+                            childViewModel.saveChild(
+                                DomainChildModel(
+                                    id = child.id,
+                                    imagePath = child.imagePath,
+                                    name = child.name,
+                                    additionalInfo = child.additionalInfo,
+                                    dateOfBirth = child.dateOfBirth,
+                                    documents = child.documents,
+                                    learningStages = child.learningStages,
+                                    visitPrice = child.visitPrice,
+                                    currentBalance = balance.value,
+                                ), childVisitComing
+                            )
                             openWindowChangeBalance.value = false
                         }
                     }

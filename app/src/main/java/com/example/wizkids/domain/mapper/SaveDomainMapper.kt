@@ -1,6 +1,5 @@
 package com.example.wizkids.domain.mapper
 
-import androidx.compose.ui.input.key.Key.Companion.D
 import com.example.wizkids.data.local.model.ChildModel
 import com.example.wizkids.data.local.model.DocumentsModel
 import com.example.wizkids.data.local.model.UserModel
@@ -24,6 +23,7 @@ class SaveDomainMapper {
             currentBalance = child.currentBalance
         )
     }
+
     fun mapDomainVisitModelToDataVisitModel(visit: DomainVisitModel): VisitModel {
         return VisitModel(
             id = visit.id,
@@ -36,6 +36,7 @@ class SaveDomainMapper {
             childId = visit.childId
         )
     }
+
     fun mapDomainUserModelToDataUserModel(user: DomainUserModel): UserModel {
         return UserModel(
             imagePath = user.imagePath,
@@ -50,6 +51,7 @@ class SaveDomainMapper {
             documents = user.documents.map { mapDomainDocumentsModelToDataDocumentsModel(it) }
         )
     }
+
     fun mapDomainDocumentsModelToDataDocumentsModel(documents: DomainDocumentsModel): DocumentsModel {
         return DocumentsModel(
             id = documents.id,

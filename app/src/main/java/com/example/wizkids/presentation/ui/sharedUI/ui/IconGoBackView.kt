@@ -18,13 +18,16 @@ import com.example.wizkids.ui.theme.whiteColor
 
 class IconGoBackView {
     @Composable
-    fun IconGoBack(onBackClick:()->Unit){
+    fun IconGoBack(onBackClick: () -> Unit) {
         Icon(
             imageVector = Icons.Filled.KeyboardArrowLeft, contentDescription = "",
-            Modifier.clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple()
-            ) { onBackClick.invoke() }.padding(ICON_GO_BACK_PADDING.dp).size(ICON_GO_BACK_SIZE.dp),
+            Modifier
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple()
+                ) { onBackClick.invoke() }
+                .padding(ICON_GO_BACK_PADDING.dp)
+                .size(ICON_GO_BACK_SIZE.dp),
             tint = whiteColor
         )
     }

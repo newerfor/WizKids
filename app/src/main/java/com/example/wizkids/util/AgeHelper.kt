@@ -1,13 +1,9 @@
 package com.example.wizkids.util
 
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-
+import com.example.wizkids.util.UtilLogicConstant.DATE_PATTERN
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter
-import com.example.wizkids.R
-import com.example.wizkids.util.UtilLogicConstant.DATE_PATTERN
 
 class AgeHelper {
 
@@ -20,7 +16,7 @@ class AgeHelper {
 
     }
 
-    fun Int.getChildAge():String{
+    fun Int.getChildAge(): String {
         return when {
             this % 10 == 1 && this % 100 != 11 -> "$this год"
             this % 10 in 2..4 && this % 100 !in 12..14 -> "$this года"

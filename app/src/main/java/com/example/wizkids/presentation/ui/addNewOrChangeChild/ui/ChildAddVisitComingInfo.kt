@@ -37,10 +37,10 @@ class ChildAddVisitComingInfo {
                         VisitInfo.value = changeVisit
                     },
                     onDelete = {
-                        if(visit.id != null) {
+                        if (visit.id != null) {
                             viewModel.deleteVisit(visit.id)
                             childVisitComing.remove(visit)
-                        }else{
+                        } else {
                             visitsToRemove.add(visit)
                         }
                     },
@@ -52,9 +52,9 @@ class ChildAddVisitComingInfo {
                     stringResource(R.string.add_button) to {
                         openWindowAddVisit.value = true
                     },
-                    stringResource(R.string.reset_all_button) to{
-                        for(visit in childVisitComing){
-                            if(visit.id != null){
+                    stringResource(R.string.reset_all_button) to {
+                        for (visit in childVisitComing) {
+                            if (visit.id != null) {
                                 viewModel.deleteVisit(visit.id)
                             }
                         }

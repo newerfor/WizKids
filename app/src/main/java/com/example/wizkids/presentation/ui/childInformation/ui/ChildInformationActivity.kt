@@ -17,17 +17,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import com.example.wizkids.ui.theme.WizKidsTheme
+import com.example.wizkids.R
 import com.example.wizkids.presentation.sharedUI.NavHelper
 import com.example.wizkids.presentation.sharedUI.TextFont
 import com.example.wizkids.presentation.ui.childInformation.constant.ChildInformationLogicConstant.CHILD_INFORMATION_DEFAULT_SUBTITLE
 import com.example.wizkids.presentation.ui.childInformation.constant.ChildInformationLogicConstant.CHILD_INFORMATION_DEFAULT_TITLE
-import com.example.wizkids.util.UtilLogicConstant.ID_KEY
-import org.koin.androidx.compose.koinViewModel
-import com.example.wizkids.R
 import com.example.wizkids.presentation.ui.childInformation.constant.ChildInformationViewConstant.CHILD_INFORMATION_MAIN_CONTAINER_WEIGHT
 import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.wizkids.ui.theme.WizKidsTheme
+import com.example.wizkids.util.UtilLogicConstant.ID_KEY
+import org.koin.androidx.compose.koinViewModel
 
 class ChildInformationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,34 +42,38 @@ class ChildInformationActivity : ComponentActivity() {
                 Column(Modifier) {
                     NavHelper().Header(
                         nameSelection = name.value,
-                        infoSelection = "${years.value} ${stringResource(R.string.subtitle_number)}${id}", isBackActivity =true,
-                    ){
+                        infoSelection = "${years.value} ${stringResource(R.string.subtitle_number)}${id}",
+                        isBackActivity = true,
+                    ) {
                         finish()
                     }
-                    Column(Modifier
-                        .weight(CHILD_INFORMATION_MAIN_CONTAINER_WEIGHT)
-                        .verticalScroll(
-                            rememberScrollState()
-                        )) {
-                        ChildInfoScreen(name = name, years =years, id =id)
+                    Column(
+                        Modifier
+                            .weight(CHILD_INFORMATION_MAIN_CONTAINER_WEIGHT)
+                            .verticalScroll(
+                                rememberScrollState()
+                            )
+                    ) {
+                        ChildInfoScreen(name = name, years = years, id = id)
                     }
                 }
             }
         }
     }
+
     @Composable
     fun ChildInfoScreen(
         childViewModel: ChildViewModel = koinViewModel(),
-        visitViewModel: VisitViewModel= koinViewModel(),
+        visitViewModel: VisitViewModel = koinViewModel(),
         textFont: TextFont = TextFont(),
         name: MutableState<String>,
         years: MutableState<String>,
         id: Int?
     ) {
-        val context= LocalContext.current
+        val context = LocalContext.current
         val childByIdUiState by childViewModel.childByIdState.collectAsState()
         val visitUiState by visitViewModel.visitUiState.collectAsState()
-        if(id!=null){
+        if (id != null) {
             LaunchedEffect(Unit) {
                 childViewModel.getChildById(id)
                 visitViewModel.getVisitByChildId(id)

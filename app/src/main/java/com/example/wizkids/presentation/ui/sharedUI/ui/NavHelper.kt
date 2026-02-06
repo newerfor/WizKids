@@ -54,15 +54,26 @@ import com.example.wizkids.util.IntentHelper
 
 class NavHelper {
     @Composable
-    fun Header(nameSelection:String,infoSelection:String=HEADER_DEFAULT_VALUE_INFO_SELECTION,textFont: TextFont = TextFont(),
-               isBackActivity:Boolean = false,
-               onBackClick: () -> Unit = {},
+    fun Header(
+        nameSelection: String,
+        infoSelection: String = HEADER_DEFAULT_VALUE_INFO_SELECTION,
+        textFont: TextFont = TextFont(),
+        isBackActivity: Boolean = false,
+        onBackClick: () -> Unit = {},
     ) {
-        Row(Modifier.fillMaxWidth().background(color = darkHeader)) {
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .background(color = darkHeader)
+        ) {
             Row(
                 Modifier.weight(HEADER_R0W_WEIGHT)
             ) {
-                Column(Modifier.padding(start =HEADER_COLUMN_PADDING_START.dp).statusBarsPadding()) {
+                Column(
+                    Modifier
+                        .padding(start = HEADER_COLUMN_PADDING_START.dp)
+                        .statusBarsPadding()
+                ) {
                     Row {
                         if (isBackActivity) {
                             IconGoBackView().IconGoBack(onBackClick)
@@ -82,8 +93,9 @@ class NavHelper {
             }
         }
     }
+
     @Composable
-    fun Footer(textFont: TextFont = TextFont(),context: Context) {
+    fun Footer(textFont: TextFont = TextFont(), context: Context) {
         var selectedIndex = remember { mutableStateOf(FOOTER_SELECTED_INDEX_DEFAULT_VALUE) }
         Row(
             modifier = Modifier
@@ -94,20 +106,39 @@ class NavHelper {
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            FooterItem(selectedIndex=selectedIndex,itemIndex = 1,nameButton = stringResource(R.string.footer_label_main),icon = Icons.Filled.Home,textFont)
-            FooterItem(selectedIndex=selectedIndex,itemIndex = 2,nameButton = stringResource(R.string.footer_label_calendar),icon = Icons.Filled.DateRange,textFont)
-            FooterItem(selectedIndex=selectedIndex,itemIndex = 3,nameButton = stringResource(R.string.footer_label_user_profile),icon = Icons.Filled.Person,textFont)
-            if(selectedIndex.value == 1){
+            FooterItem(
+                selectedIndex = selectedIndex,
+                itemIndex = 1,
+                nameButton = stringResource(R.string.footer_label_main),
+                icon = Icons.Filled.Home,
+                textFont
+            )
+            FooterItem(
+                selectedIndex = selectedIndex,
+                itemIndex = 2,
+                nameButton = stringResource(R.string.footer_label_calendar),
+                icon = Icons.Filled.DateRange,
+                textFont
+            )
+            FooterItem(
+                selectedIndex = selectedIndex,
+                itemIndex = 3,
+                nameButton = stringResource(R.string.footer_label_user_profile),
+                icon = Icons.Filled.Person,
+                textFont
+            )
+            if (selectedIndex.value == 1) {
                 IntentHelper().intentStart(KEY_ACTIVITY_MAIN, context)
             }
-            if(selectedIndex.value == 2){
+            if (selectedIndex.value == 2) {
                 IntentHelper().intentStart(KEY_ACTIVITY_CALENDAR, context)
             }
-            if(selectedIndex.value == 3){
+            if (selectedIndex.value == 3) {
                 IntentHelper().intentStart(KEY_ACTIVITY_USER_PROFILE, context)
             }
         }
     }
+
     @Composable
     fun FooterItem(
         selectedIndex: MutableState<Int>,
@@ -118,10 +149,22 @@ class NavHelper {
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.clickable(
-                interactionSource = remember { MutableInteractionSource() },
-                indication = rememberRipple()
-            )  { selectedIndex.value = itemIndex }.padding( start =if(itemIndex == FOOTER_ITEM_DEFAULT_VALUE_PADDING_START){FOOTER_ITEM_COLUMN_PADDING_START_IF.dp}else{FOOTER_ITEM_COLUMN_PADDING_START_ELSE.dp},end =if(itemIndex == FOOTER_ITEM_DEFAULT_VALUE_PADDING_END){FOOTER_ITEM_COLUMN_PADDING_END_IF.dp}else{FOOTER_ITEM_COLUMN_PADDING_END_ELSE.dp})
+            modifier = Modifier
+                .clickable(
+                    interactionSource = remember { MutableInteractionSource() },
+                    indication = rememberRipple()
+                ) { selectedIndex.value = itemIndex }
+                .padding(
+                    start = if (itemIndex == FOOTER_ITEM_DEFAULT_VALUE_PADDING_START) {
+                        FOOTER_ITEM_COLUMN_PADDING_START_IF.dp
+                    } else {
+                        FOOTER_ITEM_COLUMN_PADDING_START_ELSE.dp
+                    }, end = if (itemIndex == FOOTER_ITEM_DEFAULT_VALUE_PADDING_END) {
+                        FOOTER_ITEM_COLUMN_PADDING_END_IF.dp
+                    } else {
+                        FOOTER_ITEM_COLUMN_PADDING_END_ELSE.dp
+                    }
+                )
         ) {
             Icon(
                 imageVector = icon,

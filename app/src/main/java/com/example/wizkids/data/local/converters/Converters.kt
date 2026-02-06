@@ -10,10 +10,12 @@ import java.lang.reflect.Type
 
 class Converters {
     private val gson = Gson()
+
     @TypeConverter
     fun fromDomainDocumentsDataList(list: List<DomainDocumentsModel>?): String? {
         return if (list == null) null else gson.toJson(list)
     }
+
     @TypeConverter
     fun toDomainDocumentsDataList(json: String?): List<DomainDocumentsModel>? {
         return if (json == null) {
@@ -23,10 +25,12 @@ class Converters {
             gson.fromJson(json, type)
         }
     }
+
     @TypeConverter
     fun fromStringList(list: List<String>?): String? {
         return if (list == null) null else gson.toJson(list)
     }
+
     @TypeConverter
     fun toStringList(json: String?): List<String>? {
         return if (json == null) {
@@ -36,10 +40,12 @@ class Converters {
             gson.fromJson(json, type)
         }
     }
+
     @TypeConverter
     fun fromDocumentsDataList(list: List<DocumentsModel>?): String? {
         return if (list == null) null else gson.toJson(list)
     }
+
     @TypeConverter
     fun toDocumentsDataList(json: String?): List<DocumentsModel>? {
         return if (json == null) {
@@ -50,10 +56,12 @@ class Converters {
             gson.fromJson(json, type)
         }
     }
+
     @TypeConverter
     fun fromIntList(list: List<Int>?): String? {
         return if (list == null) null else gson.toJson(list)
     }
+
     @TypeConverter
     fun toIntList(json: String?): List<Int>? {
         return if (json == null) {
@@ -63,10 +71,12 @@ class Converters {
             gson.fromJson(json, type)
         }
     }
+
     @TypeConverter
     fun fromStringMap(map: Map<String, String>?): String? {
         return if (map == null) null else gson.toJson(map)
     }
+
     @TypeConverter
     fun toStringMap(json: String?): Map<String, String>? {
         return if (json == null) {

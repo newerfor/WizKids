@@ -39,7 +39,11 @@ class AddNewOrChangeChildActivity : ComponentActivity() {
                 var screenTitle = remember { mutableStateOf(defaultTitle) }
                 var childNameSubtitle = remember { mutableStateOf(defaultSubtitle) }
                 Column(Modifier) {
-                    NavHelper().Header(screenTitle.value, childNameSubtitle.value, isBackActivity = true){
+                    NavHelper().Header(
+                        screenTitle.value,
+                        childNameSubtitle.value,
+                        isBackActivity = true
+                    ) {
                         finish()
                     }
                     Column(
@@ -64,7 +68,7 @@ class AddNewOrChangeChildActivity : ComponentActivity() {
     fun NewChildScreen(
         childViewModel: ChildViewModel = koinViewModel(),
         textFont: TextFont = TextFont(),
-        visitViewModel: VisitViewModel= koinViewModel(),
+        visitViewModel: VisitViewModel = koinViewModel(),
         nameSelection: MutableState<String>,
         childNameSubtitle: MutableState<String>,
         id: Int?

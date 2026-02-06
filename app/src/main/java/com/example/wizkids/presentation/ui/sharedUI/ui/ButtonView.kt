@@ -14,21 +14,40 @@ import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstan
 
 class ButtonView {
     @Composable
-    fun ButtonVisibleRow(buttonNames:Map<String, () -> Unit>,textFont: TextFont,padding: Int = BUTTON_VISIBLE_DEFAULT_PADDING){
-        Row(Modifier.fillMaxWidth()){
-            for(button in buttonNames){
-                Button(onClick = button.value, Modifier.weight(BUTTON_VISIBLE_WEIGHT).padding(end = padding.dp)){
+    fun ButtonVisibleRow(
+        buttonNames: Map<String, () -> Unit>,
+        textFont: TextFont,
+        padding: Int = BUTTON_VISIBLE_DEFAULT_PADDING
+    ) {
+        Row(Modifier.fillMaxWidth()) {
+            for (button in buttonNames) {
+                Button(
+                    onClick = button.value,
+                    Modifier
+                        .weight(BUTTON_VISIBLE_WEIGHT)
+                        .padding(end = padding.dp)
+                ) {
                     textFont.WhiteText(button.key)
                 }
             }
         }
     }
+
     @Composable
-    fun ButtonVisibleColumn(buttonNames:Map<String, () -> Unit>,textFont: TextFont,padding: Int = BUTTON_VISIBLE_DEFAULT_PADDING){
-        Column{
-            for(button in buttonNames){
-                Row(Modifier.fillMaxWidth()){
-                    Button(onClick = button.value, Modifier.weight(BUTTON_VISIBLE_WEIGHT).padding(top = padding.dp)){
+    fun ButtonVisibleColumn(
+        buttonNames: Map<String, () -> Unit>,
+        textFont: TextFont,
+        padding: Int = BUTTON_VISIBLE_DEFAULT_PADDING
+    ) {
+        Column {
+            for (button in buttonNames) {
+                Row(Modifier.fillMaxWidth()) {
+                    Button(
+                        onClick = button.value,
+                        Modifier
+                            .weight(BUTTON_VISIBLE_WEIGHT)
+                            .padding(top = padding.dp)
+                    ) {
                         textFont.WhiteText(button.key)
                     }
                 }

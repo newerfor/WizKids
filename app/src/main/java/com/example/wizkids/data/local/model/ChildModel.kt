@@ -1,7 +1,5 @@
 package com.example.wizkids.data.local.model
 
-import com.example.wizkids.domain.model.DomainDocumentsModel
-
 data class ChildModel(
     val id: Int? = null,
     val imagePath: String,

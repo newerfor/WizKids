@@ -19,9 +19,9 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.example.wizkids.R
 import com.example.wizkids.presentation.sharedUI.TextFont
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant
-import com.example.wizkids.R
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ERROR_MESSAGE_COLUMN_PADDING
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ERROR_MESSAGE_ROW_CLIP
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ERROR_MESSAGE_ROW_PADDING
@@ -41,8 +41,9 @@ object StateHelper {
             )
         }
     }
+
     @Composable
-    fun ErrorMassage(textFont: TextFont,Clickable: () -> Unit) {
+    fun ErrorMassage(textFont: TextFont, Clickable: () -> Unit) {
         Column(
             Modifier
                 .fillMaxSize()

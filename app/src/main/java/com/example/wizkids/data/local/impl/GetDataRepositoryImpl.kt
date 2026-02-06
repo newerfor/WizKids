@@ -23,25 +23,25 @@ class GetDataRepositoryImpl(
         maxAge: Int?,
         balanceOperator: String?,
         hasPayStatusDebt: Boolean?,
-        ): List<ChildModel> {
+    ): List<ChildModel> {
         return dao.getChildren(
             searchName = searchName,
             minAge = minAge,
             maxAge = maxAge,
             balanceOperator = balanceOperator,
             showOnlyDebt = hasPayStatusDebt
-        ).mapNotNull  { child -> mapper.mapChildToModel(child) }
+        ).mapNotNull { child -> mapper.mapChildToModel(child) }
     }
 
     override suspend fun getVisitData(visitsList: List<String>?): List<VisitModel> {
         return if (visitsList == null) {
-            dao.getVisits().mapNotNull  { visit -> mapper.mapVisitToModel(visit) }
+            dao.getVisits().mapNotNull { visit -> mapper.mapVisitToModel(visit) }
         } else {
             val result = mutableListOf<VisitEntity>()
             for (visit in visitsList) {
                 dao.getVisitByDate(visit).let { result.addAll(it) }
             }
-            return result.mapNotNull  { visit -> mapper.mapVisitToModel(visit) }
+            return result.mapNotNull { visit -> mapper.mapVisitToModel(visit) }
         }
     }
 
@@ -50,7 +50,7 @@ class GetDataRepositoryImpl(
     }
 
     override suspend fun getVisitByChildIdData(id: Int): List<VisitModel> {
-        return dao.getVisitByChildId(id).mapNotNull  { visit -> mapper.mapVisitToModel(visit) }
+        return dao.getVisitByChildId(id).mapNotNull { visit -> mapper.mapVisitToModel(visit) }
     }
 
 }

@@ -1,6 +1,5 @@
 package com.example.wizkids.presentation.addNewOrChangeUserInformation.ui
 
-import android.R.attr.name
 import android.content.Context
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -11,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.ripple.rememberRipple
-import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -39,7 +37,6 @@ import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrCha
 import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_FIRST_NAME
 import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_LAST_NAME
 import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_MIDDLE_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserViewConstant.ADD_NEW_OR_CHANGE_USER_BUTTON_WEIGHT
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationImageAndPayStatus
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
@@ -256,7 +253,10 @@ class UserAddInfoScreen {
                     textFont
                 )
                 if (openWindowGetDateWorkExpirience.value) {
-                    GetDate().DatePickerExample(openWindowGetDateWorkExpirience, textFont) { newDate ->
+                    GetDate().DatePickerExample(
+                        openWindowGetDateWorkExpirience,
+                        textFont
+                    ) { newDate ->
                         userWorkExperience.value = newDate
                     }
                 }
@@ -373,7 +373,7 @@ class UserAddInfoScreen {
                             if (userDateOfBirth.value.isEmpty()) {
                                 hasUserDateOfBirthError.value = true
                             }
-                            if (!hasUserDateOfBirthError.value&&!hasWorkExperienceError.value&&!hasUserFirstNameError.value && !hasUserLastNameError.value && !hasUserMiddleNameError.value && !hasUserDateOfBirthError.value && !hasUserPhoneError.value && !hasUserEmailError.value) {
+                            if (!hasUserDateOfBirthError.value && !hasWorkExperienceError.value && !hasUserFirstNameError.value && !hasUserLastNameError.value && !hasUserMiddleNameError.value && !hasUserDateOfBirthError.value && !hasUserPhoneError.value && !hasUserEmailError.value) {
                                 val user = DomainUserModel(
                                     imagePath = userImage.value
                                         ?: ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_IMAGE,
@@ -392,7 +392,7 @@ class UserAddInfoScreen {
                             }
 
                         },
-                        ),
+                    ),
                     textFont
                 )
             }

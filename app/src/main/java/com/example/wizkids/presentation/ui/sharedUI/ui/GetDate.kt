@@ -47,12 +47,19 @@ class GetDate {
                             }
                             openWindowDate.value = false
                         }
-                    ) { textFont.UnColorText(stringResource(R.string.apply_button), color = blackColor) }
+                    ) {
+                        textFont.UnColorText(
+                            stringResource(R.string.apply_button),
+                            color = blackColor
+                        )
+                    }
                 },
                 dismissButton = {
-                    TextButton(onClick = { openWindowDate.value = false }) { textFont.UnColorText(
-                        stringResource(R.string.cancel_button), color = blackColor
-                    ) }
+                    TextButton(onClick = { openWindowDate.value = false }) {
+                        textFont.UnColorText(
+                            stringResource(R.string.cancel_button), color = blackColor
+                        )
+                    }
                 }
             ) {
                 DatePicker(state = datePickerState)

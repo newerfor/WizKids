@@ -10,9 +10,16 @@ import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstan
 
 class ChildInformationCardValueGrayAndWhiteText {
     @Composable
-    fun InformationCardValueGrayAndWhiteText(textFont: TextFont,nameInformation: String,valueInformation: String){
+    fun InformationCardValueGrayAndWhiteText(
+        textFont: TextFont,
+        nameInformation: String,
+        valueInformation: String
+    ) {
         Row {
-            textFont.GrayText(nameInformation, Modifier.padding(end = INFO_CARD_GRAY_AND_WHITE_TEXT_PADDING_END.dp))
+            textFont.GrayText(
+                nameInformation,
+                Modifier.padding(end = INFO_CARD_GRAY_AND_WHITE_TEXT_PADDING_END.dp)
+            )
             textFont.WhiteText(valueInformation)
         }
     }

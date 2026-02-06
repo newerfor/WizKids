@@ -1,6 +1,5 @@
 package com.example.wizkids.data.local.mapper
 
-import android.R.attr.name
 import com.example.wizkids.data.local.entity.ChildEntity
 import com.example.wizkids.data.local.entity.UserEntity
 import com.example.wizkids.data.local.entity.VisitEntity

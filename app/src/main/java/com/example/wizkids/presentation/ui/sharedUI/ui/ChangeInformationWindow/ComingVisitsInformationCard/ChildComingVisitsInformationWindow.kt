@@ -66,7 +66,6 @@ import com.example.wizkids.ui.theme.redColor
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import kotlin.text.ifEmpty
 
 class ChildComingVisitsInformationWindow {
     @Composable
@@ -81,12 +80,17 @@ class ChildComingVisitsInformationWindow {
         childId: Int?,
         selectedDate: String
     ) {
-        var selectedTime = remember { mutableStateOf(LocalTime.now().truncatedTo(ChronoUnit.MINUTES)) }
+        var selectedTime =
+            remember { mutableStateOf(LocalTime.now().truncatedTo(ChronoUnit.MINUTES)) }
         val statusList = COMING_VISITS_INFORMATION_WINDOW_STATUS_LIST
         var openWindowGetVisit = remember { mutableStateOf(false) }
         var expandedVisitStatus = remember { mutableStateOf(false) }
         var expandedPayStatus = remember { mutableStateOf(false) }
-        var selectedPayStatus = remember { mutableStateOf(visit?.value?.payStatus ?: COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_PAY_STATUS) }
+        var selectedPayStatus = remember {
+            mutableStateOf(
+                visit?.value?.payStatus ?: COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_PAY_STATUS
+            )
+        }
         var payStatusList = listOf(
             stringResource(R.string.pay_status_paid),
             stringResource(R.string.pay_status_not_paid)
@@ -110,9 +114,10 @@ class ChildComingVisitsInformationWindow {
         }
         var visitDateComing by remember {
             mutableStateOf(
-                if(!becomeCalendar){
-                    visit?.value?.date ?: COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_VISIT_DATE_COMING
-                }else{
+                if (!becomeCalendar) {
+                    visit?.value?.date
+                        ?: COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_VISIT_DATE_COMING
+                } else {
                     selectedDate
                 }
             )
@@ -122,7 +127,8 @@ class ChildComingVisitsInformationWindow {
         var hasVisitStatusError by remember { mutableStateOf(false) }
         val timeString = remember { mutableStateOf("$selectedTime") }
         LaunchedEffect(selectedTime) {
-            timeString.value = selectedTime.value?.format(DateTimeFormatter.ofPattern("HH:mm")).toString()
+            timeString.value =
+                selectedTime.value?.format(DateTimeFormatter.ofPattern("HH:mm")).toString()
         }
         Dialog(onDismissRequest = { openVisitWindow.value = false }) {
             Column(
@@ -134,17 +140,27 @@ class ChildComingVisitsInformationWindow {
                     .padding(VISIT_INFORMATION_WINDOW_DIALOG_PADDING.dp)
                     .verticalScroll(rememberScrollState())
             ) {
-                Row(Modifier.fillMaxWidth().padding(vertical = VISIT_LEAVE_ICON_PADDING_VERTICAL.dp)) {
-                    Column(Modifier.background(grayColor)){
-                        Icon(Icons.Filled.KeyboardArrowLeft, contentDescription = "", Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple()
-                        ) {
-                            openVisitWindow.value = false
-                        }.size(VISIT_LEAVE_ICON_SIZE.dp))
+                Row(
+                    Modifier
+                        .fillMaxWidth()
+                        .padding(vertical = VISIT_LEAVE_ICON_PADDING_VERTICAL.dp)
+                ) {
+                    Column(Modifier.background(grayColor)) {
+                        Icon(
+                            Icons.Filled.KeyboardArrowLeft,
+                            contentDescription = "",
+                            Modifier
+                                .clickable(
+                                    interactionSource = remember { MutableInteractionSource() },
+                                    indication = rememberRipple()
+                                ) {
+                                    openVisitWindow.value = false
+                                }
+                                .size(VISIT_LEAVE_ICON_SIZE.dp)
+                        )
                     }
                 }
-                if(!becomeCalendar){
+                if (!becomeCalendar) {
                     InputInformationCard().AddInformationCard(
                         stringResource(R.string.coming_visit_window_date_label),
                         textFont,
@@ -154,8 +170,8 @@ class ChildComingVisitsInformationWindow {
                         if (!isChangeAct) {
                             textFont.WhiteText(visitDateComing)
                         } else {
-                            Row(){
-                                textFont.WhiteText(visitDateComing.ifEmpty {stringResource(R.string.date_not_selected)})
+                            Row() {
+                                textFont.WhiteText(visitDateComing.ifEmpty { stringResource(R.string.date_not_selected) })
                                 if (hasComingVisitError) {
                                     Icon(
                                         Icons.Default.Warning,
@@ -177,7 +193,10 @@ class ChildComingVisitsInformationWindow {
                                 textFont
                             )
                             if (openWindowGetVisit.value) {
-                                GetDate().DatePickerExample(openWindowGetVisit,textFont) { newDate ->
+                                GetDate().DatePickerExample(
+                                    openWindowGetVisit,
+                                    textFont
+                                ) { newDate ->
                                     visitDateComing = newDate
                                     hasComingVisitError = false
                                 }
@@ -226,12 +245,12 @@ class ChildComingVisitsInformationWindow {
                     if (!isChangeAct) {
                         textFont.WhiteText(selectedStatusVisit.value)
                     } else {
-                       TextFieldVisible().DropMenuField(
-                           expanded = expandedVisitStatus,
-                           selectedValue = selectedStatusVisit,
-                           textFont = textFont,
-                           optionList = statusList
-                       )
+                        TextFieldVisible().DropMenuField(
+                            expanded = expandedVisitStatus,
+                            selectedValue = selectedStatusVisit,
+                            textFont = textFont,
+                            optionList = statusList
+                        )
                     }
                 }
                 InputInformationCard().AddInformationCard(
@@ -266,39 +285,40 @@ class ChildComingVisitsInformationWindow {
                 Column {
                     if (isChangeAct) {
                         Column {
-                                ButtonView().ButtonVisibleRow(
-                                    mapOf(
-                                        stringResource(R.string.apply_button) to {
-                                            if (visitDateComing.isEmpty()) {
-                                                hasComingVisitError = true
-                                            }
-                                            if (nameVisit.isEmpty()) {
-                                                hasVisitNameError = true
-                                            }
-                                            if (selectedStatusVisit.value.isEmpty()) {
-                                                hasVisitStatusError = true
-                                            }
-                                            if (!hasComingVisitError && !hasVisitNameError && !hasVisitStatusError) {
-                                                val newDocument = DomainVisitModel(
-                                                    date = visitDateComing,
-                                                    time = selectedTime.value.toString(),
-                                                    visitName = nameVisit,
-                                                    visitStatus = selectedStatusVisit.value,
-                                                    notes = infoVisit,
-                                                    id = visit?.value?.id ?: (inAddIndex + COMING_VISITS_INFORMATION_WINDOW_INDEX_PLUS_VALUE),
-                                                    childId = childId,
-                                                    payStatus = selectedPayStatus.value
-                                                )
-                                                onSave(newDocument)
-                                                openVisitWindow.value = false
-                                            }
-                                        },
-                                        stringResource(R.string.cancel_button) to{
+                            ButtonView().ButtonVisibleRow(
+                                mapOf(
+                                    stringResource(R.string.apply_button) to {
+                                        if (visitDateComing.isEmpty()) {
+                                            hasComingVisitError = true
+                                        }
+                                        if (nameVisit.isEmpty()) {
+                                            hasVisitNameError = true
+                                        }
+                                        if (selectedStatusVisit.value.isEmpty()) {
+                                            hasVisitStatusError = true
+                                        }
+                                        if (!hasComingVisitError && !hasVisitNameError && !hasVisitStatusError) {
+                                            val newDocument = DomainVisitModel(
+                                                date = visitDateComing,
+                                                time = selectedTime.value.toString(),
+                                                visitName = nameVisit,
+                                                visitStatus = selectedStatusVisit.value,
+                                                notes = infoVisit,
+                                                id = visit?.value?.id
+                                                    ?: (inAddIndex + COMING_VISITS_INFORMATION_WINDOW_INDEX_PLUS_VALUE),
+                                                childId = childId,
+                                                payStatus = selectedPayStatus.value
+                                            )
+                                            onSave(newDocument)
                                             openVisitWindow.value = false
                                         }
-                                    ),
-                                    textFont,
-                                )
+                                    },
+                                    stringResource(R.string.cancel_button) to {
+                                        openVisitWindow.value = false
+                                    }
+                                ),
+                                textFont,
+                            )
                         }
                     }
                 }

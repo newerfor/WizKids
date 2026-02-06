@@ -18,7 +18,7 @@ class GetDomainMapper {
                 name = child.name,
                 additionalInfo = child.additionalInfo,
                 dateOfBirth = child.dateOfBirth,
-                documents = child.documents.map {mapDataDocumentsModelToDomainDocumentsModel(it)},
+                documents = child.documents.map { mapDataDocumentsModelToDomainDocumentsModel(it) },
                 learningStages = child.learningStages,
                 visitPrice = child.visitPrice,
                 currentBalance = child.currentBalance
@@ -53,10 +53,11 @@ class GetDomainMapper {
                 email = user.email,
                 educationLevel = user.educationLevel,
                 specialization = user.specialization,
-                documents = user.documents.map {mapDataDocumentsModelToDomainDocumentsModel(it)}
+                documents = user.documents.map { mapDataDocumentsModelToDomainDocumentsModel(it) }
             )
         }
     }
+
     fun mapDataDocumentsModelToDomainDocumentsModel(documents: DocumentsModel): DomainDocumentsModel {
         return DomainDocumentsModel(
             id = documents.id,

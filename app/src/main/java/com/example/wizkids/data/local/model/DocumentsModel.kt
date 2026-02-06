@@ -1,4 +1,5 @@
 package com.example.wizkids.data.local.model
+
 data class DocumentsModel(
     val id: Int,
     val name: String,

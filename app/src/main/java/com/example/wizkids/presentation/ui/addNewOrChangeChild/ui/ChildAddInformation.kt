@@ -38,8 +38,8 @@ import com.example.wizkids.presentation.sharedUI.GetDate
 import com.example.wizkids.presentation.sharedUI.InputInformationCard
 import com.example.wizkids.presentation.sharedUI.TextFieldVisible
 import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ChangeInformationWindow.FinanceInfoWindow.ChildFinanceWindow
 import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
+import com.example.wizkids.presentation.ui.sharedUI.ui.ChangeInformationWindow.FinanceInfoWindow.ChildFinanceWindow
 import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitsUiState
@@ -194,8 +194,8 @@ class ChildAddInformation {
                 stringResource(R.string.birth_date_label),
                 textFont = textFont
             ) {
-                Row(){
-                    textFont.WhiteText(childDateOfBirth.value.ifEmpty {stringResource(R.string.date_not_selected)})
+                Row() {
+                    textFont.WhiteText(childDateOfBirth.value.ifEmpty { stringResource(R.string.date_not_selected) })
                     if (childDayOfBirthError.value) {
                         Icon(
                             Icons.Default.Warning,
@@ -213,7 +213,7 @@ class ChildAddInformation {
                             childDateOfBirth.value = ""
                         },
 
-                    ),
+                        ),
                     textFont
                 )
                 if (isDatePickerVisible.value) {
@@ -236,25 +236,32 @@ class ChildAddInformation {
                         }" to {
                             openWindowBalance.value = true
                         },
-                        "${stringResource(R.string.price_label)}: ${childVisitPrice.value} ${stringResource(R.string.currency_rub)}" to {
+                        "${stringResource(R.string.price_label)}: ${childVisitPrice.value} ${
+                            stringResource(
+                                R.string.currency_rub
+                            )
+                        }" to {
                             openWindowPrice.value = true
-                        },),
+                        },
+                    ),
                     textFont
                 )
-                if(openWindowPrice.value){
-                    ChildFinanceWindow().WindowAddFinanceInformation(openWindowPrice,textFont,
+                if (openWindowPrice.value) {
+                    ChildFinanceWindow().WindowAddFinanceInformation(
+                        openWindowPrice, textFont,
                         stringResource(R.string.price_label),
                         childVisitPrice.value
-                    ){newFinanceInfo->
+                    ) { newFinanceInfo ->
                         childVisitPrice.value = newFinanceInfo
                         openWindowPrice.value = false
                     }
                 }
-                if(openWindowBalance.value){
-                    ChildFinanceWindow().WindowAddFinanceInformation(openWindowBalance,textFont,
+                if (openWindowBalance.value) {
+                    ChildFinanceWindow().WindowAddFinanceInformation(
+                        openWindowBalance, textFont,
                         stringResource(R.string.balance),
                         childCurrentBalance.value
-                    ){newFinanceInfo->
+                    ) { newFinanceInfo ->
                         childCurrentBalance.value = newFinanceInfo
                         openWindowBalance.value = false
                     }
