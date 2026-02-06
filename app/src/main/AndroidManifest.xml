@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <!-- Для Android 13 и выше -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- Для Android 10 и выше -->
+    <uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,27 +18,37 @@
         android:theme="@style/Theme.WizKids"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.dateScreeen.upcomingDatesScreen.UpcominDatesActivity"
+            android:name=".presentation.addNewOrChangeChild.ui.AddNewOrChangeChildActivity"
+            android:exported="false"
+            android:label="@string/title_activity_add_new_or_change_user_information"
+            android:theme="@style/Theme.WizKids" />
+        <activity
+            android:name=".presentation.addNewOrChangeUserInformation.ui.AddNewOrChangeUserInformationActivity"
+            android:exported="false"
+            android:label="@string/title_activity_user_profile"
+            android:theme="@style/Theme.WizKids" />
+        <activity
+            android:name=".presentation.dateScreeen.ui.calendarScreen.CalendarActivity"
             android:exported="false"
             android:label="@string/title_activity_upcomin_dates"
             android:theme="@style/Theme.WizKids" />
         <activity
-            android:name=".presentation.addNewOrChangeChild.AddNewOrChangeChildActivity"
+            android:name=".presentation.userProfile.ui.UserProfileActivity"
             android:exported="false"
             android:label="@string/title_activity_calendar"
             android:theme="@style/Theme.WizKids" />
         <activity
-            android:name=".presentation.childInformation.ChildInformation"
+            android:name=".presentation.childInformation.ui.ChildInformationActivity"
             android:exported="false"
             android:label="@string/title_activity_add_new_or_change_child"
             android:theme="@style/Theme.WizKids" />
         <activity
-            android:name=".presentation.main.MainActivity"
+            android:name=".presentation.dateScreeen.ui.upcomingVisitsScreen.UpcomingVisitsActivity"
             android:exported="false"
             android:label="@string/title_activity_add_new_child"
             android:theme="@style/Theme.WizKids" />
         <activity
-            android:name=".presentation.dateScreeen.calendarScreen.CalendarActivity"
+            android:name=".presentation.main.ui.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.WizKids">
