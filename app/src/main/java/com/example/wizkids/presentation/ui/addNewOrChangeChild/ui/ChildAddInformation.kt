@@ -24,6 +24,7 @@ import com.example.wizkids.domain.model.DomainChildModel
 import com.example.wizkids.domain.model.DomainDocumentsModel
 import com.example.wizkids.domain.model.DomainVisitModel
 import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_FIRST_NAME
+import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_LAST_NAME
 import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_MIDDLE_NAME
 import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_ADDITIONAL_INFO
 import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_BALANCE
@@ -76,7 +77,7 @@ class ChildAddInformation {
         }
         var childMiddleName = remember {
             mutableStateOf(
-                parts.getOrNull(ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_MIDDLE_NAME)
+                parts.getOrNull(ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_LAST_NAME)
                     ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NAME
             )
         }

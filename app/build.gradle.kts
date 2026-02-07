@@ -42,11 +42,14 @@ android {
 
 dependencies {
     implementation(libs.converter.gson)
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(libs.koin.androidx.compose)
+    val roomVersion = "2.6.1"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
     //noinspection KaptUsageInsteadOfKsp
     kapt (libs.androidx.room.compiler)
+    implementation(libs.koin.core)
+    implementation(libs.koin.android)
     implementation(libs.koin.core)
     implementation(libs.koin.android)
     implementation(libs.koin.androidx.compose)
