@@ -1,6 +1,5 @@
 package com.example.wizkids.presentation.ui.sharedUI.ui
 
-import android.R.attr.button
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,7 +12,8 @@ import androidx.compose.ui.unit.dp
 import com.example.wizkids.presentation.sharedUI.TextFont
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.BUTTON_VISIBLE_DEFAULT_PADDING
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.BUTTON_VISIBLE_WEIGHT
-import com.example.wizkids.ui.theme.darkHeader
+import com.example.wizkids.ui.theme.buttonColor
+import com.example.wizkids.ui.theme.lightBlue
 
 class ButtonView {
     @Composable
@@ -27,9 +27,11 @@ class ButtonView {
                 Button(
                     onClick = button.value,
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = darkHeader
+                        containerColor = buttonColor
                     ),
-                    modifier = Modifier.weight(BUTTON_VISIBLE_WEIGHT).padding(end = padding.dp)
+                    modifier = Modifier
+                        .weight(BUTTON_VISIBLE_WEIGHT)
+                        .padding(end = padding.dp)
                 ) {
                     textFont.WhiteText(button.key)
                 }
@@ -48,11 +50,40 @@ class ButtonView {
                 Row(Modifier.fillMaxWidth()) {
                     Button(
                         onClick = button.value,
-                        Modifier
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = buttonColor
+                        ),
+                        modifier = Modifier
                             .weight(BUTTON_VISIBLE_WEIGHT)
                             .padding(top = padding.dp)
                     ) {
                         textFont.WhiteText(button.key)
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun ButtonDayWeek(
+        butonSetting: Map<String, Boolean?>,
+        textFont: TextFont,
+        onClick: (String) -> Unit,
+        padding: Int = BUTTON_VISIBLE_DEFAULT_PADDING
+    ) {
+        Column {
+            butonSetting.entries.forEach { entry ->
+                Row(Modifier.fillMaxWidth()) {
+                    Button(
+                        onClick = { onClick(entry.key) },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = if (entry.value == true) lightBlue else buttonColor
+                        ),
+                        modifier = Modifier
+                            .weight(BUTTON_VISIBLE_WEIGHT)
+                            .padding(top = padding.dp)
+                    ) {
+                        textFont.WhiteText(entry.key)
                     }
                 }
             }

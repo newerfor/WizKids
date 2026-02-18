@@ -9,5 +9,6 @@ data class DomainChildModel(
     val documents: List<DomainDocumentsModel>,
     val learningStages: List<String>,
     val visitPrice: Int,
-    val currentBalance: Int
+    val currentBalance: Int,
+    val childDayOfWeekVisit:DomainChildDayOfWeekVisit
 )

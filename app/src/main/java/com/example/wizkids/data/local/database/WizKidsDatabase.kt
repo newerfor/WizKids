@@ -1,5 +1,6 @@
 package com.example.wizkids.data.local.database
 
+import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
@@ -12,7 +13,7 @@ import com.example.wizkids.data.local.entity.VisitEntity
 
 @Database(
     entities = [ChildEntity::class, VisitEntity::class, UserEntity::class],
-    version = DATABASE_VERSION
+    version = DATABASE_VERSION,
 )
 @TypeConverters(Converters::class)
 abstract class WizKidsDatabase : RoomDatabase() {

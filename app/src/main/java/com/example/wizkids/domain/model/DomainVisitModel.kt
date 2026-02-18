@@ -8,5 +8,6 @@ data class DomainVisitModel(
     val visitStatus: String,
     val notes: String,
     val payStatus: String,
-    val childId: Int?
+    val childId: Int?,
+    val childName: String
 )

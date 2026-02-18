@@ -29,6 +29,8 @@ class VisitViewModel(
     fun saveVisit(visit: DomainVisitModel, childId: Int) {
         viewModelScope.launch {
             saveVisitUseCase(visit, childId)
+            getVisit()
+
         }
     }
 

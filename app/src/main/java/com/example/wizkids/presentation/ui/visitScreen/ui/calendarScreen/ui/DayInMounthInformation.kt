@@ -7,7 +7,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -73,9 +72,8 @@ class DayInMounthInformation {
         LazyVerticalGrid(
             columns = GridCells.Fixed(CALENDAR_ACTIVITY_DAY_IN_MONTH_LAZY_VERTICAL_COLUMN),
             modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(8.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(5.dp),
+            verticalArrangement = Arrangement.spacedBy(5.dp)
         ) {
             items(dayList) { day ->
                 DayCard(
@@ -133,7 +131,7 @@ class DayInMounthInformation {
                     .fillMaxWidth()
                     .padding(12.dp), Arrangement.Center, Alignment.CenterHorizontally
             ) {
-                textFont.WhiteText(dayNumber.toString(), fontSize = 14)
+                textFont.WhiteText(dayNumber.toString(), fontSize = 12)
             }
         }
         if (openWindowVisit.value) {

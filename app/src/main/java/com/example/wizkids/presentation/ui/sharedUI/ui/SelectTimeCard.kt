@@ -44,7 +44,6 @@ class SelectTimeCard {
     fun TimeHelper(
         selectedTime: MutableState<LocalTime?>,
         textFont: TextFont,
-        timeString: MutableState<String>
     ) {
         var showTimePicker by remember { mutableStateOf(false) }
         val timePickerState = rememberTimePickerState(
@@ -55,7 +54,7 @@ class SelectTimeCard {
 
         Column() {
             textFont.WhiteText(
-                text = "${stringResource(R.string.selected_time)} ${timeString.value}"
+                text = "${stringResource(R.string.selected_time)} ${selectedTime.value.toString()}"
             )
 
             Spacer(modifier = Modifier.height(TIME_HELPER_SPACER_HEIGHT.dp))

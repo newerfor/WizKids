@@ -14,6 +14,7 @@ val Pink40 = Color(0xFF7D5260)
 val textWhite = Color(0xFFFFFFFF)
 val textLightGray = Color(0xFFCBD5E0)
 val darkHeader = Color(0xFF2D3748)
+val buttonColor = Color(0xFF425F8C)
 val PdfButtonBackground = Color(0xFFFF9800)
 
 val cardBackground = Color(0xFF4A5568)

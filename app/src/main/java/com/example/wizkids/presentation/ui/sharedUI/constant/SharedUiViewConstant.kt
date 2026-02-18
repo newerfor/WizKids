@@ -77,6 +77,7 @@ object SharedUiViewConstant {
     const val HEADER_COLUMN_PADDING_START = 12
     const val ICON_GO_BACK_PADDING = 5
     const val ICON_GO_BACK_SIZE = 40
+    const val ICON_EXIT_SIZE = 30
     const val HEADER_INFO_SELECTION_PADDING_TOP = 5
     const val HEADER_INFO_SELECTION_PADDING_BOTTOM = 5
     const val FOOTER_MAIN_CONTAINER_HEIGHT = 70

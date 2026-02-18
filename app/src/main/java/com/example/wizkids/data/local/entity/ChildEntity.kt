@@ -2,6 +2,7 @@ package com.example.wizkids.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.wizkids.data.local.model.ChildDayOfWeekVisitModel
 import com.example.wizkids.data.local.model.DocumentsModel
 
 @Entity(tableName = "child")
@@ -15,5 +16,6 @@ data class ChildEntity(
     val documents: List<DocumentsModel>,
     val learningStages: List<String>,
     val visitPrice: Int,
-    val currentBalance: Int
+    val currentBalance: Int,
+    val childDayOfWeekVisit: ChildDayOfWeekVisitEntity
 )

@@ -3,6 +3,7 @@ package com.example.wizkids.data.local.mapper
 import com.example.wizkids.data.local.entity.ChildEntity
 import com.example.wizkids.data.local.entity.UserEntity
 import com.example.wizkids.data.local.entity.VisitEntity
+import com.example.wizkids.data.local.model.ChildDayOfWeekVisitModel
 import com.example.wizkids.data.local.model.ChildModel
 import com.example.wizkids.data.local.model.UserModel
 import com.example.wizkids.data.local.model.VisitModel
@@ -19,7 +20,13 @@ class GetMapper {
                 documents = child.documents,
                 learningStages = child.learningStages,
                 visitPrice = child.visitPrice,
-                currentBalance = child.currentBalance
+                currentBalance = child.currentBalance,
+                childDayOfWeekVisit = ChildDayOfWeekVisitModel(
+                    dayOfWeek = child.childDayOfWeekVisit.dayOfWeek,
+                    firstDate = child.childDayOfWeekVisit.firstDate,
+                    secondDate = child.childDayOfWeekVisit.secondDate,
+                    time = child.childDayOfWeekVisit.time,
+                )
             )
         }
     }
@@ -34,7 +41,8 @@ class GetMapper {
                 visitStatus = visit.visitStatus,
                 notes = visit.notes,
                 payStatus = visit.payStatus,
-                childId = visit.childId
+                childId = visit.childId,
+                childName = visit.childName
             )
         }
     }

@@ -25,6 +25,7 @@ import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitsUiState
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CHILD_ADD_INFO
+import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_MAIN
 import com.example.wizkids.util.AgeHelper
 import com.example.wizkids.util.ImageHelper
 import com.example.wizkids.util.IntentHelper
@@ -160,6 +161,11 @@ class ChildFullInfoScreen {
                                 }
                             }
                         }
+                        IntentHelper().intentStartById(
+                            KEY_ACTIVITY_MAIN,
+                            context,
+                            child.id
+                        )
                     }
                 ),
                 textFont,

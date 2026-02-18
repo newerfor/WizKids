@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.example.wizkids.R
+import com.example.wizkids.domain.model.DomainChildDayOfWeekVisit
 import com.example.wizkids.domain.model.DomainChildModel
 import com.example.wizkids.domain.model.DomainDocumentsModel
 import com.example.wizkids.domain.model.DomainVisitModel
@@ -67,6 +68,16 @@ class ChildAddInformation {
             mutableStateOf(
                 parts.getOrNull(ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_FIRST_NAME)
                     ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NAME
+            )
+        }
+        var childDateOfWeek = remember {
+            mutableStateOf(
+                sampleChild?.childDayOfWeekVisit ?: DomainChildDayOfWeekVisit(
+                    dayOfWeek = mapOf(),
+                    firstDate = "",
+                    secondDate = "",
+                    time = ""
+                )
             )
         }
         var childLastName = remember {
@@ -293,8 +304,22 @@ class ChildAddInformation {
                     textFont,
                     childVisitComing,
                     visitViewModel,
-                    sampleChild?.id
-                )
+                    childDateOfWeek,
+                    sampleChild?.id,
+                    sampleChild?.name
+                        ?: "${childLastName.value} ${childFirstName.value} ${childMiddleName.value}",
+                    price = if (sampleChild == null) {
+                        null
+                    } else {
+                        childVisitPrice.value
+                    },
+                    balance = if (sampleChild == null) {
+                        null
+                    } else {
+                        childCurrentBalance
+                    },
+
+                    )
             }
             Column(Modifier.fillMaxWidth()) {
                 Column(Modifier.fillMaxWidth(), Arrangement.Center, Alignment.CenterHorizontally) {
@@ -351,7 +376,8 @@ class ChildAddInformation {
                                     documents = childDocuments,
                                     learningStages = childLearningStages.value,
                                     visitPrice = childVisitPrice.value,
-                                    currentBalance = childCurrentBalance.value
+                                    currentBalance = childCurrentBalance.value,
+                                    childDayOfWeekVisit = childDateOfWeek.value,
                                 )
                                 childViewModel.saveChild(child, childVisitComing)
                                 IntentHelper().intentStart(KEY_ACTIVITY_MAIN, context)

@@ -42,7 +42,8 @@ class MainActivity : ComponentActivity() {
                 Column(Modifier.fillMaxSize()) {
                     NavHelper().Header(
                         stringResource(R.string.main_activity_title),
-                        stringResource(R.string.main_activity_subtitle)
+                        stringResource(R.string.main_activity_subtitle),
+                        context = context
                     )
                     Column(Modifier.weight(MAIN_ACTIVITY_MAIN_CONTAINER_WEIGHT)) {
                         ChildScreen(context = context)

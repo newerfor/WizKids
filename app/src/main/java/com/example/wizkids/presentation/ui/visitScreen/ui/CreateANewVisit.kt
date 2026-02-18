@@ -28,6 +28,7 @@ import com.example.wizkids.presentation.sharedUI.ChildView
 import com.example.wizkids.presentation.sharedUI.TextFont
 import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
 import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_ID
+import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_NAME
 import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.CREATE_A_NEW_VISIT_DIALOG_CLIP
 import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.CREATE_A_NEW_VISIT_DIALOG_HEIGHT
 import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.CREATE_A_NEW_VISIT_DIALOG_WIDTH
@@ -50,6 +51,7 @@ class CreateANewVisit {
     ) {
         var openSelectChild = remember { mutableStateOf(true) }
         var childId = remember { mutableStateOf(CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_ID) }
+        var childName = remember { mutableStateOf(CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_NAME) }
         Dialog(onDismissRequest = { openWindowAddDate.value = false }) {
             Column(
                 Modifier
@@ -70,6 +72,7 @@ class CreateANewVisit {
                 if (openSelectChild.value) {
                     WindowChildPicker(
                         childId = childId,
+                        childName = childName,
                         openSelectChild = openSelectChild,
                         visitViewModel = visitViewModel,
                         allChildUiState = allChildUiState,
@@ -85,13 +88,15 @@ class CreateANewVisit {
                         isChangeAct = true,
                         onSave = { newVisit ->
                             visitViewModel.saveVisit(newVisit, childId.value)
-                            visitViewModel.getVisit()
+                            openWindowAddDate.value = false
                         },
                         inAddIndex = visitListSize,
                         becomeCalendar = true,
                         childId = childId.value,
-                        selectVisit
-                    )
+                        childName = childName.value,
+                        selectVisit,
+
+                        )
                 }
             }
         }
@@ -105,7 +110,8 @@ class CreateANewVisit {
         textFont: TextFont,
         context: Context,
         childId: MutableState<Int>,
-        openSelectChild: MutableState<Boolean>
+        openSelectChild: MutableState<Boolean>,
+        childName: MutableState<String>
     ) {
         LaunchedEffect(Unit) {
             childViewModel.getChildren(
@@ -131,7 +137,8 @@ class CreateANewVisit {
                     context,
                     childViewModel
                 ) {
-                    childId.value = it
+                    childId.value = it.id ?: 0
+                    childName.value = it.name
                     openSelectChild.value = false
                 }
             }

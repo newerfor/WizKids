@@ -1,6 +1,7 @@
 package com.example.wizkids.data.local.converters
 
 import androidx.room.TypeConverter
+import com.example.wizkids.data.local.entity.ChildDayOfWeekVisitEntity
 import com.example.wizkids.data.local.model.DocumentsModel
 import com.example.wizkids.domain.model.DomainDocumentsModel
 
@@ -25,7 +26,20 @@ class Converters {
             gson.fromJson(json, type)
         }
     }
+    @TypeConverter
+    fun fromChildDayOfWeekVisitEntity(entity: ChildDayOfWeekVisitEntity?): String? {
+        return if (entity == null) null else gson.toJson(entity)
+    }
 
+    @TypeConverter
+    fun toChildDayOfWeekVisitEntity(json: String?): ChildDayOfWeekVisitEntity? {
+        return if (json == null) {
+            null
+        } else {
+            val type: Type = object : TypeToken<ChildDayOfWeekVisitEntity>() {}.type
+            gson.fromJson(json, type)
+        }
+    }
     @TypeConverter
     fun fromStringList(list: List<String>?): String? {
         return if (list == null) null else gson.toJson(list)

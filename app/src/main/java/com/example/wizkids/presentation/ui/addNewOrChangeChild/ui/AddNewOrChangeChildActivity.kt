@@ -1,6 +1,8 @@
 package com.example.wizkids.presentation.addNewOrChangeChild.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -30,6 +32,8 @@ class AddNewOrChangeChildActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         val defaultTitle = getString(R.string.add_child_activity_title)
         val defaultSubtitle = getString(R.string.add_child_activity_subtitle)
         setContent {
@@ -38,11 +42,14 @@ class AddNewOrChangeChildActivity : ComponentActivity() {
                 val id = idString?.toIntOrNull()
                 var screenTitle = remember { mutableStateOf(defaultTitle) }
                 var childNameSubtitle = remember { mutableStateOf(defaultSubtitle) }
+                val context = LocalContext.current
+
                 Column(Modifier) {
                     NavHelper().Header(
                         screenTitle.value,
                         childNameSubtitle.value,
-                        isBackActivity = true
+                        isBackActivity = true,
+                        context = context
                     ) {
                         finish()
                     }
@@ -56,7 +63,8 @@ class AddNewOrChangeChildActivity : ComponentActivity() {
                         NewChildScreen(
                             nameSelection = screenTitle,
                             childNameSubtitle = childNameSubtitle,
-                            id = id
+                            id = id,
+                            context = context
                         )
                     }
                 }
@@ -71,9 +79,9 @@ class AddNewOrChangeChildActivity : ComponentActivity() {
         visitViewModel: VisitViewModel = koinViewModel(),
         nameSelection: MutableState<String>,
         childNameSubtitle: MutableState<String>,
-        id: Int?
+        id: Int?,
+        context: Context
     ) {
-        val context = LocalContext.current
         val childByIdUiState by childViewModel.childByIdState.collectAsState()
         val visitUiState by visitViewModel.visitUiState.collectAsState()
         if (id != null) {

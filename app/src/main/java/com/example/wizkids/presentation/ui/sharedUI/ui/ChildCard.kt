@@ -73,7 +73,7 @@ class ChildView {
         isMainActivity: Boolean,
         context: Context,
         childViewModel: ChildViewModel,
-        onClick: (Int) -> Unit,
+        onClick: (DomainChildModel) -> Unit,
     ) {
         for (child in allChild) {
             ChildCard(child, textFont, context, isMainActivity, childViewModel, onClick)
@@ -87,7 +87,7 @@ class ChildView {
         context: Context,
         isMainActivity: Boolean,
         childViewModel: ChildViewModel,
-        onClick: (Int) -> Unit
+        onClick: (DomainChildModel) -> Unit
     ) {
         var balance = remember { mutableStateOf(child.currentBalance) }
         val parts = child.name.trim().split(" ")
@@ -114,7 +114,7 @@ class ChildView {
                     interactionSource = remember { MutableInteractionSource() },
                     indication = rememberRipple()
                 ) {
-                    onClick.invoke(child.id ?: -1)
+                    onClick.invoke(child)
                 }
                 .border(CHILD_CARD_BORDER_WIDTH.dp, blackColor)
         ) {
@@ -241,6 +241,7 @@ class ChildView {
                                     learningStages = child.learningStages,
                                     visitPrice = child.visitPrice,
                                     currentBalance = balance.value,
+                                    childDayOfWeekVisit = child.childDayOfWeekVisit,
                                 ), childVisitComing
                             )
                             openWindowChangeBalance.value = false

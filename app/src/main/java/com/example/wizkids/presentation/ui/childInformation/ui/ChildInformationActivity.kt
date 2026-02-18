@@ -1,6 +1,8 @@
 package com.example.wizkids.presentation.childInformation.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -33,6 +35,8 @@ class ChildInformationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         setContent {
             WizKidsTheme {
                 var name = remember { mutableStateOf(CHILD_INFORMATION_DEFAULT_TITLE) }
@@ -40,10 +44,12 @@ class ChildInformationActivity : ComponentActivity() {
                 val idString = intent?.getStringExtra(ID_KEY)
                 val id = idString?.toIntOrNull()
                 Column(Modifier) {
+                    val context = LocalContext.current
                     NavHelper().Header(
                         nameSelection = name.value,
                         infoSelection = "${years.value} ${stringResource(R.string.subtitle_number)}${id}",
                         isBackActivity = true,
+                        context = context
                     ) {
                         finish()
                     }
@@ -54,7 +60,7 @@ class ChildInformationActivity : ComponentActivity() {
                                 rememberScrollState()
                             )
                     ) {
-                        ChildInfoScreen(name = name, years = years, id = id)
+                        ChildInfoScreen(name = name, years = years, id = id, context = context)
                     }
                 }
             }
@@ -68,9 +74,9 @@ class ChildInformationActivity : ComponentActivity() {
         textFont: TextFont = TextFont(),
         name: MutableState<String>,
         years: MutableState<String>,
-        id: Int?
+        id: Int?,
+        context: Context
     ) {
-        val context = LocalContext.current
         val childByIdUiState by childViewModel.childByIdState.collectAsState()
         val visitUiState by visitViewModel.visitUiState.collectAsState()
         if (id != null) {

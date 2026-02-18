@@ -82,7 +82,7 @@ class PersonalVisitInfo {
                     .padding(VISIT_INFORMATION_COLUMN_COLUMN_PADDING.dp)
             ) {
                 textFont.WhiteText(visitInfo.time)
-                textFont.WhiteText(visitInfo.visitStatus)
+                textFont.WhiteText("${visitInfo.childName}/${visitInfo.visitStatus}")
             }
         }
         if (openWindowPersonalDate.value) {
@@ -133,9 +133,9 @@ class PersonalVisitInfo {
             PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_NOT_PAID
         )
         val statusVisitList = listOf(
-            PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_COMING,
             PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_SOON,
-            PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_NOT_COMING
+            PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_COMING,
+            PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_NOT_COMING,
         )
         Dialog(onDismissRequest = { openWindowPersonalVisit.value = false }) {
             Column(
@@ -249,8 +249,8 @@ class PersonalVisitInfo {
                                         } else {
                                             balance
                                         }
-                                    }
-
+                                    },
+                                    childDayOfWeekVisit = child.childDayOfWeekVisit
                                 )
                                 val updateDateInfo = DomainVisitModel(
                                     id = visitInfo.id,
@@ -260,7 +260,8 @@ class PersonalVisitInfo {
                                     visitStatus = visitStatus.value,
                                     notes = visitInfo.notes,
                                     payStatus = payStatus.value,
-                                    childId = visitInfo.childId
+                                    childId = visitInfo.childId,
+                                    childName = visitInfo.childName
                                 )
                                 childViewModel.saveChild(
                                     dataChildUpdateBalance,

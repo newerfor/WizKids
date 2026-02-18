@@ -1,8 +1,10 @@
 package com.example.wizkids.data.local.mapper
 
+import com.example.wizkids.data.local.entity.ChildDayOfWeekVisitEntity
 import com.example.wizkids.data.local.entity.ChildEntity
 import com.example.wizkids.data.local.entity.UserEntity
 import com.example.wizkids.data.local.entity.VisitEntity
+import com.example.wizkids.data.local.model.ChildDayOfWeekVisitModel
 import com.example.wizkids.data.local.model.ChildModel
 import com.example.wizkids.data.local.model.UserModel
 import com.example.wizkids.data.local.model.VisitModel
@@ -18,7 +20,13 @@ class SaveMapper {
             documents = child.documents,
             learningStages = child.learningStages,
             visitPrice = child.visitPrice,
-            currentBalance = child.currentBalance
+            currentBalance = child.currentBalance,
+            childDayOfWeekVisit = ChildDayOfWeekVisitEntity(
+                dayOfWeek = child.childDayOfWeekVisit.dayOfWeek as Map<String, Boolean>,
+                firstDate = child.childDayOfWeekVisit.firstDate,
+                secondDate = child.childDayOfWeekVisit.secondDate,
+                time = child.childDayOfWeekVisit.time,
+            )
         )
     }
 
@@ -31,7 +39,8 @@ class SaveMapper {
             visitStatus = visit.visitStatus,
             notes = visit.notes,
             payStatus = visit.payStatus,
-            childId = childId
+            childId = childId,
+            childName = visit.childName
         )
     }
 

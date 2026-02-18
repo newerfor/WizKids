@@ -16,10 +16,12 @@ import com.example.wizkids.presentation.dateScreeen.ui.PersonalVisitInfo
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
 import com.example.wizkids.presentation.sharedUI.InputInformationCard
 import com.example.wizkids.presentation.sharedUI.TextFont
+import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
 import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
 import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CALENDAR
+import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_UPCOMING_VISITS
 import com.example.wizkids.util.IntentHelper
 
 class UpcomingVisitsCard {
@@ -84,9 +86,14 @@ class UpcomingVisitsCard {
                         }
                     }
                 }
-                Button(onClick = { IntentHelper().intentStart(KEY_ACTIVITY_CALENDAR, context) }) {
-                    textFont.WhiteText(stringResource(R.string.button_go_to_calendar_label))
-                }
+                ButtonView().ButtonVisibleRow(
+                    mapOf(
+                        stringResource(R.string.button_go_to_calendar_label) to {
+                            IntentHelper().intentStart(KEY_ACTIVITY_CALENDAR, context)
+                        },
+                    ),
+                    textFont
+                )
             }
         }
 

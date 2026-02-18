@@ -1,5 +1,6 @@
 package com.example.wizkids.data.local.impl
 
+import android.util.Log
 import com.example.wizkids.data.local.dao.WizKidsDao
 import com.example.wizkids.data.local.mapper.SaveMapper
 import com.example.wizkids.data.local.model.ChildModel
@@ -24,6 +25,7 @@ class SaveDataRepositoryImpl(
     }
 
     override suspend fun saveVisitData(visit: VisitModel, childId: Int) {
+        Log.d("khfgjyghfhjtyfhtuft", "saveVisitData: $visit $childId")
         dao.saveVisit(mapper.mapVisitModelToEntity(visit, childId))
 
     }

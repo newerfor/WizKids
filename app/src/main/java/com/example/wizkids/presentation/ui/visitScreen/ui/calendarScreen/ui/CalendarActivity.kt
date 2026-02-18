@@ -2,6 +2,7 @@ package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -31,11 +32,16 @@ class CalendarActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         setContent {
             WizKidsTheme {
                 val context = LocalContext.current
                 Column(Modifier.fillMaxSize()) {
-                    NavHelper().Header(stringResource(R.string.calendar_screen_title))
+                    NavHelper().Header(
+                        stringResource(R.string.calendar_screen_title),
+                        context = context
+                    )
                     Column(Modifier.weight(CALENDAR_ACTIVITY_MAIN_CONTAINER_WEIGHT)) {
                         CalendarScreen(context = context)
                     }

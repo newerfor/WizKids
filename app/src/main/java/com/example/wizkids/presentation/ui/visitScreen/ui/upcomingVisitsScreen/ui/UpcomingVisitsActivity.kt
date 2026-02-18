@@ -2,6 +2,7 @@ package com.example.wizkids.presentation.dateScreeen.ui.upcomingVisitsScreen
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -34,11 +35,13 @@ class UpcomingVisitsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         setContent {
             WizKidsTheme {
                 val context = LocalContext.current
                 Column(Modifier.fillMaxSize()) {
-                    NavHelper().Header(stringResource(R.string.upcomin_dates_title))
+                    NavHelper().Header(stringResource(R.string.upcomin_dates_title),context=context)
                     Column(Modifier.weight(UPCOMING_DATES_ACTIVITY_MAIN_CONTAINER_WEIGHT)) {
                         UpcomingVisitsScreen(context = context)
                     }

@@ -41,7 +41,6 @@ import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConsta
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_PAY_STATUS
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_STATUS_VISIT
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_VISIT_DATE_COMING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.COMING_VISITS_INFORMATION_WINDOW_INDEX_PLUS_VALUE
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.COMING_VISITS_INFORMATION_WINDOW_STATUS_LIST
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_ADDITIONAL_INFO_PADDING_HORIZONTAL
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_ADDITIONAL_INFO_PADDING_VERTICAL
@@ -78,10 +77,24 @@ class ChildComingVisitsInformationWindow {
         inAddIndex: Int,
         becomeCalendar: Boolean,
         childId: Int?,
+        childName: String,
         selectedDate: String
     ) {
-        var selectedTime =
-            remember { mutableStateOf(LocalTime.now().truncatedTo(ChronoUnit.MINUTES)) }
+        val formatter = DateTimeFormatter.ofPattern("HH.mm")
+
+        var selectedTime = remember {
+            mutableStateOf(
+                if (visit?.value?.time?.isNotEmpty() == true) {  // ⬅️ ИСПРАВЛЕНО!
+                    try {
+                        LocalTime.parse(visit.value!!.time, formatter)
+                    } catch (e: Exception) {
+                        LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                    }
+                } else {
+                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                }
+            )
+        }
         val statusList = COMING_VISITS_INFORMATION_WINDOW_STATUS_LIST
         var openWindowGetVisit = remember { mutableStateOf(false) }
         var expandedVisitStatus = remember { mutableStateOf(false) }
@@ -124,7 +137,6 @@ class ChildComingVisitsInformationWindow {
         }
         var hasComingVisitError by remember { mutableStateOf(false) }
         var hasVisitNameError by remember { mutableStateOf(false) }
-        var hasVisitStatusError by remember { mutableStateOf(false) }
         val timeString = remember { mutableStateOf("$selectedTime") }
         LaunchedEffect(selectedTime) {
             timeString.value =
@@ -154,6 +166,7 @@ class ChildComingVisitsInformationWindow {
                                     interactionSource = remember { MutableInteractionSource() },
                                     indication = rememberRipple()
                                 ) {
+                                    visit?.value = null
                                     openVisitWindow.value = false
                                 }
                                 .size(VISIT_LEAVE_ICON_SIZE.dp)
@@ -213,7 +226,7 @@ class ChildComingVisitsInformationWindow {
                     if (!isChangeAct) {
                         textFont.WhiteText(stringResource(R.string.dollar_icon))
                     } else {
-                        SelectTimeCard().TimeHelper(selectedTime, textFont, timeString)
+                        SelectTimeCard().TimeHelper(selectedTime, textFont)
                     }
                 }
                 InputInformationCard().AddInformationCard(
@@ -294,26 +307,24 @@ class ChildComingVisitsInformationWindow {
                                         if (nameVisit.isEmpty()) {
                                             hasVisitNameError = true
                                         }
-                                        if (selectedStatusVisit.value.isEmpty()) {
-                                            hasVisitStatusError = true
-                                        }
-                                        if (!hasComingVisitError && !hasVisitNameError && !hasVisitStatusError) {
+                                        if (!hasComingVisitError && !hasVisitNameError) {
                                             val newDocument = DomainVisitModel(
                                                 date = visitDateComing,
                                                 time = selectedTime.value.toString(),
                                                 visitName = nameVisit,
-                                                visitStatus = selectedStatusVisit.value,
+                                                visitStatus = selectedStatusVisit.value.ifEmpty { COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_STATUS_VISIT },
                                                 notes = infoVisit,
-                                                id = visit?.value?.id
-                                                    ?: (inAddIndex + COMING_VISITS_INFORMATION_WINDOW_INDEX_PLUS_VALUE),
+                                                id = visit?.value?.id,
                                                 childId = childId,
-                                                payStatus = selectedPayStatus.value
+                                                payStatus = selectedPayStatus.value,
+                                                childName = childName
                                             )
                                             onSave(newDocument)
                                             openVisitWindow.value = false
                                         }
                                     },
                                     stringResource(R.string.cancel_button) to {
+                                        visit?.value = null
                                         openVisitWindow.value = false
                                     }
                                 ),

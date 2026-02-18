@@ -4,6 +4,7 @@ import com.example.wizkids.data.local.model.ChildModel
 import com.example.wizkids.data.local.model.DocumentsModel
 import com.example.wizkids.data.local.model.UserModel
 import com.example.wizkids.data.local.model.VisitModel
+import com.example.wizkids.domain.model.DomainChildDayOfWeekVisit
 import com.example.wizkids.domain.model.DomainChildModel
 import com.example.wizkids.domain.model.DomainDocumentsModel
 import com.example.wizkids.domain.model.DomainUserModel
@@ -21,7 +22,13 @@ class GetDomainMapper {
                 documents = child.documents.map { mapDataDocumentsModelToDomainDocumentsModel(it) },
                 learningStages = child.learningStages,
                 visitPrice = child.visitPrice,
-                currentBalance = child.currentBalance
+                currentBalance = child.currentBalance,
+                childDayOfWeekVisit = DomainChildDayOfWeekVisit(
+                    dayOfWeek = child.childDayOfWeekVisit.dayOfWeek,
+                    firstDate = child.childDayOfWeekVisit.firstDate,
+                    secondDate = child.childDayOfWeekVisit.secondDate,
+                    time = child.childDayOfWeekVisit.time,
+                )
             )
         }
     }
@@ -36,7 +43,8 @@ class GetDomainMapper {
                 visitStatus = visit.visitStatus,
                 notes = visit.notes,
                 payStatus = visit.payStatus,
-                childId = visit.childId
+                childId = visit.childId,
+                childName = visit.childName
             )
         }
     }

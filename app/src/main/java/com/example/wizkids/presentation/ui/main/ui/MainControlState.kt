@@ -77,8 +77,12 @@ class MainControlState {
                     true,
                     context,
                     childViewModel
-                ) { id ->
-                    IntentHelper().intentStartById(KEY_ACTIVITY_CHILD_INFORMATION, context, id)
+                ) { child ->
+                    IntentHelper().intentStartById(
+                        KEY_ACTIVITY_CHILD_INFORMATION,
+                        context,
+                        child.id
+                    )
                 }
             }
 

@@ -1,5 +1,6 @@
 package com.example.wizkids.presentation.sharedUI
 
+import android.app.Activity
 import android.content.Context
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,9 +12,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.ExitToApp
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.ripple.rememberRipple
@@ -42,6 +45,8 @@ import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstan
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.HEADER_INFO_SELECTION_PADDING_BOTTOM
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.HEADER_INFO_SELECTION_PADDING_TOP
 import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.HEADER_R0W_WEIGHT
+import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ICON_EXIT_SIZE
+import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ICON_GO_BACK_PADDING
 import com.example.wizkids.presentation.ui.sharedUI.ui.IconGoBackView
 import com.example.wizkids.ui.theme.darkHeader
 import com.example.wizkids.ui.theme.grayColor
@@ -59,6 +64,7 @@ class NavHelper {
         infoSelection: String = HEADER_DEFAULT_VALUE_INFO_SELECTION,
         textFont: TextFont = TextFont(),
         isBackActivity: Boolean = false,
+        context: Context,
         onBackClick: () -> Unit = {},
     ) {
         Row(
@@ -88,7 +94,23 @@ class NavHelper {
                                     )
                             )
                         }
+                        Column(Modifier.fillMaxWidth(), Arrangement.Center, Alignment.End) {
+                            Icon(
+                                imageVector = Icons.Filled.ExitToApp, contentDescription = "",
+                                Modifier
+                                    .clickable(
+                                        interactionSource = remember { MutableInteractionSource() },
+                                        indication = rememberRipple()
+                                    ) {
+                                        (context as? Activity)?.finishAffinity()
+                                    }
+                                    .padding(ICON_GO_BACK_PADDING.dp)
+                                    .size(ICON_EXIT_SIZE.dp),
+                                tint = whiteColor
+                            )
+                        }
                     }
+
                 }
             }
         }

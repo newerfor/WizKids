@@ -1,6 +1,8 @@
 package com.example.wizkids.presentation.addNewOrChangeUserInformation.ui
 
+import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -24,13 +26,18 @@ class AddNewOrChangeUserInformationActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         setContent {
             WizKidsTheme {
+                val context = LocalContext.current
+
                 Column(Modifier) {
                     NavHelper().Header(
                         stringResource(R.string.add_user_activity_title),
                         stringResource(R.string.add_user_activity_subtitle),
                         isBackActivity = true,
+                        context = context
                     ) {
                         finish()
                     }
@@ -41,7 +48,7 @@ class AddNewOrChangeUserInformationActivity : ComponentActivity() {
                                 rememberScrollState()
                             )
                     ) {
-                        AddOrChangeUserInformationScreen()
+                        AddOrChangeUserInformationScreen(context = context)
                     }
                 }
             }
@@ -52,9 +59,9 @@ class AddNewOrChangeUserInformationActivity : ComponentActivity() {
 @Composable
 fun AddOrChangeUserInformationScreen(
     userViewModel: UserViewModel = koinViewModel(),
-    textFont: TextFont = TextFont()
+    textFont: TextFont = TextFont(),
+    context: Context
 ) {
-    val context = LocalContext.current
     val userUiState by userViewModel.userUiState.collectAsState()
     UserInfoControlState().ControlState(userUiState, textFont, context, userViewModel)
 }

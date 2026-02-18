@@ -2,6 +2,7 @@ package com.example.wizkids.presentation.userProfile.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -29,13 +30,16 @@ class UserProfileActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
         setContent {
             WizKidsTheme {
                 val context = LocalContext.current
                 Column(Modifier.fillMaxSize()) {
                     NavHelper().Header(
                         nameSelection = stringResource(R.string.user_profile_title),
-                        infoSelection = stringResource(R.string.user_profile_subtitle)
+                        infoSelection = stringResource(R.string.user_profile_subtitle),
+                        context = context
                     )
                     Column(Modifier.weight(USER_PROFILE_MAIN_CONTENT_WEIGHT)) {
                         UserProfileScreen(context = context)
