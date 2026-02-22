@@ -15,7 +15,18 @@ class DateHelper {
     fun getMonthNumber(): Int {
         return LocalDate.now().monthValue
     }
-
+    fun getFirstDayOfMonth(month: Int, year: Int): Int {
+        val date = LocalDate.of(year, month, 1)
+        return when (date.dayOfWeek) {
+            DayOfWeek.MONDAY -> 1
+            DayOfWeek.TUESDAY -> 2
+            DayOfWeek.WEDNESDAY -> 3
+            DayOfWeek.THURSDAY -> 4
+            DayOfWeek.FRIDAY -> 5
+            DayOfWeek.SATURDAY -> 6
+            DayOfWeek.SUNDAY -> 7
+        }
+    }
     fun getYearNumber(): Int {
         return LocalDate.now().year
     }

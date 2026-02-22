@@ -51,7 +51,7 @@ class VisitInfo {
                 Column() {
                     IconGoBackView().IconGoBack() { openWindowVisit.value = false }
                 }
-                for (visit in visitInfo) {
+                for (visit in visitInfo.sortedBy { it.time }) {
                     if (visit.date == currentVisit) {
                         PersonalVisitInfo().VisitInformation(
                             visit,

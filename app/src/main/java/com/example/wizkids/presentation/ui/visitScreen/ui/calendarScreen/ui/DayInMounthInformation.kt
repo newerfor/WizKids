@@ -6,6 +6,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -50,43 +51,67 @@ class DayInMounthInformation {
         childByIdUiState: ChildByIdUiState,
         childViewModel: ChildViewModel,
     ) {
-        val dayList = DateHelper().getDaysInMonth(monthNumber.value, yearNumber.value)
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            for (dayNaming in DateHelper().getWeekdaysNamesForMonth(
-                monthNumber.value,
-                yearNumber.value
-            )) {
-                Column(
-                    Modifier
-                        .weight(1f)
-                        .padding(start = 12.dp)
-                ) {
-                    textFont.WhiteText(dayNaming, textAlign = TextAlign.Center)
+        val dateHelper = DateHelper()
+        val daysInMonth = dateHelper.getDaysInMonth(monthNumber.value, yearNumber.value)
+        val firstDayOfMonth = dateHelper.getFirstDayOfMonth(monthNumber.value, yearNumber.value)
+
+        // Создаем список для календаря (42 ячейки)
+        val calendarDays = remember(monthNumber.value, yearNumber.value) {
+            val days = MutableList(42) { 0 }
+            val startIndex = firstDayOfMonth - 1
+            for (i in daysInMonth.indices) {
+                days[startIndex + i] = daysInMonth[i]
+            }
+            days
+        }
+
+        val weekDays = listOf("Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс")
+
+        Column {
+            // Заголовки дней недели
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                weekDays.forEach { dayName ->
+                    Column(
+                        Modifier
+                            .weight(1f)
+                            .padding(start = 12.dp)
+                    ) {
+                        textFont.WhiteText(dayName, textAlign = TextAlign.Center)
+                    }
+                }
+            }
+
+            // Сетка дней
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(CALENDAR_ACTIVITY_DAY_IN_MONTH_LAZY_VERTICAL_COLUMN),
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(5.dp),
+                verticalArrangement = Arrangement.spacedBy(5.dp)
+            ) {
+                items(calendarDays) { day ->
+                    if (day == 0) {
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                                .padding(12.dp)
+                        )
+                    } else {
+                        DayCard(
+                            textFont, day, monthNumber, yearNumber, visitInfo,
+                            visitViewModel = visitViewModel,
+                            allChildUiState = allChildUiState,
+                            context = context,
+                            childByIdUiState = childByIdUiState,
+                            childViewModel = childViewModel
+                        )
+                    }
                 }
             }
         }
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(CALENDAR_ACTIVITY_DAY_IN_MONTH_LAZY_VERTICAL_COLUMN),
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(5.dp),
-            verticalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
-            items(dayList) { day ->
-                DayCard(
-                    textFont, day, monthNumber, yearNumber, visitInfo,
-                    visitViewModel = visitViewModel,
-                    allChildUiState = allChildUiState,
-                    context = context,
-                    childByIdUiState = childByIdUiState,
-                    childViewModel = childViewModel
-                )
-            }
-        }
-
     }
 
     @Composable
@@ -102,22 +127,18 @@ class DayInMounthInformation {
         childByIdUiState: ChildByIdUiState,
         childViewModel: ChildViewModel,
     ) {
-        val dateToday = DateHelper().getDateToday()
+        val dateHelper = DateHelper()
+        val dateToday = dateHelper.getDateToday()
+        val fullDate = dateHelper.GetFullDate(dayNumber, monthNumber.value, yearNumber.value)
+
         var openWindowVisit = remember { mutableStateOf(false) }
         var openWindowAddVisit = remember { mutableStateOf(false) }
+
         Column(
             Modifier
-                .background(
-                    DayColorState(
-                        DateHelper().GetFullDate(
-                            dayNumber,
-                            monthNumber.value,
-                            yearNumber.value
-                        ), visitInfo
-                    )
-                )
+                .background(DayColorState(fullDate, visitInfo))
                 .border(
-                    if ("$dayNumber.${monthNumber.value}.${yearNumber.value}" == dateToday) 5.dp else 0.dp,
+                    if (fullDate == dateToday) 2.dp else 0.dp,
                     blackColor
                 )
                 .clickable(
@@ -125,19 +146,23 @@ class DayInMounthInformation {
                     indication = rememberRipple()
                 ) {
                     openWindowVisit.value = true
-                }) {
+                }
+        ) {
             Column(
                 Modifier
                     .fillMaxWidth()
-                    .padding(12.dp), Arrangement.Center, Alignment.CenterHorizontally
+                    .padding(12.dp),
+                Arrangement.Center,
+                Alignment.CenterHorizontally
             ) {
                 textFont.WhiteText(dayNumber.toString(), fontSize = 12)
             }
         }
+
         if (openWindowVisit.value) {
             VisitInfo().VisitWindow(
                 openWindowVisit,
-                DateHelper().GetFullDate(dayNumber, monthNumber.value, yearNumber.value),
+                fullDate,
                 visitInfo,
                 childByIdUiState = childByIdUiState,
                 textFont = textFont,
@@ -147,6 +172,7 @@ class DayInMounthInformation {
                 childViewModel = childViewModel
             )
         }
+
         if (openWindowAddVisit.value) {
             CreateANewVisit().CreateANewVisitWindow(
                 openWindowAddVisit,
@@ -154,7 +180,7 @@ class DayInMounthInformation {
                 allChildUiState = allChildUiState,
                 textFont = textFont,
                 context = context,
-                DateHelper().GetFullDate(dayNumber, monthNumber.value, yearNumber.value),
+                fullDate,
                 visitInfo.size,
                 childViewModel = childViewModel
             )
@@ -166,7 +192,7 @@ class DayInMounthInformation {
         return if (DateHelper().isWeekend(currentDate)) {
             grayColor
         } else {
-            if (dateInfo.any { dateInfo -> dateInfo.date == currentDate }) {
+            if (dateInfo.any { it.date == currentDate }) {
                 greenColor
             } else {
                 lightBlue

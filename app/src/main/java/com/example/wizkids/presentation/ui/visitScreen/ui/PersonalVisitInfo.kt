@@ -61,9 +61,6 @@ class PersonalVisitInfo {
         childViewModel: ChildViewModel,
         childByIdUiState: ChildByIdUiState
     ) {
-        LaunchedEffect(Unit) {
-            childViewModel.getChildById(visitInfo.childId)
-        }
         var openWindowPersonalDate = remember { mutableStateOf(false) }
         Column(
             Modifier
@@ -75,6 +72,7 @@ class PersonalVisitInfo {
                     indication = rememberRipple()
                 ) {
                     openWindowPersonalDate.value = true
+                    childViewModel.getChildById(visitInfo.childId)
                 }) {
             Column(
                 Modifier
@@ -272,8 +270,8 @@ class PersonalVisitInfo {
                             stringResource(R.string.delete_button) to {
                                 if (visitInfo.id != null) {
                                     visitViewModel.deleteVisit(visitInfo.id)
-                                    visitViewModel.getVisit()
                                 }
+                                visitViewModel.getVisit()
                                 openWindowPersonalVisit.value = false
                             },
 

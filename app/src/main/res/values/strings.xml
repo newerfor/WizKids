@@ -129,7 +129,7 @@
     <string name="pay_status_label">Статус оплаты</string>
     <string name="coming_visit_window_date_label">Дата</string>
     <string name="coming_visit_window_time_label">Время</string>
-    <string name="select_day_week_label">Выберите дени недели</string>
+    <string name="select_day_week_label">Выберите дни недели</string>
     <string name="dollar_icon">$</string>
     <string name="name_document_add_name_docs_label">Название документа</string>
     <string name="information_on_docs_label">Информация о документе</string>
