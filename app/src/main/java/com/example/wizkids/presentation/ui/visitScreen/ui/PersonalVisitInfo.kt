@@ -1,5 +1,6 @@
 package com.example.wizkids.presentation.dateScreeen.ui
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -16,7 +17,6 @@ import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -59,7 +59,8 @@ class PersonalVisitInfo {
         textFont: TextFont,
         visitViewModel: VisitViewModel,
         childViewModel: ChildViewModel,
-        childByIdUiState: ChildByIdUiState
+        childByIdUiState: ChildByIdUiState,
+        launchedTriger: MutableState<Boolean>  =mutableStateOf(false)
     ) {
         var openWindowPersonalDate = remember { mutableStateOf(false) }
         Column(
@@ -102,7 +103,8 @@ class PersonalVisitInfo {
                         textFont,
                         childViewModel,
                         childByIdUiState.child,
-                        visitViewModel
+                        visitViewModel,
+                        launchedTriger
                     )
                 }
 
@@ -118,7 +120,8 @@ class PersonalVisitInfo {
         textFont: TextFont,
         childViewModel: ChildViewModel,
         child: DomainChildModel,
-        visitViewModel: VisitViewModel
+        visitViewModel: VisitViewModel,
+        launchedTriger: MutableState<Boolean>
     ) {
         var price by remember { mutableStateOf(child.visitPrice) }
         var balance by remember { mutableStateOf(child.currentBalance) }
@@ -261,17 +264,19 @@ class PersonalVisitInfo {
                                     childId = visitInfo.childId,
                                     childName = visitInfo.childName
                                 )
+                                Log.d("ghjfhgfghfhgfhgfhgf", payStatus.value)
                                 childViewModel.saveChild(
                                     dataChildUpdateBalance,
                                     listOf(updateDateInfo)
                                 )
+                                launchedTriger.value=true
                                 openWindowPersonalVisit.value = false
                             },
                             stringResource(R.string.delete_button) to {
                                 if (visitInfo.id != null) {
                                     visitViewModel.deleteVisit(visitInfo.id)
                                 }
-                                visitViewModel.getVisit()
+                                launchedTriger.value=true
                                 openWindowPersonalVisit.value = false
                             },
 

@@ -2,6 +2,7 @@ package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
 
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
@@ -27,7 +28,8 @@ class CalendarCard {
         childByIdUiState: ChildByIdUiState,
         visitViewModel: VisitViewModel,
         context: Context,
-        childViewModel: ChildViewModel
+        childViewModel: ChildViewModel,
+        launchedTriger: MutableState<Boolean>
     ) {
         var monthNumber = remember { mutableStateOf(DateHelper().getMonthNumber()) }
         var yearNumber = remember { mutableStateOf(DateHelper().getYearNumber()) }
@@ -36,6 +38,7 @@ class CalendarCard {
             DayInMounthInformation().DayInMonth(
                 visitInfo, monthNumber, yearNumber, textFont,
                 visitViewModel = visitViewModel,
+                launchedTriger,
                 allChildUiState = allChildUiState,
                 context = context,
                 childByIdUiState,

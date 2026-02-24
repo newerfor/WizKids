@@ -1,6 +1,7 @@
 package com.example.wizkids.presentation.addNewOrChangeChild.ui
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -76,7 +77,7 @@ class ChildAddInformation {
                     dayOfWeek = mapOf(),
                     firstDate = "",
                     secondDate = "",
-                    time = ""
+                    time = mapOf()
                 )
             )
         }
@@ -133,8 +134,13 @@ class ChildAddInformation {
             is VisitsUiState.Loading -> {}
 
             is VisitsUiState.Success -> {
+                visitComingFromDataBase.clear()
+                childVisitComing.clear()
+
                 visitComingFromDataBase.addAll(visitUiState.visit)
                 childVisitComing.addAll(visitUiState.visit)
+
+
             }
 
             is VisitsUiState.Error -> {}

@@ -1,5 +1,6 @@
 package com.example.wizkids.presentation.addNewOrChangeChild.ui
 
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
@@ -29,6 +30,7 @@ class ChildAddVisitComingInfo {
         price: Int?,
         balance: MutableState<Int>?,
     ) {
+        Log.d("ChildAddVisitComingInfo", "AddVisitComingInfo: $childVisitComing")
         var openWindowAddVisit = remember { mutableStateOf(false) }
         var openWindowAddVisitToDayWeek = remember { mutableStateOf(false) }
         var VisitInfo = remember { mutableStateOf<DomainVisitModel?>(null) }
@@ -96,7 +98,6 @@ class ChildAddVisitComingInfo {
                     openVisitWindow = openWindowAddVisit,
                     visit = VisitInfo,
                     isChangeAct = true,
-                    inAddIndex = childVisitComing.size,
                     onSave = { newVisit ->
                         if (price != null && balance != null && VisitInfo.value?.payStatus == PAY_STATUS_PAYED) {
                             balance.value -= price
@@ -108,10 +109,11 @@ class ChildAddVisitComingInfo {
                             VisitInfo.value = null
                         }
                     },
+                    inAddIndex = childVisitComing.size,
                     becomeCalendar = false,
                     childId = childId,
+                    childName = childName,
                     selectedDate = "",
-                    childName = childName
                 )
             }
         }

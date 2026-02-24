@@ -4,5 +4,5 @@ data class ChildDayOfWeekVisitModel(
     val dayOfWeek: Map<String, Boolean?>,
     val firstDate: String,
     val secondDate: String,
-    val time: String
+    val time: Map<String, String>
 )

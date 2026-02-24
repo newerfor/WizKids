@@ -38,7 +38,8 @@ class VisitInfo {
         textFont: TextFont,
         context: Context,
         openWindowAddVisit: MutableState<Boolean>,
-        childViewModel: ChildViewModel
+        childViewModel: ChildViewModel,
+        launchedTriger: MutableState<Boolean>
     ) {
         Dialog(onDismissRequest = { openWindowVisit.value = false }) {
             Column(
@@ -59,6 +60,7 @@ class VisitInfo {
                             childByIdUiState = childByIdUiState,
                             visitViewModel = visitViewModel,
                             childViewModel = childViewModel,
+                            launchedTriger = launchedTriger
                         )
                     }
                 }

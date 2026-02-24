@@ -14,6 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -67,8 +69,10 @@ class CalendarActivity : ComponentActivity() {
         val allChildUiState by childViewModel.childUiState.collectAsState()
         val childByIdUiState by childViewModel.childByIdState.collectAsState()
         val visitUiState by visitViewModel.visitUiState.collectAsState()
-        LaunchedEffect(Unit) {
+        var launchedTriger = remember { mutableStateOf(true) }
+        LaunchedEffect(launchedTriger.value) {
             visitViewModel.getVisit()
+            launchedTriger.value = false
         }
         VisitControlState().ControlState(visitUiState, textFont, visitViewModel) { visit ->
             CalendarCard().Calendar(
@@ -78,7 +82,8 @@ class CalendarActivity : ComponentActivity() {
                 childByIdUiState,
                 visitViewModel,
                 context,
-                childViewModel
+                childViewModel,
+                launchedTriger
             )
         }
     }

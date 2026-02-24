@@ -46,6 +46,7 @@ class DayInMounthInformation {
         yearNumber: MutableState<Int>,
         textFont: TextFont,
         visitViewModel: VisitViewModel,
+        launchedTriger: MutableState<Boolean>,
         allChildUiState: ChildrenUiState,
         context: Context,
         childByIdUiState: ChildByIdUiState,
@@ -106,7 +107,8 @@ class DayInMounthInformation {
                             allChildUiState = allChildUiState,
                             context = context,
                             childByIdUiState = childByIdUiState,
-                            childViewModel = childViewModel
+                            childViewModel = childViewModel,
+                            launchedTriger
                         )
                     }
                 }
@@ -126,6 +128,7 @@ class DayInMounthInformation {
         context: Context,
         childByIdUiState: ChildByIdUiState,
         childViewModel: ChildViewModel,
+        launchedTriger: MutableState<Boolean>,
     ) {
         val dateHelper = DateHelper()
         val dateToday = dateHelper.getDateToday()
@@ -168,6 +171,7 @@ class DayInMounthInformation {
                 textFont = textFont,
                 context = context,
                 visitViewModel = visitViewModel,
+                launchedTriger=launchedTriger,
                 openWindowAddVisit = openWindowAddVisit,
                 childViewModel = childViewModel
             )
@@ -182,7 +186,8 @@ class DayInMounthInformation {
                 context = context,
                 fullDate,
                 visitInfo.size,
-                childViewModel = childViewModel
+                childViewModel = childViewModel,
+                launchedTriger
             )
         }
     }

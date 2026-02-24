@@ -35,10 +35,9 @@ class VisitViewModel(
     }
 
     fun getVisit(visitDateList: List<String>? = null) {
+        _visitUiState.value = VisitsUiState.Loading
         viewModelScope.launch {
             try {
-                _visitUiState.value = VisitsUiState.Loading
-
                 val result = getVisitsUseCase(visitDateList)
                 result.onSuccess { domainVisits ->
                     // Полностью заменяем список

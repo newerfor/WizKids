@@ -17,6 +17,7 @@ import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildIn
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardValueGrayAndWhiteText
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationImageAndPayStatus
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformation
+import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformationWindow
 import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
 import com.example.wizkids.presentation.sharedUI.InputInformationCard
 import com.example.wizkids.presentation.sharedUI.TextFont
@@ -48,9 +49,13 @@ class ChildFullInfoScreen {
             is VisitsUiState.Loading -> {}
             is VisitsUiState.Error -> {}
             is VisitsUiState.Success -> {
+                visitsInfo.clear()
                 visitsInfo.addAll(visitUiState.visit)
             }
         }
+        var moreInfoVisit = remember { mutableStateOf<DomainVisitModel?>(null) }
+
+        var openWindowMoreVisitInfo = remember { mutableStateOf(false) }
         val parts = child.name.trim().split(" ")
         val childFirstName =
             remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME]) }
@@ -134,7 +139,10 @@ class ChildFullInfoScreen {
                 textFont
             ) {
                 for (visit in visitsInfo) {
-                    ChildComingVisitsInformation().ComingVisitsInformation(textFont, visit)
+                    ChildComingVisitsInformation().ComingVisitsInformation(textFont, visit, onClick = {visit ->
+                        moreInfoVisit.value = visit
+                        openWindowMoreVisitInfo.value = true
+                    })
                 }
             }
             ButtonView().ButtonVisibleColumn(
@@ -170,6 +178,19 @@ class ChildFullInfoScreen {
                 ),
                 textFont,
             )
+            if(openWindowMoreVisitInfo.value) {
+                ChildComingVisitsInformationWindow().ComingVisitsInformationWindow(
+                    textFont = textFont,
+                    openVisitWindow = openWindowMoreVisitInfo,
+                    visit = moreInfoVisit,
+                    isChangeAct = false,
+                    inAddIndex = 0,
+                    becomeCalendar = false,
+                    childId = moreInfoVisit.value?.childId,
+                    childName = moreInfoVisit.value?.childName?:"",
+                    selectedDate = "",
+                )
+            }
         }
     }
 }

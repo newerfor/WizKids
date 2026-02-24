@@ -67,19 +67,7 @@ class AddVisitToDayWeek {
         onSave: (List<DomainVisitModel>) -> Unit
     ) {
         val formatter = DateTimeFormatter.ofPattern("HH.mm")
-        var selectedTime = remember {
-            mutableStateOf(
-                if (!childDayWeek.value.time.isEmpty()) {
-                    try {
-                        LocalTime.parse(childDayWeek.value.time, formatter)
-                    } catch (e: Exception) {
-                        LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
-                    }
-                } else {
-                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
-                }
-            )
-        }
+
         var openWindowGetFirstDate = remember { mutableStateOf(false) }
         var openWindowGetSecondDate = remember { mutableStateOf(false) }
         var firstDate by remember {
@@ -104,6 +92,90 @@ class AddVisitToDayWeek {
                     FRIDAY to childDayWeek.value.dayOfWeek[FRIDAY],
                     SATURDAY to childDayWeek.value.dayOfWeek[SATURDAY],
                     SUNDAY to childDayWeek.value.dayOfWeek[SUNDAY]
+                )
+            )
+        }
+        var timeOfDayWeek by remember {
+            mutableStateOf(
+                mutableMapOf(
+                    MONDAY to mutableStateOf(
+                            if (!childDayWeek.value.time.isEmpty()) {
+                                try {
+                                    LocalTime.parse(childDayWeek.value.time[MONDAY], formatter)
+                                } catch (e: Exception) {
+                                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                                }
+                            } else {
+                                LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                            }
+                        ),
+                    TUESDAY to mutableStateOf(
+                            if (!childDayWeek.value.time.isEmpty()) {
+                                try {
+                                    LocalTime.parse(childDayWeek.value.time[TUESDAY], formatter)
+                                } catch (e: Exception) {
+                                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                                }
+                            } else {
+                                LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                            }
+                        ),
+                    WEDNESDAY to mutableStateOf(
+                            if (!childDayWeek.value.time.isEmpty()) {
+                                try {
+                                    LocalTime.parse(childDayWeek.value.time[WEDNESDAY], formatter)
+                                } catch (e: Exception) {
+                                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                                }
+                            } else {
+                                LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                            }
+                        ),
+                    THURSDAY to mutableStateOf(
+                            if (!childDayWeek.value.time.isEmpty()) {
+                                try {
+                                    LocalTime.parse(childDayWeek.value.time[THURSDAY], formatter)
+                                } catch (e: Exception) {
+                                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                                }
+                            } else {
+                                LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                            }
+                        ),
+                    FRIDAY to mutableStateOf(
+                            if (!childDayWeek.value.time.isEmpty()) {
+                                try {
+                                    LocalTime.parse(childDayWeek.value.time[FRIDAY], formatter)
+                                } catch (e: Exception) {
+                                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                                }
+                            } else {
+                                LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                            }
+                        ),
+                    SATURDAY to mutableStateOf(
+                            if (!childDayWeek.value.time.isEmpty()) {
+                                try {
+                                    LocalTime.parse(childDayWeek.value.time[SATURDAY], formatter)
+                                } catch (e: Exception) {
+                                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                                }
+                            } else {
+                                LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                            }
+                        ),
+                    SUNDAY to mutableStateOf(
+                            if (!childDayWeek.value.time.isEmpty()) {
+                                try {
+                                    LocalTime.parse(childDayWeek.value.time[SATURDAY], formatter)
+                                } catch (e: Exception) {
+                                    LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                                }
+                            } else {
+                                LocalTime.now().truncatedTo(ChronoUnit.MINUTES)
+                            }
+                        )
+                    ,
                 )
             )
         }
@@ -146,13 +218,17 @@ class AddVisitToDayWeek {
                         }
                     )
                 }
-                InputInformationCard().AddInformationCard(
-                    stringResource(R.string.coming_visit_window_time_label),
-                    textFont,
-                    horizontalPadding = COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_HORIZONTAL.dp,
-                    verticalPadding = COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_VERTICAL.dp
-                ) {
-                    SelectTimeCard().TimeHelper(selectedTime, textFont)
+                for (time in timeOfDayWeek) {
+                    if (mapOfDays[time.key] == true) {
+                        InputInformationCard().AddInformationCard(
+                            "${stringResource(R.string.coming_visit_window_time_label)} на ${time.key}",
+                            textFont,
+                            horizontalPadding = COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_HORIZONTAL.dp,
+                            verticalPadding = COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_VERTICAL.dp
+                        ) {
+                            SelectTimeCard().TimeHelper(time.value, textFont)
+                        }
+                    }
                 }
                 InputInformationCard().AddInformationCard(
                     stringResource(R.string.select_first_date_button),
@@ -243,22 +319,27 @@ class AddVisitToDayWeek {
                                 !hasFirstDateError &&
                                 !hasSecondDateError
                             ) {
+                                val timeMap = timeOfDayWeek.mapValues { (_, timeState) ->
+                                    timeState.value.format(formatter)
+                                }
                                 onSave(
                                     getDatesByWeekdaysWithInfo(
                                         startDate = firstDate,
                                         endDate = secondDate,
                                         targetWeekdays = mapOfDays,
-                                        time = selectedTime.value.toString(),
+                                        time =timeMap ,
                                         childName = childName,
                                         childId = childId,
                                         childVisitComing
                                     )
                                 )
+
+
                                 childDayWeek.value = DomainChildDayOfWeekVisit(
                                     dayOfWeek = mapOfDays,
                                     firstDate = firstDate,
                                     secondDate = secondDate,
-                                    time = selectedTime.value.toString()
+                                    time  =timeMap
                                 )
                                 openWindowAddVisitToDayWeek.value = false
 
@@ -279,7 +360,7 @@ class AddVisitToDayWeek {
         startDate: String,
         endDate: String,
         targetWeekdays: MutableMap<String, Boolean?>,
-        time: String,
+        time: Map<String, String?>,
         childName: String,
         childId: Int?,
         existingVisits: List<DomainVisitModel> // ⬅️ Добавляем список существующих визитов
@@ -321,6 +402,8 @@ class AddVisitToDayWeek {
             }.toSet()
             allMatchingDates
                 .mapNotNull { date ->
+                    val dayOfWeekName = reverseWeekdayMap[date.dayOfWeek] ?: ""
+                    val timeForDay = time[dayOfWeekName] ?: "09:00"
                     val dateStr = date.format(formatter)
                     val dateTimeKey = "${dateStr}_${time}"
                     if (dateTimeKey in existingDateTimeSet) {
@@ -331,7 +414,7 @@ class AddVisitToDayWeek {
                         DomainVisitModel(
                             id = null,
                             date = dateStr,
-                            time = time,
+                            time = timeForDay,
                             visitName = "Посещение в $dayOfWeekName",
                             visitStatus = "Назначено",
                             notes = "",

@@ -73,12 +73,13 @@ class ChildComingVisitsInformationWindow {
         openVisitWindow: MutableState<Boolean>,
         visit: MutableState<DomainVisitModel?>?,
         isChangeAct: Boolean,
-        onSave: (DomainVisitModel) -> Unit,
+        onSave: (DomainVisitModel) -> Unit = {},
         inAddIndex: Int,
         becomeCalendar: Boolean,
         childId: Int?,
         childName: String,
-        selectedDate: String
+        selectedDate: String,
+        launchedTriger: MutableState<Boolean> = mutableStateOf(false)
     ) {
         val formatter = DateTimeFormatter.ofPattern("HH.mm")
 
@@ -224,7 +225,7 @@ class ChildComingVisitsInformationWindow {
                     verticalPadding = COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_VERTICAL.dp
                 ) {
                     if (!isChangeAct) {
-                        textFont.WhiteText(stringResource(R.string.dollar_icon))
+                        textFont.WhiteText(selectedTime.value.toString())
                     } else {
                         SelectTimeCard().TimeHelper(selectedTime, textFont)
                     }
@@ -288,12 +289,17 @@ class ChildComingVisitsInformationWindow {
                     horizontalPadding = COMING_VISITS_INFORMATION_WINDOW_DIALOG_ADDITIONAL_INFO_PADDING_HORIZONTAL.dp,
                     verticalPadding = COMING_VISITS_INFORMATION_WINDOW_DIALOG_ADDITIONAL_INFO_PADDING_VERTICAL.dp
                 ) {
-                    TextFieldVisible().DropMenuField(
-                        expanded = expandedPayStatus,
-                        selectedValue = selectedPayStatus,
-                        textFont = textFont,
-                        optionList = payStatusList
-                    )
+                    if (!isChangeAct) {
+                        textFont.WhiteText(selectedPayStatus.value)
+                    }else{
+                        TextFieldVisible().DropMenuField(
+                            expanded = expandedPayStatus,
+                            selectedValue = selectedPayStatus,
+                            textFont = textFont,
+                            optionList = payStatusList
+                        )
+                    }
+
                 }
                 Column {
                     if (isChangeAct) {

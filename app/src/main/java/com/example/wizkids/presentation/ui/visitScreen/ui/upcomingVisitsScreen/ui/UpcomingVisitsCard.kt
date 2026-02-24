@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Button
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -21,7 +20,6 @@ import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
 import com.example.wizkids.presentation.viewModel.child.ChildViewModel
 import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CALENDAR
-import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_UPCOMING_VISITS
 import com.example.wizkids.util.IntentHelper
 
 class UpcomingVisitsCard {
@@ -50,8 +48,8 @@ class UpcomingVisitsCard {
                             PersonalVisitInfo().VisitInformation(
                                 todayDate, textFont,
                                 visitViewModel = visitViewModel,
+                                childViewModel = childViewModel,
                                 childByIdUiState = childByIdUiState,
-                                childViewModel = childViewModel
                             )
                         }
                     }
@@ -65,8 +63,8 @@ class UpcomingVisitsCard {
                             PersonalVisitInfo().VisitInformation(
                                 tomorrowDate, textFont,
                                 visitViewModel = visitViewModel,
+                                childViewModel = childViewModel,
                                 childByIdUiState = childByIdUiState,
-                                childViewModel = childViewModel
                             )
                         }
                     }
@@ -80,8 +78,8 @@ class UpcomingVisitsCard {
                             PersonalVisitInfo().VisitInformation(
                                 afterTomorrowDate, textFont,
                                 visitViewModel = visitViewModel,
+                                childViewModel = childViewModel,
                                 childByIdUiState = childByIdUiState,
-                                childViewModel = childViewModel
                             )
                         }
                     }

@@ -48,6 +48,7 @@ class CreateANewVisit {
         selectVisit: String,
         visitListSize: Int,
         childViewModel: ChildViewModel,
+        launchedTriger: MutableState<Boolean>,
     ) {
         var openSelectChild = remember { mutableStateOf(true) }
         var childId = remember { mutableStateOf(CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_ID) }
@@ -88,6 +89,7 @@ class CreateANewVisit {
                         isChangeAct = true,
                         onSave = { newVisit ->
                             visitViewModel.saveVisit(newVisit, childId.value)
+                            launchedTriger
                             openWindowAddDate.value = false
                         },
                         inAddIndex = visitListSize,
@@ -95,7 +97,7 @@ class CreateANewVisit {
                         childId = childId.value,
                         childName = childName.value,
                         selectVisit,
-
+                        launchedTriger
                         )
                 }
             }
