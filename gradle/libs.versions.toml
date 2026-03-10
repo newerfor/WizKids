@@ -1,6 +1,7 @@
 [versions]
 activityComposeVersion = "1.7.2"
 agp = "8.13.2"
+androidxRoomKtx = "2.6.1"
 coilCompose = "2.6.0"
 coilComposeVersion = "2.7.0"
 converterGson = "2.9.0"
@@ -22,6 +23,7 @@ roomCompiler = "2.8.0"
 roomCompilerVersion = "2.6.1"
 roomKtx = "2.8.0"
 roomRuntime = "2.8.0"
+roomVersion = "2.6.1"
 ui = "1.9.0"
 navigationFragment = "2.9.3"
 appcompat = "1.7.0"
@@ -43,7 +45,9 @@ androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx" 
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
 androidx-room-compiler-v261 = { module = "androidx.room:room-compiler", version.ref = "roomCompilerVersion" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
+androidx-room-ktx-v261 = { module = "androidx.room:room-ktx", version.ref = "androidxRoomKtx" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+androidx-room-runtime-v261 = { module = "androidx.room:room-runtime", version.ref = "roomVersion" }
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 coil-compose-v270 = { module = "io.coil-kt:coil-compose", version.ref = "coilComposeVersion" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
@@ -79,4 +83,5 @@ firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "fireb
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
