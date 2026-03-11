@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.ui
+package com.example.feature_addneworchangeinfochild.ui
 
 import android.content.Context
 import androidx.compose.foundation.clickable
@@ -19,35 +19,35 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainChildDayOfWeekVisit
-import com.example.wizkids.domain.model.DomainChildModel
-import com.example.wizkids.domain.model.DomainDocumentsModel
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_FIRST_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_LAST_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_MIDDLE_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_ADDITIONAL_INFO
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_BALANCE
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_DAY_OF_BIRTH
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_IMAGE_PATCH
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_PRICE
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationImageAndPayStatus
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
-import com.example.wizkids.presentation.sharedUI.GetDate
-import com.example.wizkids.presentation.sharedUI.InputInformationCard
-import com.example.wizkids.presentation.sharedUI.TextFieldVisible
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.ui.sharedUI.ui.ChangeInformationWindow.FinanceInfoWindow.ChildFinanceWindow
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitsUiState
+import com.example.core_domain.model.DomainChildDayOfWeekVisit
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationCardBackGround
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationImageAndPayStatus
+import com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
+import com.example.core_ui.ui.ChangeInformationWindow.FinanceInfoWindow.ChildFinanceWindow
+import com.example.core_ui.ui.GetDate
+import com.example.core_ui.ui.InputInformationCard
+import com.example.core_ui.ui.TextFieldVisible
+import com.example.core_ui.ui.TextFont
+import com.example.core_util.IntentHelper
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.core_viewmodel.visit.VisitsUiState
+import com.example.feature_addneworchangeinfochild.R
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_FIRST_NAME
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_LAST_NAME
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_MIDDLE_NAME
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_ADDITIONAL_INFO
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_BALANCE
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_DAY_OF_BIRTH
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_IMAGE_PATCH
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NAME
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_PRICE
 import com.example.wizkids.ui.theme.redColor
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_MAIN
-import com.example.wizkids.util.IntentHelper
 
 class ChildAddInformation {
     @Composable
@@ -144,7 +144,7 @@ class ChildAddInformation {
 
             is VisitsUiState.Error -> {}
         }
-        ChildInformationCardBackGround().InformationCardbackGround {
+        ChildInformationCardBackGround().InformationCardBackGround {
             ChildInformationImageAndPayStatus().InformationImageAndPayStatus(
                 textFont,
                 childImage,

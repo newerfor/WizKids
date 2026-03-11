@@ -1,6 +1,6 @@
-package com.example.wizkids.presentation.viewModel.child
+package com.example.core_viewmodel.child
 
-import com.example.wizkids.domain.model.DomainChildModel
+import com.example.core_domain.model.DomainChildModel
 
 sealed interface ChildrenUiState {
     data object Loading : ChildrenUiState

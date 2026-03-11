@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI
+package com.example.core_ui.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ADD_INFO_CARD_COLUMN_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ADD_INFO_CARD_COLUMN_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ADD_INFO_CARD_DEFAULT_HORIZONTAL_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ADD_INFO_CARD_DEFAULT_VERTICAL_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ADD_INFO_CARD_TEXT_HORIZONTAL_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ADD_INFO_CARD_TEXT_VERTICAL_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_COLUMN_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_COLUMN_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_DEFAULT_HORIZONTAL_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_DEFAULT_VERTICAL_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_TEXT_HORIZONTAL_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_TEXT_VERTICAL_PADDING
 import com.example.wizkids.ui.theme.darkHeader
 
 class InputInformationCard {

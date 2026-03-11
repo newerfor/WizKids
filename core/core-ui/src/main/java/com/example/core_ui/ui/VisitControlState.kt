@@ -1,11 +1,9 @@
-package com.example.wizkids.presentation.dateScreeen.ui
+package com.example.core_ui.ui
 
 import androidx.compose.runtime.Composable
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitsUiState
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.core_viewmodel.visit.VisitsUiState
 
 class VisitControlState {
     @Composable

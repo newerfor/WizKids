@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui.upcomingVisitsScreen
+package com.example.feature_upcomingdates.ui
 
 import android.content.Context
 import androidx.compose.foundation.layout.Column
@@ -9,16 +9,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.dateScreeen.ui.PersonalVisitInfo
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
-import com.example.wizkids.presentation.sharedUI.InputInformationCard
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationCardBackGround
+import com.example.core_ui.ui.InputInformationCard
+import com.example.core_ui.ui.PersonalVisitInfo
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.child.ChildByIdUiState
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.feature_upcomingdates.R
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CALENDAR
 import com.example.wizkids.util.IntentHelper
 
@@ -38,7 +38,7 @@ class UpcomingVisitsCard {
         Column(Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())) {
-            ChildInformationCardBackGround().InformationCardbackGround {
+            ChildInformationCardBackGround().InformationCardBackGround {
                 InputInformationCard().AddInformationCard(
                     stringResource(R.string.day_today),
                     textFont

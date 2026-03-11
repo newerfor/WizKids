@@ -1,8 +1,8 @@
-package com.example.wizkids.domain.repository
+package com.example.core_domain.repository
 
-import com.example.wizkids.data.local.model.ChildModel
-import com.example.wizkids.data.local.model.UserModel
-import com.example.wizkids.data.local.model.VisitModel
+import com.example.core_data.local.model.ChildModel
+import com.example.core_data.local.model.UserModel
+import com.example.core_data.local.model.VisitModel
 
 interface GetDataRepository {
     suspend fun getChildByIdData(id: Int?): ChildModel?

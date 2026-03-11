@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI.ChangeInformationWindow
+package com.example.core_ui.ui.ChangeInformationWindow
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -37,23 +37,23 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_INITIAL_FIRST_NAME_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_INITIAL_SECOND_NAME_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_SHAPE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH_ERROR
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_ICON_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_HORIZONTAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_SPACER_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.ui.ChildPayStatusHelper
+import com.example.core_ui.constant.SharedUiLogicConstant.INFORMATION_INITIAL_FIRST_NAME_INDEX
+import com.example.core_ui.constant.SharedUiLogicConstant.INFORMATION_INITIAL_SECOND_NAME_INDEX
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_SHAPE
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH_ERROR
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_ICON_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_HORIZONTAL
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_SPACER_HEIGHT
+import com.example.core_ui.ui.ChildPayStatusHelper
+import com.example.core_ui.ui.TextFont
 import com.example.wizkids.ui.theme.lightGray
 import com.example.wizkids.ui.theme.redColor
-import com.example.wizkids.util.ImageHelper
+import com.example.core_util.ImageHelper
 import java.util.UUID
 
 class ChildInformationImageAndPayStatus {
@@ -98,8 +98,7 @@ class ChildInformationImageAndPayStatus {
                 Alignment.CenterHorizontally
             ) {
                 Box(
-                    Modifier
-                        .size(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_SIZE.dp)
+                    Modifier.size(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_SIZE.dp)
                         .clip(RoundedCornerShape(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_CLIP.dp))
                         .border(
                             width = if (childImageError) INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH_ERROR.dp else INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH.dp,

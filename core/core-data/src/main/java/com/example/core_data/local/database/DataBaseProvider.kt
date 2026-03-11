@@ -2,7 +2,7 @@ package com.example.core_data.local.database
 
 import android.content.Context
 import androidx.room.Room
-import com.example.wizkids.data.local.constant.DataBaseConstants.DATABASE_NAME
+import com.example.core_data.local.constant.DataBaseConstants.DATABASE_NAME
 
 object DataBaseProvider {
     private var instance: WizKidsDatabase? = null

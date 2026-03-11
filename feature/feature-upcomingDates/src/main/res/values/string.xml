@@ -1,0 +1,7 @@
+<resources>
+    <string name="upcomin_dates_title">Ближайшие посещения</string>
+    <string name="day_today">Сегодня</string>
+    <string name="day_tomorrow">Завтра</string>
+    <string name="day_after_tomorrow">Послезавтра</string>
+    <string name="button_go_to_calendar_label">Перейти на Календарь</string>
+</resources>

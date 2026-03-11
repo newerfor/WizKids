@@ -1,9 +1,9 @@
-package com.example.wizkids.presentation.dateScreeen.ui
+package com.example.core_ui.ui
 
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenLogicConstant.DATE_HELPER_DATE_FORMATER
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenLogicConstant.DATE_HELPER_DATE_SECOND_FORMATER
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenLogicConstant.DATE_HELPER_LANGUAGE
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenLogicConstant.monthNames
+import com.example.core_ui.constant.SharedUiLogicConstant.DATE_HELPER_DATE_FORMATER
+import com.example.core_ui.constant.SharedUiLogicConstant.DATE_HELPER_DATE_SECOND_FORMATER
+import com.example.core_ui.constant.SharedUiLogicConstant.DATE_HELPER_LANGUAGE
+import com.example.core_ui.constant.SharedUiLogicConstant.monthNames
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.YearMonth

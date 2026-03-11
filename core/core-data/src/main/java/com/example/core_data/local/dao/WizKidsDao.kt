@@ -4,10 +4,10 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.wizkids.data.local.constant.SqlConstants
-import com.example.wizkids.data.local.entity.ChildEntity
-import com.example.wizkids.data.local.entity.UserEntity
-import com.example.wizkids.data.local.entity.VisitEntity
+import com.example.core_data.local.constant.SqlConstants
+import com.example.core_data.local.entity.ChildEntity
+import com.example.core_data.local.entity.UserEntity
+import com.example.core_data.local.entity.VisitEntity
 
 @Dao
 interface WizKidsDao {

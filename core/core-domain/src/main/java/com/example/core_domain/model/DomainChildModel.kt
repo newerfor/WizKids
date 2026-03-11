@@ -1,4 +1,4 @@
-package com.example.wizkids.domain.model
+package com.example.core_domain.model
 
 data class DomainChildModel(
     val id: Int? = null,
@@ -10,5 +10,5 @@ data class DomainChildModel(
     val learningStages: List<String>,
     val visitPrice: Int,
     val currentBalance: Int,
-    val childDayOfWeekVisit:DomainChildDayOfWeekVisit
+    val childDayOfWeekVisit: DomainChildDayOfWeekVisit
 )

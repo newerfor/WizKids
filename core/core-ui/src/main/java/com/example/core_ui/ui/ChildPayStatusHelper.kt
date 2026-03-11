@@ -1,10 +1,10 @@
 package com.example.core_ui.ui
 
 import androidx.compose.ui.graphics.Color
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_DEBT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_NOT_PAYED
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAYED
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAY_SOON
+import com.example.core_ui.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_DEBT
+import com.example.core_ui.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_NOT_PAYED
+import com.example.core_ui.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAYED
+import com.example.core_ui.constant.SharedUiLogicConstant.INFORMATION_IMAGE_AND_PAY_STATUS_STATUS_PAY_SOON
 import com.example.wizkids.ui.theme.payDebt
 import com.example.wizkids.ui.theme.payFalse
 import com.example.wizkids.ui.theme.payLater

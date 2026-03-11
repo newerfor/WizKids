@@ -50,5 +50,31 @@ object SharedUiLogicConstant {
     const val INFORMATION_INITIAL_SECOND_NAME_INDEX = 0
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_FINANCE = 0
 
+    const val CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_ID = -1
+    const val CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_NAME=""
+    const val PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_COMING = "Проведено"
+    const val PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_NOT_COMING = "Отменено"
+    const val PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_SOON = "Назначенно"
+    const val PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_PAID = "Оплачено"
+    const val PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_NOT_PAID = "Не оплачено"
+    val monthNames = mapOf(
+        1 to "Январь",
+        2 to "Февраль",
+        3 to "Март",
+        4 to "Апрель",
+        5 to "Май",
+        6 to "Июнь",
+        7 to "Июль",
+        8 to "Август",
+        9 to "Сентябрь",
+        10 to "Октябрь",
+        11 to "Ноябрь",
+        12 to "Декабрь"
+    )
+    const val MAX_MONTH_COUNT = 12
+    const val MIN_MONTH_COUNT = 1
+    const val DATE_HELPER_LANGUAGE = "ru"
+    const val DATE_HELPER_DATE_FORMATER = "dd.MM.yyyy"
+    const val DATE_HELPER_DATE_SECOND_FORMATER = "d.MM.yyyy"
 
 }

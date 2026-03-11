@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
+package com.example.feature_calendarscreen.ui
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -16,15 +16,15 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.dateScreeen.ui.PersonalVisitInfo
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.ui.sharedUI.ui.IconGoBackView
-import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.IconGoBackView
+import com.example.core_ui.ui.PersonalVisitInfo
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.child.ChildByIdUiState
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.feature_calendarscreen.R
 import com.example.wizkids.ui.theme.cardBackground
 
 class VisitInfo {

@@ -1,14 +1,14 @@
-package com.example.wizkids.presentation.childInformation.ui
+package com.example.feature_childinformation.ui
 
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
-import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitsUiState
+import com.example.core_ui.ui.StateHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.child.ChildByIdUiState
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.core_viewmodel.visit.VisitsUiState
 
 class ChildInformationControlState {
     @Composable

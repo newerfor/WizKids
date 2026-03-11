@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.main.ui
+package com.example.feature_main.ui
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -23,13 +23,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.R
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_ALL_CHILD_COLUMN_HORIZONTAL_PADDING
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_CLIP
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_SIZE
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.child.ChildrenUiState
+import com.example.core_ui.ui.TextFont
+import com.example.core_util.IntentHelper
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.child.ChildrenUiState
+import com.example.feature_main.R
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_ALL_CHILD_COLUMN_HORIZONTAL_PADDING
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_CLIP
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_SIZE
 import com.example.wizkids.ui.theme.ButtonAndInfoBlue
 import com.example.wizkids.ui.theme.whiteColor
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CHILD_ADD_INFO

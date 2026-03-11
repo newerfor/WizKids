@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI
+package com.example.core_ui.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,14 +28,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.example.wizkids.R
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.TIME_HELPER_DEFAULT_VALUE_HOUR
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.TIME_HELPER_DEFAULT_VALUE_MINUTE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.TIME_HELPER_DIALOG_COLUMN_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.TIME_HELPER_DIALOG_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.TIME_HELPER_DIALOG_SPACER_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.TIME_HELPER_SPACER_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.TIME_HELPER_DEFAULT_VALUE_HOUR
+import com.example.core_ui.constant.SharedUiLogicConstant.TIME_HELPER_DEFAULT_VALUE_MINUTE
+import com.example.core_ui.constant.SharedUiViewConstant.TIME_HELPER_DIALOG_COLUMN_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.TIME_HELPER_DIALOG_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.TIME_HELPER_DIALOG_SPACER_HEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.TIME_HELPER_SPACER_HEIGHT
 import java.time.LocalTime
 
 @OptIn(ExperimentalMaterial3Api::class)

@@ -1,7 +1,7 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.constant
+package com.example.feature_addneworchangeinfouser.constant
 
 object AddNewOrChangeUserLogicConstant {
-    const val ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FULLNAME = ""
+    const val ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FULL_NAME = ""
     const val ADD_NEW_OR_CHANGE_USER_INDEX_OF_FIRST_NAME = 1
     const val ADD_NEW_OR_CHANGE_USER_INDEX_OF_MIDDLE_NAME = 0
     const val ADD_NEW_OR_CHANGE_USER_INDEX_OF_LAST_NAME = 2

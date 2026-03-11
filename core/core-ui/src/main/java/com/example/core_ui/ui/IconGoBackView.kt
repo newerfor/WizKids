@@ -12,8 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ICON_GO_BACK_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ICON_GO_BACK_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.ICON_GO_BACK_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ICON_GO_BACK_SIZE
 import com.example.wizkids.ui.theme.whiteColor
 
 class IconGoBackView {

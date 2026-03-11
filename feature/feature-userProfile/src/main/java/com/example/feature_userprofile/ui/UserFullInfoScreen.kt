@@ -6,22 +6,22 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainDocumentsModel
-import com.example.wizkids.domain.model.DomainUserModel
-import com.example.wizkids.presentation.UserProfile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME
-import com.example.wizkids.presentation.UserProfile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardValueGrayAndWhiteText
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationImageAndPayStatus
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
-import com.example.wizkids.presentation.sharedUI.InputInformationCard
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.viewModel.user.UserViewModel
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationCardBackGround
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationCardValueGrayAndWhiteText
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationImageAndPayStatus
+import com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
+import com.example.core_ui.ui.InputInformationCard
+import com.example.core_ui.ui.TextFont
+import com.example.core_util.AgeHelper
+import com.example.core_util.ImageHelper
+import com.example.core_viewmodel.user.UserViewModel
+import com.example.feature_userprofile.R
+import com.example.feature_userprofile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME
+import com.example.feature_userprofile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_ADD_USER_INFO
-import com.example.wizkids.util.AgeHelper
-import com.example.wizkids.util.ImageHelper
 import com.example.wizkids.util.IntentHelper
 
 class UserFullInfoScreen {
@@ -40,7 +40,7 @@ class UserFullInfoScreen {
         val userLastName =
             remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME]) }
         mutableDocs.addAll(userInfo.documents)
-        ChildInformationCardBackGround().InformationCardbackGround {
+        ChildInformationCardBackGround().InformationCardBackGround {
             ChildInformationImageAndPayStatus().InformationImageAndPayStatus(
                 textFont,
                 mutableImage,

@@ -24,29 +24,29 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainChildDayOfWeekVisit
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.FRIDAY
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.MONDAY
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.SATURDAY
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.SUNDAY
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.THURSDAY
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.TUESDAY
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.WEDNESDAY
-import com.example.wizkids.presentation.sharedUI.GetDate
-import com.example.wizkids.presentation.sharedUI.InputInformationCard
-import com.example.wizkids.presentation.sharedUI.SelectTimeCard
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_DATE_PICKER_PADDING_HORIZONTAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_DATE_PICKER_PADDING_VERTICAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_HORIZONTAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_VERTICAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.VISIT_INFORMATION_WINDOW_DIALOG_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
+import com.example.core_domain.model.DomainChildDayOfWeekVisit
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_DATE_PICKER_PADDING_HORIZONTAL
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_DATE_PICKER_PADDING_VERTICAL
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_HEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_HORIZONTAL
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_TIME_PICKER_PADDING_VERTICAL
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_WINDOW_DIALOG_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.VISIT_INFORMATION_WINDOW_DIALOG_PADDING
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.GetDate
+import com.example.core_ui.ui.InputInformationCard
+import com.example.core_ui.ui.SelectTimeCard
+import com.example.core_ui.ui.TextFont
+import com.example.feature_addneworchangeinfochild.R
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.FRIDAY
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.MONDAY
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.SATURDAY
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.SUNDAY
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.THURSDAY
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.TUESDAY
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.WEDNESDAY
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.redColor
 import java.time.DayOfWeek
@@ -55,7 +55,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
 import kotlin.collections.iterator
-import kotlin.text.get
+import kotlin.collections.map
 
 class AddVisitToDayWeek {
     @Composable
@@ -365,7 +365,7 @@ class AddVisitToDayWeek {
         time: Map<String, String?>,
         childName: String,
         childId: Int?,
-        existingVisits: List<DomainVisitModel> // ⬅️ Добавляем список существующих визитов
+        existingVisits: List<DomainVisitModel>
     ): List<DomainVisitModel> {
         val weekdayMap = mapOf(
             MONDAY to DayOfWeek.MONDAY,

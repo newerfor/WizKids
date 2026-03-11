@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.constant
+package com.example.feature_addneworchangeinfochild.constant
 
 object AddNewOrChangeChildViewConstant {
     const val ADD_NEW_OR_CHANGE_CHILD_MAIN_CONTENT_WEIGHT = 1f

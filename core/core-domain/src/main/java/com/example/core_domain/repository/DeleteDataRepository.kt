@@ -1,4 +1,4 @@
-package com.example.wizkids.domain.repository
+package com.example.core_domain.repository
 
 interface DeleteDataRepository {
     suspend fun deleteChildInfoById(childId: Int)

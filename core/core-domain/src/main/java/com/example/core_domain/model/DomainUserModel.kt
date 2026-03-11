@@ -1,4 +1,4 @@
-package com.example.wizkids.domain.model
+package com.example.core_domain.model
 
 data class DomainUserModel(
     val imagePath: String,

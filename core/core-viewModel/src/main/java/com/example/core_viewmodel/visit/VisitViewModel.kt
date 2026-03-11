@@ -1,12 +1,12 @@
-package com.example.wizkids.presentation.viewModel.visit
+package com.example.core_viewmodel.visit
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.domain.usecase.deleteUseCase.visitUsecase.DeleteVisitByIdUseCase
-import com.example.wizkids.domain.usecase.getUseCase.visitUsecase.GetVisitByChildIdUseCase
-import com.example.wizkids.domain.usecase.getUseCase.visitUsecase.GetVisitsUseCase
-import com.example.wizkids.domain.usecase.saveUseCase.visitUsecase.SaveVisitUseCase
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_domain.usecase.deleteUseCase.visitUsecase.DeleteVisitByIdUseCase
+import com.example.core_domain.usecase.getUseCase.visitUsecase.GetVisitByChildIdUseCase
+import com.example.core_domain.usecase.getUseCase.visitUsecase.GetVisitsUseCase
+import com.example.core_domain.usecase.saveUseCase.visitUsecase.SaveVisitUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

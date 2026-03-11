@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard
+package com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -22,15 +22,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.wizkids.domain.model.DomainDocumentsModel
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_END
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_START
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_IMAGE_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_TEXT_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_BACK_GROUND_SHAPE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_WIDTH
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_END
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_START
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_IMAGE_HEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_BOX_TEXT_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_BACK_GROUND_SHAPE
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_WIDTH
+import com.example.core_ui.ui.TextFont
 import com.example.wizkids.ui.theme.lightGray
 
 class ChildDocumentsInformation {

@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.main.ui
+package com.example.feature_main.ui
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -14,17 +14,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.R
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_CLIP
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_SIZE
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_CLIP
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_PADDING
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_TEXT_PADDING
-import com.example.wizkids.presentation.sharedUI.ChildView
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.child.ChildrenUiState
+import com.example.core_ui.ui.ChildView
+import com.example.core_ui.ui.StateHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_util.IntentHelper
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.child.ChildrenUiState
+import com.example.feature_main.R
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_CLIP
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_SIZE
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_CLIP
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_PADDING
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_TEXT_PADDING
 import com.example.wizkids.ui.theme.ButtonAndInfoBlue
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CHILD_INFORMATION

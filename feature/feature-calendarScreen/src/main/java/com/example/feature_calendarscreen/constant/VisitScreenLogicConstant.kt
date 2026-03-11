@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant
+package com.example.feature_calendarscreen.constant
 
 object VisitScreenLogicConstant {
     val monthNames = mapOf(

@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui
+package com.example.core_ui.ui
 
 import android.util.Log
 import androidx.compose.foundation.background
@@ -21,33 +21,29 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainChildModel
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardValueGrayAndWhiteText
-import com.example.wizkids.presentation.sharedUI.InputInformationCard
-import com.example.wizkids.presentation.sharedUI.TextFieldVisible
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_COMING
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_NOT_COMING
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_NOT_PAID
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_PAID
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_SOON
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.PERSONAL_VISIT_WINDOW_DIALOG_CLIP
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.PERSONAL_VISIT_WINDOW_DIALOG_PADDING
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.VISIT_INFORMATION_COLUMN_COLUMN_PADDING
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.VISIT_INFORMATION_MAIN_COLUMN_PADDING
-import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_COMING
+import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_NOT_COMING
+import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_NOT_PAID
+import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_PAID
+import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_SOON
+import com.example.core_ui.constant.SharedUiViewConstant.PERSONAL_VISIT_WINDOW_DIALOG_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.PERSONAL_VISIT_WINDOW_DIALOG_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.VISIT_INFORMATION_COLUMN_COLUMN_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.VISIT_INFORMATION_MAIN_COLUMN_PADDING
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationCardValueGrayAndWhiteText
+import com.example.core_viewmodel.child.ChildByIdUiState
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.visit.VisitViewModel
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.lightGray
 
@@ -273,7 +269,7 @@ class PersonalVisitInfo {
                             },
                             stringResource(R.string.delete_button) to {
                                 if (visitInfo.id != null) {
-                                    visitViewModel.deleteVisit(visitInfo.id)
+                                    visitViewModel.deleteVisit(visitInfo.id!!)
                                 }
                                 launchedTriger.value=true
                                 openWindowPersonalVisit.value = false

@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard
+package com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.horizontalScroll
@@ -21,15 +21,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.domain.model.DomainDocumentsModel
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_SHAPE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_SHAPE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_MAIN_CONTAINER_VERTICAL_PADDING
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_ui.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_SHAPE
+import com.example.core_ui.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_SHAPE
+import com.example.core_ui.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_MAIN_CONTAINER_VERTICAL_PADDING
+import com.example.core_ui.ui.TextFont
 import com.example.wizkids.ui.theme.lightBlue
 
 class DocumentInformation {
@@ -66,8 +66,7 @@ class DocumentInformation {
                 ) {
                     Box(
                         contentAlignment = Alignment.Companion.Center,
-                        modifier = Modifier.Companion
-                            .padding(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_PADDING.dp)
+                        modifier = Modifier.padding(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_PADDING.dp)
                             .border(
                                 ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_ADD_BOX_BORDER_WIDTH.dp,
                                 lightBlue,
@@ -91,8 +90,7 @@ class DocumentInformation {
                     }
                     Box(
                         contentAlignment = Alignment.Companion.Center,
-                        modifier = Modifier.Companion
-                            .padding(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_PADDING.dp)
+                        modifier = Modifier.padding(ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_PADDING.dp)
                             .border(
                                 ALL_DOCUMENTS_INFORMATION_CARD_BUTTON_DELETE_BOX_BORDER_WIDTH.dp,
                                 lightBlue,

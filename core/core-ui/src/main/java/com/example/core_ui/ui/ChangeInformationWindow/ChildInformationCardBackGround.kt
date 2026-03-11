@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI.ChangeInformationWindow
+package com.example.core_ui.ui.ChangeInformationWindow
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -9,14 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_GROUND_COLUMN
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_GROUND_COLUMN
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_PADDING
 import com.example.wizkids.ui.theme.cardBackground
 
 class ChildInformationCardBackGround {
     @Composable
-    fun InformationCardbackGround(function: @Composable () -> Unit) {
+    fun InformationCardBackGround(function: @Composable () -> Unit) {
         Column(
             Modifier
                 .fillMaxSize()

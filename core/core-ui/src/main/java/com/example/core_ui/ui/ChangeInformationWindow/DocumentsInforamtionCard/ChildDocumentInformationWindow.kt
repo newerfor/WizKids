@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard
+package com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard
 
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
@@ -45,41 +45,41 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import coil.compose.AsyncImage
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainDocumentsModel
-import com.example.wizkids.presentation.sharedUI.InputInformationCard
-import com.example.wizkids.presentation.sharedUI.TextFieldVisible
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_ADD_IMAGE_ICON_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_REMOVE_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_MINUS_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_PADDING_HORIZONTAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_SPACER_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_SPACER_IMAGE_TO_DOCS_INFO_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_LEAVE_ICON_PADDING_VERTICAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_LEAVE_ICON_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_MAIN_IMAGE_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DOCUMENT_MAIN_IMAGE_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_ADD_IMAGE_ICON_SIZE
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_REMOVE_INDEX
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_INDEX
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_MINUS_INDEX
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_CLIP
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_CLIP
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_SIZE
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_PADDING_HORIZONTAL
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_SIZE
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_IMAGE_SPACER_HEIGHT
+import com.example.core_ui.constant.SharedUiLogicConstant.DOCUMENT_INFORMATION_WINDOW_SPACER_IMAGE_TO_DOCS_INFO_HEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_HEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_WINDOW_DIALOG_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_LEAVE_ICON_PADDING_VERTICAL
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_LEAVE_ICON_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_MAIN_IMAGE_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_MAIN_IMAGE_HEIGHT
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.InputInformationCard
+import com.example.core_ui.ui.TextFieldVisible
+import com.example.core_ui.ui.TextFont
 import com.example.wizkids.ui.theme.blueColor
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.lightGray
 import com.example.wizkids.ui.theme.redColor
-import com.example.wizkids.util.ImageHelper
+import com.example.core_util.ImageHelper
 import java.util.UUID
 
 class ChildDocumentInformationWindow {
@@ -230,8 +230,7 @@ class ChildDocumentInformationWindow {
                 ) {
                     itemsIndexed(imageList) { index, image ->
                         Box(
-                            Modifier
-                                .size(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_SIZE.dp)
+                            Modifier.size(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_SIZE.dp)
                                 .clip(RoundedCornerShape(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_CLIP.dp))
                                 .background(if (selectedImageIndex == index) lightGray else grayColor)
                                 .clickable(
@@ -249,10 +248,9 @@ class ChildDocumentInformationWindow {
                     }
                     item {
                         Box(
-                            Modifier
-                                .size(
-                                    DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE.dp
-                                )
+                            Modifier.size(
+                                DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE.dp
+                            )
                                 .clip(
                                     RoundedCornerShape(
                                         DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_CLIP.dp

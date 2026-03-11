@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI
+package com.example.core_ui.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -25,10 +25,10 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_FILTERS_BY_PAY_STATUS_SELECTED_ITEM_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DROW_MENU_EXPOSED_MENU_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.TEXT_OUTLINE_FIELD_FONT_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.TEXT_OUTLINE_FIELD_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.DROP_MENU_FONT_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.DROW_MENU_EXPOSED_MENU_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.TEXT_OUTLINE_FIELD_FONT_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.TEXT_OUTLINE_FIELD_WIDTH
 import com.example.wizkids.ui.theme.Inter
 import com.example.wizkids.ui.theme.blackColor
 import com.example.wizkids.ui.theme.darkHeader
@@ -151,7 +151,7 @@ class TextFieldVisible {
                     TextStyle(
                         color = blackColor,
                         fontFamily = Inter,
-                        fontSize = MAIN_ACTIVITY_MAIN_FILTERS_BY_PAY_STATUS_SELECTED_ITEM_SIZE.sp,
+                        fontSize = DROP_MENU_FONT_SIZE.sp,
                         fontWeight = FontWeight.Normal
                     )
                 ),

@@ -1,15 +1,14 @@
 package com.example.core_data.local.database
 
-import androidx.room.AutoMigration
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.wizkids.data.local.constant.DataBaseConstants.DATABASE_VERSION
-import com.example.wizkids.data.local.converters.Converters
-import com.example.wizkids.data.local.dao.WizKidsDao
-import com.example.wizkids.data.local.entity.ChildEntity
-import com.example.wizkids.data.local.entity.UserEntity
-import com.example.wizkids.data.local.entity.VisitEntity
+import com.example.core_data.local.constant.DataBaseConstants.DATABASE_VERSION
+import com.example.core_data.local.converters.Converters
+import com.example.core_data.local.dao.WizKidsDao
+import com.example.core_data.local.entity.ChildEntity
+import com.example.core_data.local.entity.UserEntity
+import com.example.core_data.local.entity.VisitEntity
 
 @Database(
     entities = [ChildEntity::class, VisitEntity::class, UserEntity::class],

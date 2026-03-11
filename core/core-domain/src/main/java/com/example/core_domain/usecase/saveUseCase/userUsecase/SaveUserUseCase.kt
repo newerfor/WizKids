@@ -1,8 +1,8 @@
-package com.example.wizkids.domain.usecase.saveUseCase.userUsecase
+package com.example.core_domain.usecase.saveUseCase.userUsecase
 
-import com.example.wizkids.domain.mapper.SaveDomainMapper
-import com.example.wizkids.domain.model.DomainUserModel
-import com.example.wizkids.domain.repository.SaveDataRepository
+import com.example.core_domain.mapper.SaveDomainMapper
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_domain.repository.SaveDataRepository
 
 class SaveUserUseCase(
     private val repository: SaveDataRepository,

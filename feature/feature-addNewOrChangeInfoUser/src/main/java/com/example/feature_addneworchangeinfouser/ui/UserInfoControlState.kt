@@ -1,11 +1,11 @@
-package com.example.wizkids.presentation.addNewOrChangeUserInformation.ui
+package com.example.feature_addneworchangeinfouser.ui
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
-import com.example.wizkids.presentation.viewModel.user.UserUiState
-import com.example.wizkids.presentation.viewModel.user.UserViewModel
+import com.example.core_ui.ui.StateHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.user.UserUiState
+import com.example.core_viewmodel.user.UserViewModel
 
 class UserInfoControlState {
     @Composable

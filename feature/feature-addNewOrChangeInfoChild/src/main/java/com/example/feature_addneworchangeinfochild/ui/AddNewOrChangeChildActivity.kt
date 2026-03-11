@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.ui
+package com.example.feature_addneworchangeinfochild.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -18,14 +18,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
-import com.example.wizkids.R
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildViewConstant.ADD_NEW_OR_CHANGE_CHILD_MAIN_CONTENT_WEIGHT
-import com.example.wizkids.presentation.sharedUI.NavHelper
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_ui.ui.NavHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_util.UtilLogicConstant.ID_KEY
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.feature_addneworchangeinfochild.R
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildViewConstant.ADD_NEW_OR_CHANGE_CHILD_MAIN_CONTENT_WEIGHT
 import com.example.wizkids.ui.theme.WizKidsTheme
-import com.example.wizkids.util.UtilLogicConstant.ID_KEY
 import org.koin.androidx.compose.koinViewModel
 
 class AddNewOrChangeChildActivity : ComponentActivity() {

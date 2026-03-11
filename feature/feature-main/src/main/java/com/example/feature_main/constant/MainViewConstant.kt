@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.main.constant
+package com.example.feature_main.constant
 
 object MainViewConstant {
     const val MAIN_ACTIVITY_MAIN_CONTAINER_WEIGHT = 1f

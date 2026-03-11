@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI
+package com.example.core_ui.ui
 
 import android.content.Context
 import android.util.Log
@@ -30,40 +30,39 @@ import androidx.compose.ui.layout.ContentScale.Companion.Crop
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainChildModel
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_DEFAULT_VALUE_PAY_STATUS
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_FULL_NAME_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_FIRST_NAME
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_LAST_NAME
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_TAKE_INDEX
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_BORDER_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_PAY_STATUS_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_PAY_STATUS_WEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_BOX_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_BOX_INITIAL_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_BOX_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_COLUMN_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_MAIN_CONTAINER_VERTICAL_CLIP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_MAIN_CONTAINER_VERTICAL_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_NAME_AND_AGE_COLUMN_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_NAME_AND_AGE_COLUMN_WEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_NAME_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL
-import com.example.wizkids.presentation.ui.sharedUI.ui.ChangeInformationWindow.FinanceInfoWindow.ChildFinanceWindow
-import com.example.wizkids.presentation.ui.sharedUI.ui.ChildPayStatusHelper
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.CHILD_CARD_DEFAULT_VALUE_PAY_STATUS
+import com.example.core_ui.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_FULL_NAME_INDEX
+import com.example.core_ui.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_FIRST_NAME
+import com.example.core_ui.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_LAST_NAME
+import com.example.core_ui.constant.SharedUiLogicConstant.CHILD_CARD_INITIAL_PARTS_INDEX_TAKE_INDEX
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_BORDER_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_COLUMN_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_PAY_STATUS_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_COLUMN_PAY_STATUS_WEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_BOX_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_BOX_INITIAL_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_BOX_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_IMAGE_COLUMN_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_MAIN_CONTAINER_VERTICAL_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_MAIN_CONTAINER_VERTICAL_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_NAME_AND_AGE_COLUMN_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_NAME_AND_AGE_COLUMN_WEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_NAME_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL
+import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL
+import com.example.core_ui.ui.ChangeInformationWindow.FinanceInfoWindow.ChildFinanceWindow
+import com.example.core_viewmodel.child.ChildViewModel
 import com.example.wizkids.ui.theme.blackColor
 import com.example.wizkids.ui.theme.blueColor
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.lightGray
-import com.example.wizkids.util.AgeHelper
+import com.example.core_util.AgeHelper
 
 class ChildView {
     @Composable
@@ -121,8 +120,7 @@ class ChildView {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Column(Modifier.padding(start = CHILD_CARD_IMAGE_COLUMN_PADDING.dp)) {
                     Box(
-                        modifier = Modifier
-                            .size(CHILD_CARD_IMAGE_BOX_SIZE.dp)
+                        modifier = Modifier.size(CHILD_CARD_IMAGE_BOX_SIZE.dp)
                             .clip(RoundedCornerShape(CHILD_CARD_IMAGE_BOX_CLIP.dp))
                             .background(lightGray),
                         contentAlignment = Alignment.Center

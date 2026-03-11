@@ -1,13 +1,12 @@
 package com.example.core_data.local.impl
 
-import com.example.wizkids.data.local.dao.WizKidsDao
-import com.example.wizkids.data.local.entity.VisitEntity
-import com.example.wizkids.data.local.mapper.GetMapper
-import com.example.wizkids.data.local.model.ChildModel
-import com.example.wizkids.data.local.model.UserModel
-import com.example.wizkids.data.local.model.VisitModel
-
-import com.example.wizkids.domain.repository.GetDataRepository
+import com.example.core_data.local.dao.WizKidsDao
+import com.example.core_data.local.entity.VisitEntity
+import com.example.core_data.local.mapper.GetMapper
+import com.example.core_data.local.model.ChildModel
+import com.example.core_data.local.model.UserModel
+import com.example.core_data.local.model.VisitModel
+import com.example.core_domain.repository.GetDataRepository
 
 class GetDataRepositoryImpl(
     private val dao: WizKidsDao,

@@ -1,12 +1,12 @@
 package com.example.core_data.local.impl
 
 import android.util.Log
-import com.example.wizkids.data.local.dao.WizKidsDao
-import com.example.wizkids.data.local.mapper.SaveMapper
-import com.example.wizkids.data.local.model.ChildModel
-import com.example.wizkids.data.local.model.UserModel
-import com.example.wizkids.data.local.model.VisitModel
-import com.example.wizkids.domain.repository.SaveDataRepository
+import com.example.core_data.local.dao.WizKidsDao
+import com.example.core_data.local.mapper.SaveMapper
+import com.example.core_data.local.model.ChildModel
+import com.example.core_data.local.model.UserModel
+import com.example.core_data.local.model.VisitModel
+import com.example.core_domain.repository.SaveDataRepository
 
 class SaveDataRepositoryImpl(
     private val dao: WizKidsDao,

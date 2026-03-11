@@ -17,6 +17,7 @@ import android.provider.MediaStore
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.toColorInt
+import com.example.core_domain.model.DomainUserModel
 import com.example.wizkids.domain.model.DomainUserModel
 import java.io.File
 import java.io.FileOutputStream

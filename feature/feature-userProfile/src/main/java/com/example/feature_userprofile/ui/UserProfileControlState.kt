@@ -10,12 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.wizkids.R
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
-import com.example.wizkids.presentation.viewModel.user.UserUiState
-import com.example.wizkids.presentation.viewModel.user.UserViewModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.StateHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.user.UserUiState
+import com.example.core_viewmodel.user.UserViewModel
+import com.example.feature_userprofile.R
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_ADD_USER_INFO
 import com.example.wizkids.util.IntentHelper
 

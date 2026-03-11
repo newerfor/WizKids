@@ -1,11 +1,11 @@
-package com.example.wizkids.util
+package com.example.core_util
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import android.provider.MediaStore
 import androidx.compose.runtime.MutableState
-import com.example.wizkids.util.UtilLogicConstant.IMAGE_DIRECTORY_NAME
+import com.example.core_util.UtilLogicConstant.IMAGE_DIRECTORY_NAME
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException

@@ -1,6 +1,6 @@
-package com.example.wizkids.domain.usecase.deleteUseCase.childUsecase
+package com.example.core_domain.usecase.deleteUseCase.childUsecase
 
-import com.example.wizkids.domain.repository.DeleteDataRepository
+import com.example.core_domain.repository.DeleteDataRepository
 
 class DeleteChildByIdUseCase(
     private val repository: DeleteDataRepository

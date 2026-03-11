@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.UserProfile.constant
+package com.example.feature_userprofile.constant
 
 object UserProfileLogicConstant {
     const val USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME = 0

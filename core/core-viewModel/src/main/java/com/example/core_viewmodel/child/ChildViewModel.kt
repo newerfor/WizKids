@@ -1,14 +1,14 @@
-package com.example.wizkids.presentation.viewModel.child
+package com.example.core_viewmodel.child
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wizkids.domain.model.DomainChildModel
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.domain.usecase.deleteUseCase.childUsecase.DeleteChildByIdUseCase
-import com.example.wizkids.domain.usecase.getUseCase.childUsecase.GetChildByIdUseCase
-import com.example.wizkids.domain.usecase.getUseCase.childUsecase.GetChildrenUseCase
-import com.example.wizkids.domain.usecase.saveUseCase.childUsecase.SaveChildUseCase
-import com.example.wizkids.util.AgeHelper
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_domain.usecase.deleteUseCase.childUsecase.DeleteChildByIdUseCase
+import com.example.core_domain.usecase.getUseCase.childUsecase.GetChildByIdUseCase
+import com.example.core_domain.usecase.getUseCase.childUsecase.GetChildrenUseCase
+import com.example.core_domain.usecase.saveUseCase.childUsecase.SaveChildUseCase
+import com.example.core_util.AgeHelper
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

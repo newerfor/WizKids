@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.constant
+package com.example.feature_addneworchangeinfochild.constant
 
 object AddNewOrChangeChildLogicConstant {
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NAME = ""

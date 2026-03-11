@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant
+package com.example.feature_calendarscreen.constant
 
 object VisitScreenViewConstant {
     const val CALENDAR_ACTIVITY_MAIN_CONTAINER_WEIGHT = 1f

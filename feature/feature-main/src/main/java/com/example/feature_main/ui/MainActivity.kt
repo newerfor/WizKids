@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.main.ui
+package com.example.feature_main.ui
 
 import android.content.Context
 import android.os.Bundle
@@ -21,12 +21,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.R
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CONTAINER_HORIZONTAL_PADDING
-import com.example.wizkids.presentation.main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CONTAINER_WEIGHT
-import com.example.wizkids.presentation.sharedUI.NavHelper
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
+import com.example.core_ui.ui.NavHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.feature_main.R
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CONTAINER_HORIZONTAL_PADDING
+import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CONTAINER_WEIGHT
 import com.example.wizkids.ui.theme.WizKidsTheme
 import org.koin.androidx.compose.koinViewModel
 

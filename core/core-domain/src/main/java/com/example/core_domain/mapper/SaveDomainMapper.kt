@@ -1,14 +1,14 @@
-package com.example.wizkids.domain.mapper
+package com.example.core_domain.mapper
 
-import com.example.wizkids.data.local.model.ChildDayOfWeekVisitModel
-import com.example.wizkids.data.local.model.ChildModel
-import com.example.wizkids.data.local.model.DocumentsModel
-import com.example.wizkids.data.local.model.UserModel
-import com.example.wizkids.data.local.model.VisitModel
-import com.example.wizkids.domain.model.DomainChildModel
-import com.example.wizkids.domain.model.DomainDocumentsModel
-import com.example.wizkids.domain.model.DomainUserModel
-import com.example.wizkids.domain.model.DomainVisitModel
+import com.example.core_data.local.model.ChildDayOfWeekVisitModel
+import com.example.core_data.local.model.ChildModel
+import com.example.core_data.local.model.DocumentsModel
+import com.example.core_data.local.model.UserModel
+import com.example.core_data.local.model.VisitModel
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_domain.model.DomainVisitModel
 
 class SaveDomainMapper {
     fun mapDomainChildModelToDataChildModel(child: DomainChildModel): ChildModel {

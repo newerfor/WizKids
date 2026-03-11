@@ -9,9 +9,8 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.BUTTON_VISIBLE_DEFAULT_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.BUTTON_VISIBLE_WEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.BUTTON_VISIBLE_DEFAULT_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.BUTTON_VISIBLE_WEIGHT
 import com.example.wizkids.ui.theme.buttonColor
 import com.example.wizkids.ui.theme.lightBlue
 

@@ -2,7 +2,7 @@ package com.example.core_data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.wizkids.data.local.model.DocumentsModel
+import com.example.core_data.local.model.DocumentsModel
 
 @Entity(tableName = "user")
 data class UserEntity(

@@ -1,10 +1,9 @@
 package com.example.core_data.local.converters
 
 import androidx.room.TypeConverter
-import com.example.wizkids.data.local.entity.ChildDayOfWeekVisitEntity
-import com.example.wizkids.data.local.model.DocumentsModel
-import com.example.wizkids.domain.model.DomainDocumentsModel
-
+import com.example.core_data.local.entity.ChildDayOfWeekVisitEntity
+import com.example.core_data.local.model.DocumentsModel
+import com.example.core_domain.model.DomainDocumentsModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type

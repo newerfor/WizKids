@@ -1,6 +1,6 @@
-package com.example.wizkids.presentation.viewModel.user
+package com.example.core_viewmodel.user
 
-import com.example.wizkids.domain.model.DomainUserModel
+import com.example.core_domain.model.DomainUserModel
 
 sealed interface UserUiState {
     data object Loading : UserUiState

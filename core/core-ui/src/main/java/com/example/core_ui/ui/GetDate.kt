@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI
+package com.example.core_ui.ui
 
 import android.annotation.SuppressLint
 import androidx.compose.material3.DatePicker
@@ -9,8 +9,8 @@ import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.res.stringResource
-import com.example.wizkids.R
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.GET_DATE_TEXT_INPUT_DATE_FORMAT
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.GET_DATE_TEXT_INPUT_DATE_FORMAT
 import com.example.wizkids.ui.theme.blackColor
 import java.util.Calendar
 

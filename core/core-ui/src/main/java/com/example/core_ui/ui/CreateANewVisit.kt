@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui
+package com.example.core_ui.ui
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -22,20 +22,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.wizkids.R
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformationWindow
-import com.example.wizkids.presentation.sharedUI.ChildView
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.StateHelper
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_ID
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_NAME
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.CREATE_A_NEW_VISIT_DIALOG_CLIP
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.CREATE_A_NEW_VISIT_DIALOG_HEIGHT
-import com.example.wizkids.presentation.ui.visitScreen.sharedVisitConstant.SharedVisitViewConstant.CREATE_A_NEW_VISIT_DIALOG_WIDTH
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.child.ChildrenUiState
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_ID
+import com.example.core_ui.constant.SharedUiLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_NAME
+import com.example.core_ui.constant.SharedUiViewConstant.CREATE_A_NEW_VISIT_DIALOG_CLIP
+import com.example.core_ui.constant.SharedUiViewConstant.CREATE_A_NEW_VISIT_DIALOG_HEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.CREATE_A_NEW_VISIT_DIALOG_WIDTH
+import com.example.core_ui.ui.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformationWindow
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.child.ChildrenUiState
+import com.example.core_viewmodel.visit.VisitViewModel
 import com.example.wizkids.ui.theme.cardBackground
+
 
 class CreateANewVisit {
     @Composable

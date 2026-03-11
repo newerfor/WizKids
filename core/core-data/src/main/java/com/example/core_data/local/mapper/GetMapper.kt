@@ -1,12 +1,12 @@
 package com.example.core_data.local.mapper
 
-import com.example.wizkids.data.local.entity.ChildEntity
-import com.example.wizkids.data.local.entity.UserEntity
-import com.example.wizkids.data.local.entity.VisitEntity
-import com.example.wizkids.data.local.model.ChildDayOfWeekVisitModel
-import com.example.wizkids.data.local.model.ChildModel
-import com.example.wizkids.data.local.model.UserModel
-import com.example.wizkids.data.local.model.VisitModel
+import com.example.core_data.local.entity.ChildEntity
+import com.example.core_data.local.entity.UserEntity
+import com.example.core_data.local.entity.VisitEntity
+import com.example.core_data.local.model.ChildDayOfWeekVisitModel
+import com.example.core_data.local.model.ChildModel
+import com.example.core_data.local.model.UserModel
+import com.example.core_data.local.model.VisitModel
 
 class GetMapper {
     fun mapChildToModel(child: ChildEntity?): ChildModel? {

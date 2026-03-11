@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
+package com.example.feature_calendarscreen.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,12 +19,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.presentation.dateScreeen.ui.DateHelper
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenLogicConstant.MAX_MONTH_COUNT
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenLogicConstant.MIN_MONTH_COUNT
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_CLIP
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_PADDING_END
-import com.example.wizkids.presentation.sharedUI.TextFont
+import com.example.core_ui.ui.DateHelper
+import com.example.core_ui.ui.TextFont
+import com.example.feature_calendarscreen.constant.VisitScreenLogicConstant.MAX_MONTH_COUNT
+import com.example.feature_calendarscreen.constant.VisitScreenLogicConstant.MIN_MONTH_COUNT
+import com.example.feature_calendarscreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_CLIP
+import com.example.feature_calendarscreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_PADDING_END
 import com.example.wizkids.ui.theme.lightGray
 import com.example.wizkids.ui.theme.whiteColor
 

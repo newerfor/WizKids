@@ -1,8 +1,8 @@
-package com.example.wizkids.domain.usecase.getUseCase.visitUsecase
+package com.example.core_domain.usecase.getUseCase.visitUsecase
 
-import com.example.wizkids.domain.mapper.GetDomainMapper
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.domain.repository.GetDataRepository
+import com.example.core_domain.mapper.GetDomainMapper
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_domain.repository.GetDataRepository
 
 class GetVisitByChildIdUseCase(
     private val repository: GetDataRepository,

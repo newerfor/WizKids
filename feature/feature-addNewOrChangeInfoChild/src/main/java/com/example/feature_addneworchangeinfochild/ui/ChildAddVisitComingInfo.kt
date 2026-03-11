@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.ui
+package com.example.feature_addneworchangeinfochild.ui
 
 import android.util.Log
 import androidx.compose.foundation.layout.Column
@@ -7,16 +7,16 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainChildDayOfWeekVisit
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.PAY_STATUS_PAYED
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformation
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformationWindow
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.feature_addneworchangeinfochild.ui.AddVisitToDayWeek
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_domain.model.DomainChildDayOfWeekVisit
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformation
+import com.example.core_ui.ui.ChangeInformationWindow.ComingVisitsInformationCard.ChildComingVisitsInformationWindow
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.feature_addneworchangeinfochild.R
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.PAY_STATUS_PAYED
+import kotlin.collections.forEachIndexed
 
 class ChildAddVisitComingInfo {
     @Composable
@@ -48,7 +48,7 @@ class ChildAddVisitComingInfo {
                     },
                     onDelete = {
                         if (visit.id != null) {
-                            viewModel.deleteVisit(visit.id)
+                            viewModel.deleteVisit(visit.id!!)
                         }
                         childVisitComing.remove(visit)
                     },
@@ -63,7 +63,7 @@ class ChildAddVisitComingInfo {
                         stringResource(R.string.reset_button) to {
                             for (visit in childVisitComing) {
                                 if (visit.id != null) {
-                                    viewModel.deleteVisit(visit.id)
+                                    viewModel.deleteVisit(visit.id!!)
                                 }
                             }
                             childVisitComing.clear()

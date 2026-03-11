@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI
+package com.example.core_ui.ui
 
 
 import androidx.compose.material3.Text
@@ -9,8 +9,8 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DEFAULT_FONT_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.DEFAULT_FONT_SIZE_ITALY_TEXT
+import com.example.core_ui.constant.SharedUiViewConstant.DEFAULT_FONT_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.DEFAULT_FONT_SIZE_ITALY_TEXT
 import com.example.wizkids.ui.theme.ButtonAndInfoBlue
 import com.example.wizkids.ui.theme.Inter
 import com.example.wizkids.ui.theme.textLightGray

@@ -1,6 +1,6 @@
-package com.example.wizkids.util
+package com.example.core_util
 
-import com.example.wizkids.util.UtilLogicConstant.DATE_PATTERN
+import com.example.core_util.UtilLogicConstant.DATE_PATTERN
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.DateTimeFormatter

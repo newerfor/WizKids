@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.main.constant
+package com.example.feature_main.constant
 
 object MainLogicConstant {
     const val MAIN_ACTIVITY_DEFAULT_VALUE_SELECTED_OPTION_SORT = ""

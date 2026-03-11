@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ComingVisitsInformationCard
+package com.example.core_ui.ui.ChangeInformationWindow.ComingVisitsInformationCard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -17,17 +17,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.COMING_STATUS_COMING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.COMING_STATUS_NOT_COMING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_BOX_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_BOX_WEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_MAIN_CONTAINER_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_ROW_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_ROW_ROW_WEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_TEXT_LABEL_WEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.VISIT_INFORMATION_ICON_SIZE
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_COMING
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_NOT_COMING
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_BOX_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_BOX_WEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_MAIN_CONTAINER_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_ROW_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_ROW_ROW_WEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.COMING_VISITS_INFORMATION_TEXT_LABEL_WEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.VISIT_INFORMATION_ICON_SIZE
+import com.example.core_ui.ui.TextFont
 import com.example.wizkids.ui.theme.blackColor
 import com.example.wizkids.ui.theme.payFalse
 import com.example.wizkids.ui.theme.payLater

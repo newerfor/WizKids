@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
+package com.example.feature_calendarscreen.ui
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -6,18 +6,18 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.res.stringResource
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.dateScreeen.ui.DateHelper
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.child.ChildrenUiState
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationCardBackGround
+import com.example.core_ui.ui.DateHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_util.IntentHelper
+import com.example.core_viewmodel.child.ChildByIdUiState
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.child.ChildrenUiState
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.feature_calendarscreen.R
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_UPCOMING_VISITS
-import com.example.wizkids.util.IntentHelper
 
 class CalendarCard {
     @Composable
@@ -33,7 +33,7 @@ class CalendarCard {
     ) {
         var monthNumber = remember { mutableStateOf(DateHelper().getMonthNumber()) }
         var yearNumber = remember { mutableStateOf(DateHelper().getYearNumber()) }
-        ChildInformationCardBackGround().InformationCardbackGround {
+        ChildInformationCardBackGround().InformationCardBackGround {
             MonthAndYearInformation().MonthAndYearCard(textFont, monthNumber, yearNumber)
             DayInMounthInformation().DayInMonth(
                 visitInfo, monthNumber, yearNumber, textFont,

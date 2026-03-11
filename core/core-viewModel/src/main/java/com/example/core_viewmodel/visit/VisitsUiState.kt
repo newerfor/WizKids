@@ -1,6 +1,6 @@
-package com.example.wizkids.presentation.viewModel.visit
+package com.example.core_viewmodel.visit
 
-import com.example.wizkids.domain.model.DomainVisitModel
+import com.example.core_domain.model.DomainVisitModel
 
 sealed interface VisitsUiState {
     data object Loading : VisitsUiState

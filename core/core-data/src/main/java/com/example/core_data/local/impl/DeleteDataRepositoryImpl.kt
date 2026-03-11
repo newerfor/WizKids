@@ -1,7 +1,7 @@
 package com.example.core_data.local.impl
 
-import com.example.wizkids.data.local.dao.WizKidsDao
-import com.example.wizkids.domain.repository.DeleteDataRepository
+import com.example.core_data.local.dao.WizKidsDao
+import com.example.core_domain.repository.DeleteDataRepository
 
 class DeleteDataRepositoryImpl(
     private val dao: WizKidsDao,

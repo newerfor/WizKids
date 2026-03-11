@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.sharedUI
+package com.example.core_ui.ui
 
 import android.app.Activity
 import android.content.Context
@@ -30,24 +30,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.R
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.FOOTER_ITEM_DEFAULT_VALUE_PADDING_END
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.FOOTER_ITEM_DEFAULT_VALUE_PADDING_START
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.FOOTER_SELECTED_INDEX_DEFAULT_VALUE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.HEADER_DEFAULT_VALUE_INFO_SELECTION
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_END_ELSE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_END_IF
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_START_ELSE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_START_IF
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.FOOTER_MAIN_CONTAINER_BORDER_WIDTH
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.FOOTER_MAIN_CONTAINER_HEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.HEADER_COLUMN_PADDING_START
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.HEADER_INFO_SELECTION_PADDING_BOTTOM
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.HEADER_INFO_SELECTION_PADDING_TOP
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.HEADER_R0W_WEIGHT
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ICON_EXIT_SIZE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ICON_GO_BACK_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.ui.IconGoBackView
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.FOOTER_ITEM_DEFAULT_VALUE_PADDING_END
+import com.example.core_ui.constant.SharedUiLogicConstant.FOOTER_ITEM_DEFAULT_VALUE_PADDING_START
+import com.example.core_ui.constant.SharedUiLogicConstant.FOOTER_SELECTED_INDEX_DEFAULT_VALUE
+import com.example.core_ui.constant.SharedUiLogicConstant.HEADER_DEFAULT_VALUE_INFO_SELECTION
+import com.example.core_ui.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_END_ELSE
+import com.example.core_ui.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_END_IF
+import com.example.core_ui.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_START_ELSE
+import com.example.core_ui.constant.SharedUiViewConstant.FOOTER_ITEM_COLUMN_PADDING_START_IF
+import com.example.core_ui.constant.SharedUiViewConstant.FOOTER_MAIN_CONTAINER_BORDER_WIDTH
+import com.example.core_ui.constant.SharedUiViewConstant.FOOTER_MAIN_CONTAINER_HEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.HEADER_COLUMN_PADDING_START
+import com.example.core_ui.constant.SharedUiViewConstant.HEADER_INFO_SELECTION_PADDING_BOTTOM
+import com.example.core_ui.constant.SharedUiViewConstant.HEADER_INFO_SELECTION_PADDING_TOP
+import com.example.core_ui.constant.SharedUiViewConstant.HEADER_R0W_WEIGHT
+import com.example.core_ui.constant.SharedUiViewConstant.ICON_EXIT_SIZE
+import com.example.core_ui.constant.SharedUiViewConstant.ICON_GO_BACK_PADDING
 import com.example.wizkids.ui.theme.darkHeader
 import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.whiteColor
@@ -55,7 +54,7 @@ import com.example.wizkids.ui.theme.yellowColor
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CALENDAR
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_MAIN
 import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_USER_PROFILE
-import com.example.wizkids.util.IntentHelper
+import com.example.core_util.IntentHelper
 
 class NavHelper {
     @Composable

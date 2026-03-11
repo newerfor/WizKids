@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.dateScreeen.ui.calendarScreen
+package com.example.feature_calendarscreen.ui
 
 import android.content.Context
 import androidx.compose.foundation.background
@@ -24,15 +24,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.domain.model.DomainVisitModel
-import com.example.wizkids.presentation.dateScreeen.ui.CreateANewVisit
-import com.example.wizkids.presentation.dateScreeen.ui.DateHelper
-import com.example.wizkids.presentation.dateScreeen.ui.calendarScreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_DAY_IN_MONTH_LAZY_VERTICAL_COLUMN
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.viewModel.child.ChildByIdUiState
-import com.example.wizkids.presentation.viewModel.child.ChildViewModel
-import com.example.wizkids.presentation.viewModel.child.ChildrenUiState
-import com.example.wizkids.presentation.viewModel.visit.VisitViewModel
+import com.example.core_domain.model.DomainVisitModel
+import com.example.core_ui.ui.CreateANewVisit
+import com.example.core_ui.ui.DateHelper
+import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.child.ChildByIdUiState
+import com.example.core_viewmodel.child.ChildViewModel
+import com.example.core_viewmodel.child.ChildrenUiState
+import com.example.core_viewmodel.visit.VisitViewModel
+import com.example.feature_calendarscreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_DAY_IN_MONTH_LAZY_VERTICAL_COLUMN
 import com.example.wizkids.ui.theme.blackColor
 import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.greenColor

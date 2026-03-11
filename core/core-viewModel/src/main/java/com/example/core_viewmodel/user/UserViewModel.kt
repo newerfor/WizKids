@@ -1,11 +1,11 @@
-package com.example.wizkids.presentation.viewModel.user
+package com.example.core_viewmodel.user
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.wizkids.domain.model.DomainUserModel
-import com.example.wizkids.domain.usecase.deleteUseCase.userUsecase.DeleteUserUseCase
-import com.example.wizkids.domain.usecase.getUseCase.userUsecase.GetUserUseCase
-import com.example.wizkids.domain.usecase.saveUseCase.userUsecase.SaveUserUseCase
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_domain.usecase.deleteUseCase.userUsecase.DeleteUserUseCase
+import com.example.core_domain.usecase.getUseCase.userUsecase.GetUserUseCase
+import com.example.core_domain.usecase.saveUseCase.userUsecase.SaveUserUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

@@ -1,0 +1,36 @@
+<resources>
+    <string name="add_child_activity_title">Создание ребёнка</string>
+    <string name="add_child_activity_subtitle">Добавление данных</string>
+    <string name="select_day_week_label">Выберите дни недели</string>
+    <string name="error_title">Ошибка</string>
+    <string name="coming_visit_window_time_label">Время</string>
+    <string name="select_first_date_button">Выбрать первую дату диапозона дат</string>
+    <string name="date_not_selected">Дата не выбрана</string>
+    <string name="reset_button">Сбросить</string>
+    <string name="select_date_button">Выбрать дату</string>
+    <string name="select_second_date_button">Выбрать вторую дату диапозона дат</string>
+    <string name="add_button">Добавить</string>
+    <string name="cancel_button">Отменить</string>
+    <string name="first_name_label">Имя</string>
+    <string name="first_name_hint">Введите Имя</string>
+    <string name="last_name_label">Фамилия</string>
+    <string name="last_name_hint">Введите Фамилию</string>
+    <string name="middle_name_label">Отчество</string>
+    <string name="middle_name_hint">Введите отчество</string>
+    <string name="additional_info_label">Дополнительная информация</string>
+    <string name="additional_info_hint">Дополнительная информация...</string>
+    <string name="birth_date_label">Дата рождения</string>
+    <string name="finance_info_label">Финансовая информация</string>
+    <string name="balance">Баланс</string>
+    <string name="currency_rub">₽</string>
+    <string name="price_label">Цена</string>
+    <string name="documents_label">Документы</string>
+    <string name="development_stages_label">Этапы развития</string>
+    <string name="recent_visits_label">Последние посещения</string>
+    <string name="save_button">Сохранить</string>
+    <string name="development_stage_hint">Введите этап...</string>
+    <string name="delete_icon_description">Удалить</string>
+    <string name="reset_text">Сбросить</string>
+    <string name="add_week_day_visit_button">Добавить расписание по дням недели</string>
+    <string name="edit_child_activity_title">Изменение информации</string>
+</resources>

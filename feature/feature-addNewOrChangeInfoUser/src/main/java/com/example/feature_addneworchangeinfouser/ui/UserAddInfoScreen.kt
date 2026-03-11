@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeUserInformation.ui
+package com.example.feature_addneworchangeinfouser.ui
 
 import android.content.Context
 import androidx.compose.foundation.clickable
@@ -19,36 +19,36 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import com.example.wizkids.R
-import com.example.wizkids.domain.model.DomainDocumentsModel
-import com.example.wizkids.domain.model.DomainUserModel
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_ABOUT
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_DATE_OF_BIRTH
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_EDUCATION_LEVEL
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_EMAIL
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FIRST_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FULLNAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_IMAGE
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_LAST_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_MIDDLE_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_PHONE
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_SPECIALIZATION
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_WORK_EXPERIENCE
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_FIRST_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_LAST_NAME
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_MIDDLE_NAME
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationCardBackGround
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.ChildInformationImageAndPayStatus
-import com.example.wizkids.presentation.sharedUI.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
-import com.example.wizkids.presentation.sharedUI.GetDate
-import com.example.wizkids.presentation.sharedUI.InputInformationCard
-import com.example.wizkids.presentation.sharedUI.TextFieldVisible
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
-import com.example.wizkids.presentation.viewModel.user.UserViewModel
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationCardBackGround
+import com.example.core_ui.ui.ChangeInformationWindow.ChildInformationImageAndPayStatus
+import com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard.DocumentInformation
+import com.example.core_ui.ui.GetDate
+import com.example.core_ui.ui.InputInformationCard
+import com.example.core_ui.ui.TextFieldVisible
+import com.example.core_ui.ui.TextFont
+import com.example.core_util.IntentHelper
+import com.example.core_viewmodel.user.UserViewModel
+import com.example.feature_addneworchangeinfouser.R
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_ABOUT
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_DATE_OF_BIRTH
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_EDUCATION_LEVEL
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_EMAIL
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FIRST_NAME
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FULL_NAME
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_IMAGE
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_LAST_NAME
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_MIDDLE_NAME
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_PHONE
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_SPECIALIZATION
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_WORK_EXPERIENCE
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_FIRST_NAME
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_LAST_NAME
+import com.example.feature_addneworchangeinfouser.constant.AddNewOrChangeUserLogicConstant.ADD_NEW_OR_CHANGE_USER_INDEX_OF_MIDDLE_NAME
 import com.example.wizkids.ui.theme.redColor
-import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_USER_PROFILE
-import com.example.wizkids.util.IntentHelper
+
 
 class UserAddInfoScreen {
     @Composable
@@ -58,7 +58,7 @@ class UserAddInfoScreen {
         viewModel: UserViewModel,
         context: Context
     ) {
-        val fullName = userInfo?.name ?: ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FULLNAME
+        val fullName = userInfo?.name ?: ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_FULL_NAME
         val parts = fullName.split(" ")
 
         var userFirstName = remember {
@@ -129,7 +129,7 @@ class UserAddInfoScreen {
         var hasUserPhoneError = remember { mutableStateOf(false) }
         var hasUserEmailError = remember { mutableStateOf(false) }
         var hasWorkExperienceError = remember { mutableStateOf(false) }
-        ChildInformationCardBackGround().InformationCardbackGround {
+        ChildInformationCardBackGround().InformationCardBackGround {
 
             ChildInformationImageAndPayStatus().InformationImageAndPayStatus(
                 textFont,

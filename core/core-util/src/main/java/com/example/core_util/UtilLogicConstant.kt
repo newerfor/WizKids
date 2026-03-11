@@ -1,4 +1,4 @@
-package com.example.wizkids.util
+package com.example.core_util
 
 object UtilLogicConstant {
     const val ID_KEY = "id"

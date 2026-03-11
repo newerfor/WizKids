@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.ui
+package com.example.feature_addneworchangeinfochild.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -14,14 +14,14 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.wizkids.R
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_INDEX_IN_LIST
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_WORK_STAGE
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildViewConstant.ADD_NEW_OR_CHANGE_LEARNING_STAGES_COLUMN_PADDING
-import com.example.wizkids.presentation.addNewOrChangeChild.constant.AddNewOrChangeChildViewConstant.ADD_NEW_OR_CHANGE_LEARNING_STAGES_TEXT_PADDING
-import com.example.wizkids.presentation.sharedUI.TextFieldVisible
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.TextFieldVisible
+import com.example.core_ui.ui.TextFont
+import com.example.feature_addneworchangeinfochild.R
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_INDEX_IN_LIST
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_WORK_STAGE
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildViewConstant.ADD_NEW_OR_CHANGE_LEARNING_STAGES_COLUMN_PADDING
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildViewConstant.ADD_NEW_OR_CHANGE_LEARNING_STAGES_TEXT_PADDING
 import com.example.wizkids.ui.theme.textWhite
 
 class ChildAddLearningStagesInfo {

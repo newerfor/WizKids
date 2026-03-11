@@ -1,4 +1,4 @@
-package com.example.wizkids.presentation.addNewOrChangeChild.constant
+package com.example.feature_addneworchangeinfouser.constant
 
 object AddNewOrChangeUserViewConstant {
 

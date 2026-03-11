@@ -15,13 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.wizkids.R
-import com.example.wizkids.presentation.sharedUI.TextFieldVisible
-import com.example.wizkids.presentation.sharedUI.TextFont
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_FINANCE
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.ADD_NEW_OR_CHANGE_FINANCE_WINDOW_COLUMN_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.constant.SharedUiViewConstant.FINANCE_INFORMATION_TEXT_PADDING
-import com.example.wizkids.presentation.ui.sharedUI.ui.ButtonView
+import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_FINANCE
+import com.example.core_ui.constant.SharedUiViewConstant.ADD_NEW_OR_CHANGE_FINANCE_WINDOW_COLUMN_PADDING
+import com.example.core_ui.constant.SharedUiViewConstant.FINANCE_INFORMATION_TEXT_PADDING
+import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.TextFieldVisible
+import com.example.core_ui.ui.TextFont
 import com.example.wizkids.ui.theme.cardBackground
 
 
