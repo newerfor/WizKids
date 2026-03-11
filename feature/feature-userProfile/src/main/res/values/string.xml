@@ -1,0 +1,20 @@
+<resources>
+    <string name="basic_information">Основная информация</string>
+    <string name="full_name">ФИО:</string>
+    <string name="birth_date">Дата рождения:</string>
+    <string name="about_me">О себе:</string>
+    <string name="work_experience">Стаж работы:</string>
+    <string name="contact_information">Контактная информация</string>
+    <string name="phone">Телефон:</string>
+    <string name="email">Email:</string>
+    <string name="education_and_qualification">Образование и квалификация</string>
+    <string name="education_level">Уровень образования:</string>
+    <string name="specialization">Специализация:</string>
+    <string name="documents">Документы</string>
+    <string name="edit_profile_button">Редактировать профиль</string>
+    <string name="delete_button">Удалить</string>
+    <string name="convert_to_pdf_button">Конвертировать в PDF</string>
+    <string name="user_profile_title">Профиль воспитателя</string>
+    <string name="user_profile_subtitle">Просмотр данных</string>
+    <string name="create_profile_button">Создать профиль</string>
+</resources>

@@ -1,0 +1,28 @@
+<resources>
+    <string name="add_user_activity_title">Профиль воспитателя</string>
+    <string name="add_user_activity_subtitle">Редактирование данных</string>
+    <string name="first_name_label">Имя</string>
+    <string name="first_name_hint">Введите Имя</string>
+    <string name="last_name_label">Фамилия</string>
+    <string name="last_name_hint">Введите Фамилию</string>
+    <string name="middle_name_label">Отчество</string>
+    <string name="middle_name_hint">Введите отчество</string>
+    <string name="birth_date_label">Дата рождения</string>
+    <string name="date_not_selected">Дата не выбрана</string>
+    <string name="error_title">Ошибка</string>
+    <string name="select_date_button">Выбрать дату</string>
+    <string name="reset_button">Сбросить</string>
+    <string name="about_me_label">О себе</string>
+    <string name="about_me_hint">Введите информацию о себе</string>
+    <string name="expirience_label">Начало работы в (стаж)</string>
+    <string name="phone_label">Телефон</string>
+    <string name="phone_hint">Введите телефон</string>
+    <string name="email_label">Email</string>
+    <string name="email_hint">Введите email</string>
+    <string name="learning_level_label">Уровень образования</string>
+    <string name="learning_level_hint">Введите уровень образования</string>
+    <string name="specialization_label">Специализация</string>
+    <string name="specialization_hint">Введите специализацию</string>
+    <string name="documents_label">Документы</string>
+    <string name="save_button">Сохранить</string>
+</resources>

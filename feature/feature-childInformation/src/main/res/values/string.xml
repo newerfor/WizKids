@@ -1,0 +1,16 @@
+<resources>
+    <string name="basic_information">Основная информация</string>
+    <string name="full_name">ФИО:</string>
+    <string name="birth_date">Дата рождения:</string>
+    <string name="age_label">Возраст:</string>
+    <string name="additional_info_label">Дополнительная информация</string>
+    <string name="finance_info_label">Финансовая информация</string>
+    <string name="balance">Баланс</string>
+    <string name="visit_price_label">Цена посещения:</string>
+    <string name="documents_label">Документы</string>
+    <string name="development_stages_label">Этапы развития</string>
+    <string name="recent_visits_label">Последние посещения</string>
+    <string name="edit_child_activity_title">Изменение информации</string>
+    <string name="delete_icon_description">Удалить</string>
+    <string name="subtitle_number">• №</string>
+</resources>

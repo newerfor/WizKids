@@ -1,0 +1,5 @@
+<resources>
+    <string name="calendar_screen_title">Календарь</string>
+    <string name="go_to_upcoming_dates">Перейти на ближайшие дни</string>
+    <string name="addVisit">Добаить новое посещение</string>
+</resources>

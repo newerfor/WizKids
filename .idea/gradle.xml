@@ -11,6 +11,21 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/core-data" />
+            <option value="$PROJECT_DIR$/core/core-domain" />
+            <option value="$PROJECT_DIR$/core/core-navigation" />
+            <option value="$PROJECT_DIR$/core/core-ui" />
+            <option value="$PROJECT_DIR$/core/core-util" />
+            <option value="$PROJECT_DIR$/core/core-viewModel" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/feature-addNewOrChangeInfoChild" />
+            <option value="$PROJECT_DIR$/feature/feature-addNewOrChangeInfoUser" />
+            <option value="$PROJECT_DIR$/feature/feature-calendarScreen" />
+            <option value="$PROJECT_DIR$/feature/feature-childInformation" />
+            <option value="$PROJECT_DIR$/feature/feature-main" />
+            <option value="$PROJECT_DIR$/feature/feature-upcomingDates" />
+            <option value="$PROJECT_DIR$/feature/feature-userProfile" />
           </set>
         </option>
       </GradleProjectSettings>

@@ -1,0 +1,22 @@
+<resources>
+    <string name="add_button">Добавить</string>
+    <string name="select_status_default_value_label">Выберите вариант</string>
+    <string name="main_activity_filters_container_label">Фильтрация</string>
+    <string name="main_activity_filters_container_sublabel_filter_by_age">Фильтрация по возрасту</string>
+    <string name="main_activity_filters_first_date_label">От</string>
+    <string name="main_activity_filters_second_date_label">До</string>
+    <string name="main_activity_filters_container_sublabel_filter_by_pay_status">Фильтрация по статусу оплаты</string>
+    <string name="reset_text">Сбросить</string>
+    <string name="apply_button">Применить</string>
+    <string name="cancel_button">Отменить</string>
+    <string name="main_activity_filters_label">Фильтр</string>
+    <string name="main_activity_sorted_label">Сортировка</string>
+    <string name="main_activity_search_by_name_hint">Поиск по имени....</string>
+    <string name="content_description_search">Поиск</string>
+    <string name="main_activity_title">Главная страница</string>
+    <string name="main_activity_subtitle">Все дети</string>
+    <string name="main_activity_sorted_container_label">Фильтрация</string>
+    <string name="reset_button">Сбросить</string>
+    <string name="discard_button">Отменить</string>
+    <string name="children_founded">Найдено:</string>
+</resources>
