@@ -18,32 +18,30 @@ import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_TEXT_HORI
 import com.example.core_ui.constant.SharedUiViewConstant.ADD_INFO_CARD_TEXT_VERTICAL_PADDING
 import com.example.wizkids.ui.theme.darkHeader
 
-class InputInformationCard {
-    @Composable
-    fun AddInformationCard(
-        italyText: String,
-        textFont: TextFont,
-        verticalPadding: Dp = ADD_INFO_CARD_DEFAULT_VERTICAL_PADDING.dp,
-        horizontalPadding: Dp = ADD_INFO_CARD_DEFAULT_HORIZONTAL_PADDING.dp,
-        function: @Composable () -> Unit
+@Composable
+fun AddInformationCard(
+    italyText: String,
+    textFont: TextFont,
+    verticalPadding: Dp = ADD_INFO_CARD_DEFAULT_VERTICAL_PADDING.dp,
+    horizontalPadding: Dp = ADD_INFO_CARD_DEFAULT_HORIZONTAL_PADDING.dp,
+    function: @Composable () -> Unit
+) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .padding(vertical = verticalPadding, horizontal = horizontalPadding)
+            .clip(RoundedCornerShape(ADD_INFO_CARD_COLUMN_CLIP.dp))
+            .background(darkHeader)
     ) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .padding(vertical = verticalPadding, horizontal = horizontalPadding)
-                .clip(RoundedCornerShape(ADD_INFO_CARD_COLUMN_CLIP.dp))
-                .background(darkHeader)
-        ) {
-            Column(Modifier.padding(ADD_INFO_CARD_COLUMN_PADDING.dp)) {
-                textFont.ItalyText(
-                    italyText,
-                    Modifier.padding(
-                        vertical = ADD_INFO_CARD_TEXT_VERTICAL_PADDING.dp,
-                        horizontal = ADD_INFO_CARD_TEXT_HORIZONTAL_PADDING.dp
-                    )
+        Column(Modifier.padding(ADD_INFO_CARD_COLUMN_PADDING.dp)) {
+            textFont.ItalyText(
+                italyText,
+                Modifier.padding(
+                    vertical = ADD_INFO_CARD_TEXT_VERTICAL_PADDING.dp,
+                    horizontal = ADD_INFO_CARD_TEXT_HORIZONTAL_PADDING.dp
                 )
-                function.invoke()
-            }
+            )
+            function.invoke()
         }
     }
 }

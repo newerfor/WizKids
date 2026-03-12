@@ -26,43 +26,41 @@ import com.example.core_ui.constant.SharedUiViewConstant.ERROR_MESSAGE_ROW_CLIP
 import com.example.core_ui.constant.SharedUiViewConstant.ERROR_MESSAGE_ROW_PADDING
 import com.example.wizkids.ui.theme.cardBackground
 
-object StateHelper {
-    @Composable
-    fun RoundLoad() {
-        Column(
-            Modifier.Companion.fillMaxSize(),
-            Arrangement.Center,
-            Alignment.Companion.CenterHorizontally,
-        ) {
-            CircularProgressIndicator(
-                modifier = Modifier.Companion.size(SharedUiViewConstant.ROUND_LOAD_ROUND_SIZE.dp),
-                color = Color.Companion.Black
-            )
-        }
+@Composable
+fun RoundLoad() {
+    Column(
+        Modifier.Companion.fillMaxSize(),
+        Arrangement.Center,
+        Alignment.Companion.CenterHorizontally,
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier.Companion.size(SharedUiViewConstant.ROUND_LOAD_ROUND_SIZE.dp),
+            color = Color.Companion.Black
+        )
     }
+}
 
-    @Composable
-    fun ErrorMassage(textFont: TextFont, Clickable: () -> Unit) {
-        Column(
+@Composable
+fun ErrorMassage(textFont: TextFont, Clickable: () -> Unit) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(ERROR_MESSAGE_COLUMN_PADDING.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
+    ) {
+        Row(
             Modifier
-                .fillMaxSize()
-                .padding(ERROR_MESSAGE_COLUMN_PADDING.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Bottom
+                .fillMaxWidth()
+                .clip(shape = RoundedCornerShape(ERROR_MESSAGE_ROW_CLIP.dp))
+                .background(cardBackground)
+                .padding(ERROR_MESSAGE_ROW_PADDING.dp)
         ) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .clip(shape = RoundedCornerShape(ERROR_MESSAGE_ROW_CLIP.dp))
-                    .background(cardBackground)
-                    .padding(ERROR_MESSAGE_ROW_PADDING.dp)
-            ) {
-                textFont.WhiteText(stringResource(R.string.error_text))
-                Spacer(Modifier.weight(1f))
-                textFont.BlueText(
-                    stringResource(R.string.retry),
-                    modifier = Modifier.clickable { Clickable.invoke() })
-            }
+            textFont.WhiteText(stringResource(R.string.error_text))
+            Spacer(Modifier.weight(1f))
+            textFont.BlueText(
+                stringResource(R.string.retry),
+                modifier = Modifier.clickable { Clickable.invoke() })
         }
     }
 }

@@ -70,351 +70,353 @@ import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_LEAVE_ICON_PAD
 import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_LEAVE_ICON_SIZE
 import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_MAIN_IMAGE_CLIP
 import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_MAIN_IMAGE_HEIGHT
-import com.example.core_ui.ui.ButtonView
-import com.example.core_ui.ui.InputInformationCard
-import com.example.core_ui.ui.TextFieldVisible
+import com.example.core_ui.ui.AddInformationCard
+import com.example.core_ui.ui.ButtonVisibleRow
 import com.example.core_ui.ui.TextFont
+import com.example.core_ui.ui.TextOutlineField
+import com.example.core_util.deleteImageByPath
+import com.example.core_util.saveImageToLocalStorage
 import com.example.wizkids.ui.theme.blueColor
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.lightGray
 import com.example.wizkids.ui.theme.redColor
-import com.example.core_util.ImageHelper
 import java.util.UUID
 
-class ChildDocumentInformationWindow {
-    @Composable
-    fun DocumentInformationWindow(
-        textFont: TextFont,
-        openDocumentWindow: MutableState<Boolean>,
-        docs: MutableState<DomainDocumentsModel?>,
-        isChangeAct: Boolean,
-        onSave: (DomainDocumentsModel) -> Unit,
-        inAddIndex: Int,
-        documentList: MutableList<DomainDocumentsModel>? = null
-    ) {
-        val imageList = remember { mutableStateListOf<String>() }
-        LaunchedEffect(Unit) {
-            if (docs.value?.imagePaths?.isNotEmpty() == true) {
-                imageList.clear()
-                imageList.addAll(docs.value!!.imagePaths)
+
+@Composable
+fun DocumentInformationWindow(
+    textFont: TextFont,
+    openDocumentWindow: MutableState<Boolean>,
+    docs: MutableState<DomainDocumentsModel?>,
+    isChangeAct: Boolean,
+    onSave: (DomainDocumentsModel) -> Unit,
+    inAddIndex: Int,
+    documentList: MutableList<DomainDocumentsModel>? = null
+) {
+    val imageList = remember { mutableStateListOf<String>() }
+    LaunchedEffect(Unit) {
+        if (docs.value?.imagePaths?.isNotEmpty() == true) {
+            imageList.clear()
+            imageList.addAll(docs.value!!.imagePaths)
+        }
+    }
+    var selectedImageIndex by remember {
+        mutableStateOf(
+            DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_INDEX
+        )
+    }
+    var docsName by remember {
+        mutableStateOf(
+            docs.value?.name ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME
+        )
+    }
+    var docsInfo by remember {
+        mutableStateOf(
+            docs.value?.description ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
+        )
+    }
+    val context = LocalContext.current
+    var hasDocsImageError by remember { mutableStateOf(false) }
+    var hasDocsNameError by remember { mutableStateOf(false) }
+    var hasDocsInfoError by remember { mutableStateOf(false) }
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri ->
+            if (uri != null) {
+                val fileName = "${UUID.randomUUID()}.jpg"
+                val imagePath = saveImageToLocalStorage(
+                    context,
+                    uri,
+                    fileName,
+                )
+                imagePath?.let { path ->
+                    imageList.add(path)
+                    selectedImageIndex =
+                        imageList.size - DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_MINUS_INDEX
+                }
             }
         }
-        var selectedImageIndex by remember {
-            mutableStateOf(
-                DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_INDEX
-            )
-        }
-        var docsName by remember {
-            mutableStateOf(
-                docs.value?.name ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME
-            )
-        }
-        var docsInfo by remember {
-            mutableStateOf(
-                docs.value?.description ?: DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
-            )
-        }
-        val context = LocalContext.current
-        var hasDocsImageError by remember { mutableStateOf(false) }
-        var hasDocsNameError by remember { mutableStateOf(false) }
-        var hasDocsInfoError by remember { mutableStateOf(false) }
-        val launcher = rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.PickVisualMedia(),
-            onResult = { uri ->
-                if (uri != null) {
-                    val fileName = "${UUID.randomUUID()}.jpg"
-                    val imagePath = ImageHelper().saveImageToLocalStorage(
-                        context,
-                        uri,
-                        fileName,
+    )
+
+    Dialog(onDismissRequest = { openDocumentWindow.value = false }) {
+        Column(
+            Modifier
+                .fillMaxWidth(DOCUMENT_INFORMATION_WINDOW_DIALOG_WIDTH)
+                .fillMaxHeight(DOCUMENT_INFORMATION_WINDOW_DIALOG_HEIGHT)
+                .clip(RoundedCornerShape(DOCUMENT_INFORMATION_WINDOW_DIALOG_CLIP.dp))
+                .background(color = cardBackground)
+                .padding(DOCUMENT_INFORMATION_WINDOW_DIALOG_PADDING.dp)
+                .verticalScroll(rememberScrollState())
+        ) {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = DOCUMENT_LEAVE_ICON_PADDING_VERTICAL.dp)
+            ) {
+                Column(Modifier.background(grayColor)) {
+                    Icon(
+                        Icons.Filled.KeyboardArrowLeft,
+                        contentDescription = "",
+                        Modifier
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple()
+                            ) {
+                                openDocumentWindow.value = false
+                                if (docs.value == null) {
+                                    imageList.map { imagePath ->
+                                        deleteImageByPath(
+                                            imagePath
+                                        )
+                                    }
+                                }
+                            }
+                            .size(DOCUMENT_LEAVE_ICON_SIZE.dp)
                     )
-                    imagePath?.let { path ->
-                        imageList.add(path)
-                        selectedImageIndex =
-                            imageList.size - DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_SELECTED_IMAGE_MINUS_INDEX
+                }
+            }
+            Box(
+                Modifier
+                    .fillMaxWidth()
+                    .height(DOCUMENT_MAIN_IMAGE_HEIGHT.dp)
+                    .background(grayColor)
+                    .clip(RoundedCornerShape(DOCUMENT_MAIN_IMAGE_CLIP.dp))
+            ) {
+                if (hasDocsImageError) {
+                    Icon(
+                        Icons.Default.Warning,
+                        contentDescription = "",
+                        tint = redColor
+                    )
+                }
+                if (imageList.isNotEmpty() && selectedImageIndex < imageList.size) {
+                    AsyncImage(
+                        model = imageList[selectedImageIndex],
+                        contentDescription = null,
+                        Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                } else {
+                    Column(
+                        Modifier
+                            .fillMaxSize()
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple()
+                            ) {
+                                launcher.launch(
+                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                )
+                            },
+                        Arrangement.Center,
+                        Alignment.CenterHorizontally
+                    ) {
+
+                        Icon(
+                            imageVector = Icons.Filled.Add,
+                            contentDescription = "",
+                            Modifier.size(DOCUMENT_INFORMATION_WINDOW_ADD_IMAGE_ICON_SIZE.dp),
+                            tint = blueColor
+                        )
                     }
                 }
             }
-        )
-
-        Dialog(onDismissRequest = { openDocumentWindow.value = false }) {
-            Column(
-                Modifier
-                    .fillMaxWidth(DOCUMENT_INFORMATION_WINDOW_DIALOG_WIDTH)
-                    .fillMaxHeight(DOCUMENT_INFORMATION_WINDOW_DIALOG_HEIGHT)
-                    .clip(RoundedCornerShape(DOCUMENT_INFORMATION_WINDOW_DIALOG_CLIP.dp))
-                    .background(color = cardBackground)
-                    .padding(DOCUMENT_INFORMATION_WINDOW_DIALOG_PADDING.dp)
-                    .verticalScroll(rememberScrollState())
+            Spacer(modifier = Modifier.height(DOCUMENT_INFORMATION_WINDOW_IMAGE_SPACER_HEIGHT.dp))
+            LazyRow(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(
+                    DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_PADDING_HORIZONTAL.dp
+                )
             ) {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = DOCUMENT_LEAVE_ICON_PADDING_VERTICAL.dp)
-                ) {
-                    Column(Modifier.background(grayColor)) {
+                itemsIndexed(imageList) { index, image ->
+                    Box(
+                        Modifier
+                            .size(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_SIZE.dp)
+                            .clip(RoundedCornerShape(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_CLIP.dp))
+                            .background(if (selectedImageIndex == index) lightGray else grayColor)
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple()
+                            ) { selectedImageIndex = index }
+                    ) {
+                        AsyncImage(
+                            model = image,
+                            contentDescription = null,
+                            Modifier.fillMaxSize(),
+                            contentScale = ContentScale.Crop,
+                        )
+                    }
+                }
+                item {
+                    Box(
+                        Modifier
+                            .size(
+                                DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE.dp
+                            )
+                            .clip(
+                                RoundedCornerShape(
+                                    DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_CLIP.dp
+                                )
+                            )
+                            .background(grayColor)
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple()
+                            ) {
+                                launcher.launch(
+                                    PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                                )
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
                         Icon(
-                            Icons.Filled.KeyboardArrowLeft,
+                            imageVector = Icons.Filled.Add,
                             contentDescription = "",
-                            Modifier
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = rememberRipple()
-                                ) {
-                                    openDocumentWindow.value = false
-                                    if (docs.value == null) {
+                            Modifier.size(
+                                DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_SIZE.dp
+                            ),
+                            tint = blueColor
+                        )
+                    }
+                }
+            }
+            Spacer(
+                modifier = Modifier.height(
+                    DOCUMENT_INFORMATION_WINDOW_SPACER_IMAGE_TO_DOCS_INFO_HEIGHT.dp
+                )
+            )
+            AddInformationCard(
+                stringResource(R.string.name_document_add_name_docs_label),
+                textFont,
+                horizontalPadding = 2.dp,
+                verticalPadding = 5.dp
+            ) {
+                if (isChangeAct) {
+                    TextOutlineField(
+                        docsName,
+                        textFont,
+                        stringResource(R.string.name_name_other_hint),
+                        trailingIcon = hasDocsNameError
+                    ) { newText ->
+                        docsName = newText
+                        hasDocsNameError = false
+                    }
+                } else {
+                    textFont.WhiteText(docsName)
+                }
+            }
+
+            AddInformationCard(
+                stringResource(R.string.information_on_docs_label),
+                textFont,
+                horizontalPadding = 2.dp,
+                verticalPadding = 5.dp
+            ) {
+                if (isChangeAct) {
+                    TextOutlineField(
+                        docsInfo,
+                        textFont,
+                        stringResource(R.string.information_on_docs_hint),
+                        trailingIcon = hasDocsInfoError
+                    ) { newText ->
+                        docsInfo = newText
+                        hasDocsInfoError = false
+                    }
+                } else {
+                    textFont.WhiteText(docsInfo)
+                }
+            }
+            Column {
+                if (isChangeAct) {
+                    Column {
+                        val buttonMap = if (docs.value != null && documentList != null) {
+                            mapOf<String, () -> Unit>(
+                                stringResource(R.string.apply_button) to {
+                                    if (imageList.isEmpty()) {
+                                        hasDocsImageError = true
+                                    }
+                                    if (docsName.isEmpty()) {
+                                        hasDocsNameError = true
+                                    }
+                                    if (docsInfo.isEmpty()) {
+                                        hasDocsInfoError = true
+                                    }
+                                    if (!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError) {
+                                        val newDocument = DomainDocumentsModel(
+                                            name = docsName,
+                                            description = docsInfo,
+                                            imagePaths = imageList.toList(),
+                                            id = docs.value?.id
+                                                ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
+                                        )
+                                        onSave(newDocument)
+                                        openDocumentWindow.value = false
+                                    }
+
+                                },
+                                stringResource(R.string.delete_button) to {
+                                    {
                                         imageList.map { imagePath ->
-                                            ImageHelper().deleteImageByPath(
+                                            deleteImageByPath(
                                                 imagePath
                                             )
                                         }
+                                        imageList.clear()
+                                        documentList.removeAt(docs.value!!.id - DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_REMOVE_INDEX)
+                                        docs.value = null
+                                        openDocumentWindow.value = false
+                                        hasDocsImageError = false
                                     }
-                                }
-                                .size(DOCUMENT_LEAVE_ICON_SIZE.dp)
-                        )
-                    }
-                }
-                Box(
-                    Modifier
-                        .fillMaxWidth()
-                        .height(DOCUMENT_MAIN_IMAGE_HEIGHT.dp)
-                        .background(grayColor)
-                        .clip(RoundedCornerShape(DOCUMENT_MAIN_IMAGE_CLIP.dp))
-                ) {
-                    if (hasDocsImageError) {
-                        Icon(
-                            Icons.Default.Warning,
-                            contentDescription = "",
-                            tint = redColor
-                        )
-                    }
-                    if (imageList.isNotEmpty() && selectedImageIndex < imageList.size) {
-                        AsyncImage(
-                            model = imageList[selectedImageIndex],
-                            contentDescription = null,
-                            Modifier.fillMaxSize(),
-                            contentScale = ContentScale.Crop
-                        )
-                    } else {
-                        Column(
-                            Modifier
-                                .fillMaxSize()
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = rememberRipple()
-                                ) {
-                                    launcher.launch(
-                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                    )
                                 },
+                            )
+                        } else {
+                            mapOf(
+                                stringResource(R.string.apply_button) to {
+                                    if (imageList.isEmpty()) {
+                                        hasDocsImageError = true
+                                    }
+                                    if (docsName.isEmpty()) {
+                                        hasDocsNameError = true
+                                    }
+                                    if (docsInfo.isEmpty()) {
+                                        hasDocsInfoError = true
+                                    }
+                                    if (!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError) {
+                                        val newDocument = DomainDocumentsModel(
+                                            name = docsName,
+                                            description = docsInfo,
+                                            imagePaths = imageList.toList(),
+                                            id = docs.value?.id
+                                                ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
+                                        )
+                                        onSave(newDocument)
+                                        openDocumentWindow.value = false
+                                    }
+
+                                },
+                            )
+                        }
+                        Column(
+                            Modifier.fillMaxWidth(),
                             Arrangement.Center,
                             Alignment.CenterHorizontally
                         ) {
-
-                            Icon(
-                                imageVector = Icons.Filled.Add,
-                                contentDescription = "",
-                                Modifier.size(DOCUMENT_INFORMATION_WINDOW_ADD_IMAGE_ICON_SIZE.dp),
-                                tint = blueColor
-                            )
-                        }
-                    }
-                }
-                Spacer(modifier = Modifier.height(DOCUMENT_INFORMATION_WINDOW_IMAGE_SPACER_HEIGHT.dp))
-                LazyRow(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(
-                        DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_PADDING_HORIZONTAL.dp
-                    )
-                ) {
-                    itemsIndexed(imageList) { index, image ->
-                        Box(
-                            Modifier.size(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_SIZE.dp)
-                                .clip(RoundedCornerShape(DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_CLIP.dp))
-                                .background(if (selectedImageIndex == index) lightGray else grayColor)
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = rememberRipple()
-                                ) { selectedImageIndex = index }
-                        ) {
-                            AsyncImage(
-                                model = image,
-                                contentDescription = null,
-                                Modifier.fillMaxSize(),
-                                contentScale = ContentScale.Crop,
-                            )
-                        }
-                    }
-                    item {
-                        Box(
-                            Modifier.size(
-                                DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_SIZE.dp
-                            )
-                                .clip(
-                                    RoundedCornerShape(
-                                        DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_BOX_CLIP.dp
-                                    )
-                                )
-                                .background(grayColor)
-                                .clickable(
+                            textFont.BlueText(
+                                stringResource(R.string.reset_text), Modifier.clickable(
                                     interactionSource = remember { MutableInteractionSource() },
                                     indication = rememberRipple()
                                 ) {
-                                    launcher.launch(
-                                        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-                                    )
-                                },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Filled.Add,
-                                contentDescription = "",
-                                Modifier.size(
-                                    DOCUMENT_INFORMATION_WINDOW_IMAGE_LIST_ITEM_ICON_ADD_NEW_IMAGE_SIZE.dp
-                                ),
-                                tint = blueColor
-                            )
+                                    docsName = DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME
+                                    for (image in imageList) {
+                                        deleteImageByPath(image)
+                                    }
+                                    imageList.clear()
+                                    docsInfo =
+                                        DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
+                                })
                         }
-                    }
-                }
-                Spacer(
-                    modifier = Modifier.height(
-                        DOCUMENT_INFORMATION_WINDOW_SPACER_IMAGE_TO_DOCS_INFO_HEIGHT.dp
-                    )
-                )
-                InputInformationCard().AddInformationCard(
-                    stringResource(R.string.name_document_add_name_docs_label),
-                    textFont,
-                    horizontalPadding = 2.dp,
-                    verticalPadding = 5.dp
-                ) {
-                    if (isChangeAct) {
-                        TextFieldVisible().TextOutlineField(
-                            docsName,
-                            textFont,
-                            stringResource(R.string.name_name_other_hint),
-                            trailingIcon = hasDocsNameError
-                        ) { newText ->
-                            docsName = newText
-                            hasDocsNameError = false
-                        }
-                    } else {
-                        textFont.WhiteText(docsName)
-                    }
-                }
-
-                InputInformationCard().AddInformationCard(
-                    stringResource(R.string.information_on_docs_label),
-                    textFont,
-                    horizontalPadding = 2.dp,
-                    verticalPadding = 5.dp
-                ) {
-                    if (isChangeAct) {
-                        TextFieldVisible().TextOutlineField(
-                            docsInfo,
-                            textFont,
-                            stringResource(R.string.information_on_docs_hint),
-                            trailingIcon = hasDocsInfoError
-                        ) { newText ->
-                            docsInfo = newText
-                            hasDocsInfoError = false
-                        }
-                    } else {
-                        textFont.WhiteText(docsInfo)
-                    }
-                }
-                Column {
-                    if (isChangeAct) {
-                        Column {
-                            val buttonMap = if (docs.value != null && documentList != null) {
-                                mapOf<String, () -> Unit>(
-                                    stringResource(R.string.apply_button) to {
-                                        if (imageList.isEmpty()) {
-                                            hasDocsImageError = true
-                                        }
-                                        if (docsName.isEmpty()) {
-                                            hasDocsNameError = true
-                                        }
-                                        if (docsInfo.isEmpty()) {
-                                            hasDocsInfoError = true
-                                        }
-                                        if (!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError) {
-                                            val newDocument = DomainDocumentsModel(
-                                                name = docsName,
-                                                description = docsInfo,
-                                                imagePaths = imageList.toList(),
-                                                id = docs.value?.id
-                                                    ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
-                                            )
-                                            onSave(newDocument)
-                                            openDocumentWindow.value = false
-                                        }
-
-                                    },
-                                    stringResource(R.string.delete_button) to {
-                                        {
-                                            imageList.map { imagePath ->
-                                                ImageHelper().deleteImageByPath(
-                                                    imagePath
-                                                )
-                                            }
-                                            imageList.clear()
-                                            documentList.removeAt(docs.value!!.id - DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_REMOVE_INDEX)
-                                            docs.value = null
-                                            openDocumentWindow.value = false
-                                            hasDocsImageError = false
-                                        }
-                                    },
-                                )
-                            } else {
-                                mapOf(
-                                    stringResource(R.string.apply_button) to {
-                                        if (imageList.isEmpty()) {
-                                            hasDocsImageError = true
-                                        }
-                                        if (docsName.isEmpty()) {
-                                            hasDocsNameError = true
-                                        }
-                                        if (docsInfo.isEmpty()) {
-                                            hasDocsInfoError = true
-                                        }
-                                        if (!hasDocsImageError && !hasDocsNameError && !hasDocsInfoError) {
-                                            val newDocument = DomainDocumentsModel(
-                                                name = docsName,
-                                                description = docsInfo,
-                                                imagePaths = imageList.toList(),
-                                                id = docs.value?.id
-                                                    ?: (inAddIndex + DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DOCS_LIST_ADD_INDEX)
-                                            )
-                                            onSave(newDocument)
-                                            openDocumentWindow.value = false
-                                        }
-
-                                    },
-                                )
-                            }
-                            Column(
-                                Modifier.fillMaxWidth(),
-                                Arrangement.Center,
-                                Alignment.CenterHorizontally
-                            ) {
-                                textFont.BlueText(
-                                    stringResource(R.string.reset_text), Modifier.clickable(
-                                        interactionSource = remember { MutableInteractionSource() },
-                                        indication = rememberRipple()
-                                    ) {
-                                        docsName = DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_NAME
-                                        for (image in imageList) {
-                                            ImageHelper().deleteImageByPath(image)
-                                        }
-                                        imageList.clear()
-                                        docsInfo =
-                                            DOCUMENT_INFORMATION_WINDOW_DEFAULT_VALUE_DESCRIPTION
-                                    })
-                            }
-                            ButtonView().ButtonVisibleRow(buttonMap, textFont)
-                        }
+                        ButtonVisibleRow(buttonMap, textFont)
                     }
                 }
             }

@@ -41,9 +41,22 @@ android {
 }
 
 dependencies {
+    implementation(project(":feature:feature-main"))
+    implementation(project(":feature:feature-addNewOrChangeInfoChild"))
+    implementation(project(":feature:feature-addNewOrChangeInfoUser"))
+    implementation(project(":feature:feature-childInformation"))
+    implementation(project(":feature:feature-userProfile"))
+    implementation(project(":feature:feature-calendarScreen"))
+    implementation(project(":feature:feature-upcomingDates"))
+    implementation(project(":core:core-ui"))
+    implementation(project(":core:core-data"))
+    implementation(project(":core:core-domain"))
+    implementation(project(":core:core-viewModel"))
+    implementation(project(":core:core-navigation"))
     implementation(libs.converter.gson)
     implementation(libs.androidx.room.runtime.v261)
     implementation(libs.androidx.room.ktx.v261)
+    implementation(libs.navigation.compose)
     kapt(libs.androidx.room.compiler.v261)
     kapt (libs.androidx.room.compiler)
     implementation(libs.koin.core)

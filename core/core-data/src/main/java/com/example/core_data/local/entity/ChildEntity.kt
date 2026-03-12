@@ -2,7 +2,6 @@ package com.example.core_data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.core_data.local.model.DocumentsModel
 
 @Entity(tableName = "child")
 data class ChildEntity(
@@ -12,7 +11,7 @@ data class ChildEntity(
     val name: String,
     val additionalInfo: String,
     val dateOfBirth: String,
-    val documents: List<DocumentsModel>,
+    val documents: List<DocumentModel>,
     val learningStages: List<String>,
     val visitPrice: Int,
     val currentBalance: Int,

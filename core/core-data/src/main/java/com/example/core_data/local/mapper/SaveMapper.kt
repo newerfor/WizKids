@@ -2,21 +2,29 @@ package com.example.core_data.local.mapper
 
 import com.example.core_data.local.entity.ChildDayOfWeekVisitEntity
 import com.example.core_data.local.entity.ChildEntity
+import com.example.core_data.local.entity.DocumentModel
 import com.example.core_data.local.entity.UserEntity
 import com.example.core_data.local.entity.VisitEntity
-import com.example.core_data.local.model.ChildModel
-import com.example.core_data.local.model.UserModel
-import com.example.core_data.local.model.VisitModel
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_domain.model.DomainVisitModel
 
 class SaveMapper {
-    fun mapChildModelToEntity(child: ChildModel): ChildEntity {
+    fun mapChildModelToEntity(child: DomainChildModel): ChildEntity {
         return ChildEntity(
             id = child.id,
             imagePath = child.imagePath,
             name = child.name,
             additionalInfo = child.additionalInfo,
             dateOfBirth = child.dateOfBirth,
-            documents = child.documents,
+            documents = child.documents.map {
+                DocumentModel(
+                    id = it.id,
+                    name = it.name,
+                    description = it.description,
+                    imagePaths = it.imagePaths
+                )
+            },
             learningStages = child.learningStages,
             visitPrice = child.visitPrice,
             currentBalance = child.currentBalance,
@@ -29,7 +37,7 @@ class SaveMapper {
         )
     }
 
-    fun mapVisitModelToEntity(visit: VisitModel, childId: Int): VisitEntity {
+    fun mapVisitModelToEntity(visit: DomainVisitModel, childId: Int): VisitEntity {
         return VisitEntity(
             id = visit.id,
             date = visit.date,
@@ -43,7 +51,7 @@ class SaveMapper {
         )
     }
 
-    fun mapUserModelToEntity(user: UserModel): UserEntity {
+    fun mapUserModelToEntity(user: DomainUserModel): UserEntity {
         return UserEntity(
             imagePath = user.imagePath,
             name = user.name,
@@ -54,7 +62,14 @@ class SaveMapper {
             email = user.email,
             educationLevel = user.educationLevel,
             specialization = user.specialization,
-            documents = user.documents
+            documents = user.documents.map{
+                DocumentModel(
+                    id = it.id,
+                    name = it.name,
+                    description = it.description,
+                    imagePaths = it.imagePaths
+                )
+            }
         )
     }
 }

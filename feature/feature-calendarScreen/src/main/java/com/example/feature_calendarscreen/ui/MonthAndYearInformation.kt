@@ -19,8 +19,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.example.core_ui.ui.DateHelper
 import com.example.core_ui.ui.TextFont
+import com.example.core_ui.ui.getMonthName
+import com.example.core_ui.ui.getNextMonth
+import com.example.core_ui.ui.getPreviousMonth
 import com.example.feature_calendarscreen.constant.VisitScreenLogicConstant.MAX_MONTH_COUNT
 import com.example.feature_calendarscreen.constant.VisitScreenLogicConstant.MIN_MONTH_COUNT
 import com.example.feature_calendarscreen.constant.VisitScreenViewConstant.CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_CLIP
@@ -28,48 +30,47 @@ import com.example.feature_calendarscreen.constant.VisitScreenViewConstant.CALEN
 import com.example.wizkids.ui.theme.lightGray
 import com.example.wizkids.ui.theme.whiteColor
 
-class MonthAndYearInformation {
-    @Composable
-    fun MonthAndYearCard(
-        textFont: TextFont,
-        monthNumber: MutableState<Int>,
-        yearNumber: MutableState<Int>
-    ) {
-        Row(Modifier.fillMaxWidth()) {
-            textFont.ItalyText("${DateHelper().getMonthName(monthNumber.value)} ${yearNumber.value}")
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .clip(RoundedCornerShape(CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_CLIP.dp))
-                    .padding(end = CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_PADDING_END.dp),
-                horizontalArrangement = Arrangement.End
-            ) {
-                Row(Modifier.background(lightGray)) {
-                    Icon(
-                        imageVector = Icons.Filled.KeyboardArrowLeft,
-                        contentDescription = "",
-                        Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple()
-                        ) {
-                            monthNumber.value = DateHelper().getPreviousMonth(monthNumber.value)
-                            if (monthNumber.value == MAX_MONTH_COUNT) yearNumber.value--
-                        },
-                        tint = whiteColor
-                    )
-                    Icon(
-                        imageVector = Icons.Filled.KeyboardArrowRight,
-                        contentDescription = "",
-                        Modifier.clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple()
-                        ) {
-                            monthNumber.value = DateHelper().getNextMonth(monthNumber.value)
-                            if (monthNumber.value == MIN_MONTH_COUNT) yearNumber.value++
-                        },
-                        tint = whiteColor
-                    )
-                }
+
+@Composable
+fun MonthAndYearCard(
+    textFont: TextFont,
+    monthNumber: MutableState<Int>,
+    yearNumber: MutableState<Int>
+) {
+    Row(Modifier.fillMaxWidth()) {
+        textFont.ItalyText("${getMonthName(monthNumber.value)} ${yearNumber.value}")
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_CLIP.dp))
+                .padding(end = CALENDAR_ACTIVITY_MONTH_AND_YEAR_CARD_ROW_PADDING_END.dp),
+            horizontalArrangement = Arrangement.End
+        ) {
+            Row(Modifier.background(lightGray)) {
+                Icon(
+                    imageVector = Icons.Filled.KeyboardArrowLeft,
+                    contentDescription = "",
+                    Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple()
+                    ) {
+                        monthNumber.value = getPreviousMonth(monthNumber.value)
+                        if (monthNumber.value == MAX_MONTH_COUNT) yearNumber.value--
+                    },
+                    tint = whiteColor
+                )
+                Icon(
+                    imageVector = Icons.Filled.KeyboardArrowRight,
+                    contentDescription = "",
+                    Modifier.clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple()
+                    ) {
+                        monthNumber.value = getNextMonth(monthNumber.value)
+                        if (monthNumber.value == MIN_MONTH_COUNT) yearNumber.value++
+                    },
+                    tint = whiteColor
+                )
             }
         }
     }

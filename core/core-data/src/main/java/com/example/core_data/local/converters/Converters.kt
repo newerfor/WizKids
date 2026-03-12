@@ -2,101 +2,56 @@ package com.example.core_data.local.converters
 
 import androidx.room.TypeConverter
 import com.example.core_data.local.entity.ChildDayOfWeekVisitEntity
-import com.example.core_data.local.model.DocumentsModel
-import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_data.local.entity.DocumentModel
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import java.lang.reflect.Type
 
 class Converters {
     private val gson = Gson()
 
+    // ✅ Только data модели
     @TypeConverter
-    fun fromDomainDocumentsDataList(list: List<DomainDocumentsModel>?): String? {
-        return if (list == null) null else gson.toJson(list)
-    }
+    fun fromDocumentsDataList(list: List<DocumentModel>?): String? =
+        if (list == null) null else gson.toJson(list)
 
     @TypeConverter
-    fun toDomainDocumentsDataList(json: String?): List<DomainDocumentsModel>? {
-        return if (json == null) {
-            null
-        } else {
-            val type: Type = object : TypeToken<List<DomainDocumentsModel>>() {}.type
-            gson.fromJson(json, type)
-        }
-    }
-    @TypeConverter
-    fun fromChildDayOfWeekVisitEntity(entity: ChildDayOfWeekVisitEntity?): String? {
-        return if (entity == null) null else gson.toJson(entity)
-    }
+    fun toDocumentsDataList(json: String?): List<DocumentModel>? =
+        if (json == null) null
+        else gson.fromJson(json, object : TypeToken<List<DocumentModel>>() {}.type)
 
     @TypeConverter
-    fun toChildDayOfWeekVisitEntity(json: String?): ChildDayOfWeekVisitEntity? {
-        return if (json == null) {
-            null
-        } else {
-            val type: Type = object : TypeToken<ChildDayOfWeekVisitEntity>() {}.type
-            gson.fromJson(json, type)
-        }
-    }
-    @TypeConverter
-    fun fromStringList(list: List<String>?): String? {
-        return if (list == null) null else gson.toJson(list)
-    }
+    fun fromChildDayOfWeekVisitEntity(entity: ChildDayOfWeekVisitEntity?): String? =
+        if (entity == null) null else gson.toJson(entity)
 
     @TypeConverter
-    fun toStringList(json: String?): List<String>? {
-        return if (json == null) {
-            null
-        } else {
-            val type: Type = object : TypeToken<List<String>>() {}.type
-            gson.fromJson(json, type)
-        }
-    }
+    fun toChildDayOfWeekVisitEntity(json: String?): ChildDayOfWeekVisitEntity? =
+        if (json == null) null
+        else gson.fromJson(json, object : TypeToken<ChildDayOfWeekVisitEntity>() {}.type)
 
     @TypeConverter
-    fun fromDocumentsDataList(list: List<DocumentsModel>?): String? {
-        return if (list == null) null else gson.toJson(list)
-    }
+    fun fromStringList(list: List<String>?): String? =
+        if (list == null) null else gson.toJson(list)
 
     @TypeConverter
-    fun toDocumentsDataList(json: String?): List<DocumentsModel>? {
-        return if (json == null) {
-            null
-        } else {
-            val type: Type = object :
-                TypeToken<List<DocumentsModel>>() {}.type
-            gson.fromJson(json, type)
-        }
-    }
+    fun toStringList(json: String?): List<String>? =
+        if (json == null) null
+        else gson.fromJson(json, object : TypeToken<List<String>>() {}.type)
 
     @TypeConverter
-    fun fromIntList(list: List<Int>?): String? {
-        return if (list == null) null else gson.toJson(list)
-    }
+    fun fromIntList(list: List<Int>?): String? =
+        if (list == null) null else gson.toJson(list)
 
     @TypeConverter
-    fun toIntList(json: String?): List<Int>? {
-        return if (json == null) {
-            null
-        } else {
-            val type: Type = object : TypeToken<List<Int>>() {}.type
-            gson.fromJson(json, type)
-        }
-    }
+    fun toIntList(json: String?): List<Int>? =
+        if (json == null) null
+        else gson.fromJson(json, object : TypeToken<List<Int>>() {}.type)
 
     @TypeConverter
-    fun fromStringMap(map: Map<String, String>?): String? {
-        return if (map == null) null else gson.toJson(map)
-    }
+    fun fromStringMap(map: Map<String, String>?): String? =
+        if (map == null) null else gson.toJson(map)
 
     @TypeConverter
-    fun toStringMap(json: String?): Map<String, String>? {
-        return if (json == null) {
-            null
-        } else {
-            val type: Type = object : TypeToken<Map<String, String>>() {}.type
-            gson.fromJson(json, type)
-        }
-    }
+    fun toStringMap(json: String?): Map<String, String>? =
+        if (json == null) null
+        else gson.fromJson(json, object : TypeToken<Map<String, String>>() {}.type)
 }

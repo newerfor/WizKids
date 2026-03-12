@@ -8,7 +8,7 @@ import com.example.core_domain.usecase.deleteUseCase.childUsecase.DeleteChildByI
 import com.example.core_domain.usecase.getUseCase.childUsecase.GetChildByIdUseCase
 import com.example.core_domain.usecase.getUseCase.childUsecase.GetChildrenUseCase
 import com.example.core_domain.usecase.saveUseCase.childUsecase.SaveChildUseCase
-import com.example.core_util.AgeHelper
+import com.example.core_util.getAgeFromDate
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -129,11 +129,11 @@ class ChildViewModel(
             }
 
             SortedOption.BY_AGE_ASC -> {
-                _children.value.sortedBy { AgeHelper().getAgeFromDate(it.dateOfBirth) }
+                _children.value.sortedBy { getAgeFromDate(it.dateOfBirth) }
             }
 
             SortedOption.BY_AGE_DESC -> {
-                _children.value.sortedByDescending { AgeHelper().getAgeFromDate(it.dateOfBirth) }
+                _children.value.sortedByDescending { getAgeFromDate(it.dateOfBirth) }
             }
 
             null -> {

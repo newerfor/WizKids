@@ -14,10 +14,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.example.core_ui.ui.ChildView
-import com.example.core_ui.ui.StateHelper
+import com.example.core_ui.ui.ChildScreen
+import com.example.core_ui.ui.ErrorMassage
+import com.example.core_ui.ui.RoundLoad
 import com.example.core_ui.ui.TextFont
-import com.example.core_util.IntentHelper
 import com.example.core_viewmodel.child.ChildViewModel
 import com.example.core_viewmodel.child.ChildrenUiState
 import com.example.feature_main.R
@@ -28,83 +28,77 @@ import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHI
 import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_TEXT_PADDING
 import com.example.wizkids.ui.theme.ButtonAndInfoBlue
 import com.example.wizkids.ui.theme.cardBackground
-import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CHILD_INFORMATION
-import com.example.wizkids.util.IntentHelper
 
-class MainControlState {
-    @Composable
-    fun StateController(
-        childUiState: ChildrenUiState,
-        textFont: TextFont,
-        context: Context,
-        childViewModel: ChildViewModel
-    ) {
-        when (childUiState) {
-            is ChildrenUiState.Success -> {
+
+@Composable
+fun StateController(
+    childUiState: ChildrenUiState,
+    textFont: TextFont,
+    context: Context,
+    childViewModel: ChildViewModel,
+    onClickGoToChildInfo: (Int?) -> Unit
+) {
+    when (childUiState) {
+        is ChildrenUiState.Success -> {
+            Row(
+                Modifier
+                    .clip(
+                        RoundedCornerShape(
+                            MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_CLIP
+                        )
+                    )
+                    .background(color = cardBackground)
+            ) {
                 Row(
-                    Modifier
-                        .clip(
-                            RoundedCornerShape(
-                                MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_CLIP
-                            )
-                        )
-                        .background(color = cardBackground)
+                    Modifier.padding(
+                        MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_PADDING.dp
+                    ), Arrangement.Center, Alignment.CenterVertically
                 ) {
-                    Row(
-                        Modifier.padding(
-                            MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_ROW_PADDING.dp
-                        ), Arrangement.Center, Alignment.CenterVertically
-                    ) {
-                        Box(
-                            Modifier
-                                .size(MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_SIZE.dp)
-                                .clip(
-                                    RoundedCornerShape(
-                                        MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_CLIP
-                                    )
+                    Box(
+                        Modifier
+                            .size(MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_SIZE.dp)
+                            .clip(
+                                RoundedCornerShape(
+                                    MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_BOX_CLIP
                                 )
-                                .background(color = ButtonAndInfoBlue)
-                        )
-                        textFont.WhiteText(
-                            "${stringResource(R.string.children_founded)} ${childUiState.child.size}",
-                            modifier = Modifier.padding(start = MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_TEXT_PADDING.dp)
-                        )
-                    }
-
-                }
-                ChildView().ChildScreen(
-                    textFont,
-                    childUiState.child,
-                    true,
-                    context,
-                    childViewModel
-                ) { child ->
-                    IntentHelper().intentStartById(
-                        KEY_ACTIVITY_CHILD_INFORMATION,
-                        context,
-                        child.id
+                            )
+                            .background(color = ButtonAndInfoBlue)
+                    )
+                    textFont.WhiteText(
+                        "${stringResource(R.string.children_founded)} ${childUiState.child.size}",
+                        modifier = Modifier.padding(start = MAIN_ACTIVITY_MAIN_CHILD_STATE_CONTROLLER_SUCCESS_TEXT_PADDING.dp)
                     )
                 }
-            }
 
-            is ChildrenUiState.Loading -> {
-                StateHelper.RoundLoad()
             }
-
-            is ChildrenUiState.Error -> {
-                StateHelper.ErrorMassage(textFont = textFont) {
-                    childViewModel.getChildren(
-                        searchName = null,
-                        minAge = null,
-                        maxAge = null,
-                        balanceOperator = null,
-                        hasPayStatusDebt = null,
-                        selectedOptionSort = null
-                    )
-                }
+            ChildScreen(
+                textFont,
+                childUiState.child,
+                true,
+                context,
+                childViewModel
+            ) { childId ->
+                onClickGoToChildInfo.invoke(childId)
             }
-
-            ChildrenUiState.Empty -> {}
         }
+
+        is ChildrenUiState.Loading -> {
+            RoundLoad()
+        }
+
+        is ChildrenUiState.Error -> {
+            ErrorMassage(textFont = textFont) {
+                childViewModel.getChildren(
+                    searchName = null,
+                    minAge = null,
+                    maxAge = null,
+                    balanceOperator = null,
+                    hasPayStatusDebt = null,
+                    selectedOptionSort = null
+                )
+            }
+        }
+
+        ChildrenUiState.Empty -> {}
     }
 }

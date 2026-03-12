@@ -14,56 +14,54 @@ import com.example.core_ui.constant.SharedUiLogicConstant.GET_DATE_TEXT_INPUT_DA
 import com.example.wizkids.ui.theme.blackColor
 import java.util.Calendar
 
-class GetDate {
-    @SuppressLint("DefaultLocale")
-    @OptIn(ExperimentalMaterial3Api::class)
-    @Composable
-    fun DatePickerExample(
-        openWindowDate: MutableState<Boolean>,
-        textFont: TextFont,
-        onDateSelected: (String) -> Unit,
-    ) {
-        val datePickerState = rememberDatePickerState()
-        if (openWindowDate.value) {
-            DatePickerDialog(
-                onDismissRequest = { openWindowDate.value = false },
-                confirmButton = {
-                    TextButton(
-                        onClick = {
-                            datePickerState.selectedDateMillis?.let { millis ->
-                                val calendar = Calendar.getInstance().apply {
-                                    timeInMillis = millis
-                                }
-                                val day = calendar.get(Calendar.DAY_OF_MONTH)
-                                val month = calendar.get(Calendar.MONTH) + 1
-                                val year = calendar.get(Calendar.YEAR)
-                                val selectedDate = String.format(
-                                    GET_DATE_TEXT_INPUT_DATE_FORMAT,
-                                    day,
-                                    month,
-                                    year
-                                )
-                                onDateSelected(selectedDate)
+@SuppressLint("DefaultLocale")
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DatePickerExample(
+    openWindowDate: MutableState<Boolean>,
+    textFont: TextFont,
+    onDateSelected: (String) -> Unit,
+) {
+    val datePickerState = rememberDatePickerState()
+    if (openWindowDate.value) {
+        DatePickerDialog(
+            onDismissRequest = { openWindowDate.value = false },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        datePickerState.selectedDateMillis?.let { millis ->
+                            val calendar = Calendar.getInstance().apply {
+                                timeInMillis = millis
                             }
-                            openWindowDate.value = false
+                            val day = calendar.get(Calendar.DAY_OF_MONTH)
+                            val month = calendar.get(Calendar.MONTH) + 1
+                            val year = calendar.get(Calendar.YEAR)
+                            val selectedDate = String.format(
+                                GET_DATE_TEXT_INPUT_DATE_FORMAT,
+                                day,
+                                month,
+                                year
+                            )
+                            onDateSelected(selectedDate)
                         }
-                    ) {
-                        textFont.UnColorText(
-                            stringResource(R.string.apply_button),
-                            color = blackColor
-                        )
+                        openWindowDate.value = false
                     }
-                },
-                dismissButton = {
-                    TextButton(onClick = { openWindowDate.value = false }) {
-                        textFont.UnColorText(
-                            stringResource(R.string.cancel_button), color = blackColor
-                        )
-                    }
+                ) {
+                    textFont.UnColorText(
+                        stringResource(R.string.apply_button),
+                        color = blackColor
+                    )
                 }
-            ) {
-                DatePicker(state = datePickerState)
+            },
+            dismissButton = {
+                TextButton(onClick = { openWindowDate.value = false }) {
+                    textFont.UnColorText(
+                        stringResource(R.string.cancel_button), color = blackColor
+                    )
+                }
             }
+        ) {
+            DatePicker(state = datePickerState)
         }
     }
 }

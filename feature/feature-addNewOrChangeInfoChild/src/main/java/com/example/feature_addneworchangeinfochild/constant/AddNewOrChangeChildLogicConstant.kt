@@ -12,7 +12,7 @@ object AddNewOrChangeChildLogicConstant {
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_FIRST_NAME = 1
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_MIDDLE_NAME = 0
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_LAST_NAME = 2
-    const val PAY_STATUS_PAYED="Оплачено"
+    const val PAY_STATUS_PAYED = "Оплачено"
     const val MONDAY = "Понедельник"
     const val TUESDAY = "Вторник"
     const val WEDNESDAY = "Среда"

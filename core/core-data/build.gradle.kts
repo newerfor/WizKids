@@ -36,6 +36,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.koin.android)
+    implementation(libs.koin.core)
     implementation(project(":core:core-domain"))
     implementation(libs.androidx.room.runtime.v261)
     implementation(libs.androidx.room.ktx.v261)

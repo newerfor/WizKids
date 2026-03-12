@@ -20,12 +20,8 @@ class VisitViewModel(
 ) : ViewModel() {
     private val _visitUiState = MutableStateFlow<VisitsUiState>(VisitsUiState.Loading)
     val visitUiState: StateFlow<VisitsUiState> = _visitUiState.asStateFlow()
-
-    // Список посещений (иммутабельный)
     private val _visits = MutableStateFlow<List<DomainVisitModel>>(emptyList())
     val visits: StateFlow<List<DomainVisitModel>> = _visits.asStateFlow()
-
-
     fun saveVisit(visit: DomainVisitModel, childId: Int) {
         viewModelScope.launch {
             saveVisitUseCase(visit, childId)
@@ -68,11 +64,8 @@ class VisitViewModel(
 
                 val result = getVisitByChildIdUseCase(id)
                 result.onSuccess { domainVisits ->
-                    // Полностью заменяем список
                     _visits.value = domainVisits.filterNotNull()
-
                     _visitUiState.value = VisitsUiState.Success(visits.value)
-
                 }.onFailure { error ->
                     _visitUiState.value = VisitsUiState.Error(error.message ?: "Unknown error")
                     _visits.value = emptyList()

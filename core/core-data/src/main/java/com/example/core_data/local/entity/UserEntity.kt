@@ -2,7 +2,6 @@ package com.example.core_data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.core_data.local.model.DocumentsModel
 
 @Entity(tableName = "user")
 data class UserEntity(
@@ -16,5 +15,5 @@ data class UserEntity(
     val email: String,
     val educationLevel: String,
     val specialization: String,
-    val documents: List<DocumentsModel>
+    val documents: List<DocumentModel>
 )

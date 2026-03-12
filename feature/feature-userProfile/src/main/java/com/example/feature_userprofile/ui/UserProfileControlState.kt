@@ -10,58 +10,56 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.example.core_ui.ui.ButtonView
-import com.example.core_ui.ui.StateHelper
+import com.example.core_ui.ui.ButtonVisibleColumn
+import com.example.core_ui.ui.ErrorMassage
+import com.example.core_ui.ui.RoundLoad
 import com.example.core_ui.ui.TextFont
 import com.example.core_viewmodel.user.UserUiState
 import com.example.core_viewmodel.user.UserViewModel
 import com.example.feature_userprofile.R
-import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_ADD_USER_INFO
-import com.example.wizkids.util.IntentHelper
 
-class UserProfileControlState {
-    @Composable
-    fun ControlState(
-        userUiState: UserUiState,
-        textFont: TextFont,
-        context: Context,
-        userViewModel: UserViewModel,
-    ) {
-        when (userUiState) {
-            is UserUiState.Loading -> {
-                StateHelper.RoundLoad()
+
+@Composable
+fun ControlState(
+    userUiState: UserUiState,
+    textFont: TextFont,
+    context: Context,
+    userViewModel: UserViewModel,
+    onClickGoToAddUserInfo: () -> Unit
+) {
+    when (userUiState) {
+        is UserUiState.Loading -> {
+            RoundLoad()
+        }
+
+        is UserUiState.Success -> {
+            Column(Modifier.verticalScroll(rememberScrollState())) {
+                UserFullInfo(
+                    userUiState.user, textFont, context, userViewModel = userViewModel,
+                    onClickGoToAddUserInfo = onClickGoToAddUserInfo
+                )
             }
+        }
 
-            is UserUiState.Success -> {
-                Column(Modifier.verticalScroll(rememberScrollState())) {
-                    UserFullInfoScreen().UserFullInfo(
-                        userUiState.user, textFont, context, userViewModel = userViewModel
-                    )
-                }
+        is UserUiState.Error -> {
+            ErrorMassage(textFont = textFont) {
+                userViewModel.getUser()
             }
+        }
 
-            is UserUiState.Error -> {
-                StateHelper.ErrorMassage(textFont = textFont) {
-                    userViewModel.getUser()
-                }
-            }
-
-            is UserUiState.Empty -> {
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    ButtonView().ButtonVisibleColumn(
-                        mapOf(
-                            stringResource(R.string.create_profile_button) to {
-                                IntentHelper().intentStart(
-                                    KEY_ACTIVITY_ADD_USER_INFO, context
-                                )
-                            },
-                        ), textFont
-                    )
-                }
+        is UserUiState.Empty -> {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                ButtonVisibleColumn(
+                    mapOf(
+                        stringResource(R.string.create_profile_button) to {
+                            onClickGoToAddUserInfo.invoke()
+                        },
+                    ), textFont
+                )
             }
         }
     }

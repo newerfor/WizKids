@@ -1,6 +1,6 @@
-package com.example.core_data.local.model
+package com.example.core_data.local.entity
 
-data class DocumentsModel(
+data class DocumentModel (
     val id: Int,
     val name: String,
     val description: String,

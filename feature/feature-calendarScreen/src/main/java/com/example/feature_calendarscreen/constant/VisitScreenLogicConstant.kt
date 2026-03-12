@@ -17,8 +17,4 @@ object VisitScreenLogicConstant {
     )
     const val MAX_MONTH_COUNT = 12
     const val MIN_MONTH_COUNT = 1
-    const val DATE_HELPER_LANGUAGE = "ru"
-    const val DATE_HELPER_DATE_FORMATER = "dd.MM.yyyy"
-    const val DATE_HELPER_DATE_SECOND_FORMATER = "d.MM.yyyy"
-
 }

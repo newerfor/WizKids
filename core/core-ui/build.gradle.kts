@@ -31,6 +31,8 @@ dependencies {
     implementation(composeBom)
     implementation(libs.androidx.compose.material.icons.core)
     implementation(libs.androidx.compose.ui.ui)
+    implementation(libs.navigation.compose)
+    implementation(project(":core:core-navigation"))
     implementation(project(":core:core-domain"))
     implementation(libs.coil.compose)
     implementation(project(":core:core-util"))

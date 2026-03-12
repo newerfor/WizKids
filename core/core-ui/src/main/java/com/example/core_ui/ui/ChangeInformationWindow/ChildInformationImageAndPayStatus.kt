@@ -49,132 +49,132 @@ import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_P
 import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_HORIZONTAL
 import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL
 import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_IMAGE_AND_PAY_STATUS_SPACER_HEIGHT
-import com.example.core_ui.ui.ChildPayStatusHelper
 import com.example.core_ui.ui.TextFont
+import com.example.core_ui.ui.calculatePayStatus
+import com.example.core_ui.ui.colorPayStatus
+import com.example.core_util.saveImageToLocalStorage
 import com.example.wizkids.ui.theme.lightGray
 import com.example.wizkids.ui.theme.redColor
-import com.example.core_util.ImageHelper
 import java.util.UUID
 
-class ChildInformationImageAndPayStatus {
-    @Composable
-    fun InformationImageAndPayStatus(
-        textFont: TextFont,
-        childImage: MutableState<String?>?,
-        price: Int? = null,
-        balance: Int? = null,
-        childImageError: Boolean = false,
-        isChangeAct: Boolean = false,
-        firstName: MutableState<String>,
-        lastName: MutableState<String>
-    ) {
-        var payStatus by remember { mutableStateOf("") }
-        var payColor by remember { mutableStateOf(Color.Transparent) }
-        var imageUri by remember { mutableStateOf<Uri?>(null) }
-        val context = LocalContext.current
-        var imagePathState by remember { mutableStateOf("") }
-        val launcher = rememberLauncherForActivityResult(
-            contract = ActivityResultContracts.PickVisualMedia(),
-            onResult = { uri ->
-                imageUri = uri
-                imagePathState = uri.toString()
-                // Сохраняем изображение ТОЛЬКО когда оно выбрано
-                if (uri != null) {
-                    val fileName = "${UUID.randomUUID()}.jpg"
-                    childImage?.value =
-                        ImageHelper().saveImageToLocalStorage(context, uri, fileName, childImage)
-                            .toString()
-                }
+@Composable
+fun InformationImageAndPayStatus(
+    textFont: TextFont,
+    childImage: MutableState<String?>?,
+    price: Int? = null,
+    balance: Int? = null,
+    childImageError: Boolean = false,
+    isChangeAct: Boolean = false,
+    firstName: MutableState<String>,
+    lastName: MutableState<String>
+) {
+    var payStatus by remember { mutableStateOf("") }
+    var payColor by remember { mutableStateOf(Color.Transparent) }
+    var imageUri by remember { mutableStateOf<Uri?>(null) }
+    val context = LocalContext.current
+    var imagePathState by remember { mutableStateOf("") }
+    val launcher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri ->
+            imageUri = uri
+            imagePathState = uri.toString()
+            // Сохраняем изображение ТОЛЬКО когда оно выбрано
+            if (uri != null) {
+                val fileName = "${UUID.randomUUID()}.jpg"
+                childImage?.value =
+                    saveImageToLocalStorage(context, uri, fileName, childImage)
+                        .toString()
             }
-        )
-        LaunchedEffect(balance) {
-            payStatus = ChildPayStatusHelper().calculatePayStatus(balance ?: 0, price ?: 0)
-            payColor = ChildPayStatusHelper().colorPayStatus(payStatus)
         }
-        Column(Modifier.fillMaxWidth()) {
-            Column(
-                Modifier.fillMaxWidth(),
-                Arrangement.Center,
-                Alignment.CenterHorizontally
+    )
+    LaunchedEffect(balance) {
+        payStatus = calculatePayStatus(balance ?: 0, price ?: 0)
+        payColor = colorPayStatus(payStatus)
+    }
+    Column(Modifier.fillMaxWidth()) {
+        Column(
+            Modifier.fillMaxWidth(),
+            Arrangement.Center,
+            Alignment.CenterHorizontally
+        ) {
+            Box(
+                Modifier
+                    .size(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_SIZE.dp)
+                    .clip(RoundedCornerShape(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_CLIP.dp))
+                    .border(
+                        width = if (childImageError) INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH_ERROR.dp else INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH.dp,
+                        color = if (childImageError) redColor else lightGray,
+                        shape = RoundedCornerShape(
+                            INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_SHAPE.dp
+                        )
+                    )
+                    .background(lightGray)
+                    .clickable(
+                        interactionSource = remember { MutableInteractionSource() },
+                        indication = rememberRipple()
+                    ) {
+                        if (isChangeAct) {
+                            launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+                        }
+                    },
+                contentAlignment = Alignment.Center
             ) {
-                Box(
-                    Modifier.size(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_SIZE.dp)
-                        .clip(RoundedCornerShape(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_CLIP.dp))
-                        .border(
-                            width = if (childImageError) INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH_ERROR.dp else INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_WIDTH.dp,
-                            color = if (childImageError) redColor else lightGray,
-                            shape = RoundedCornerShape(
-                                INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_BORDER_SHAPE.dp
+                if (childImageError) {
+                    Icon(
+                        Icons.Default.Warning,
+                        contentDescription = "",
+                        Modifier.size(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_ICON_SIZE.dp),
+                        tint = redColor
+                    )
+                }
+                if (childImage?.value == null || childImage.value == "") {
+                    textFont.ItalyText(
+                        "${
+                            if (firstName.value.isNotEmpty()) {
+                                firstName.value[INFORMATION_INITIAL_FIRST_NAME_INDEX]
+                            } else {
+                                ""
+                            }
+                        } ${
+                            if (lastName.value.isNotEmpty()) {
+                                lastName.value[INFORMATION_INITIAL_SECOND_NAME_INDEX]
+                            } else {
+                                ""
+                            }
+                        }"
+                    )
+                } else {
+                    childImage.value?.let { image ->
+                        if (image.isNotEmpty()) {
+                            AsyncImage(
+                                model = image,
+                                contentDescription = "",
+                                modifier = Modifier.fillMaxSize(),
+                                contentScale = ContentScale.Crop
                             )
-                        )
-                        .background(lightGray)
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple()
-                        ) {
-                            if (isChangeAct) {
-                                launcher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-                            }
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    if (childImageError) {
-                        Icon(
-                            Icons.Default.Warning,
-                            contentDescription = "",
-                            Modifier.size(INFORMATION_IMAGE_AND_PAY_STATUS_BOX_IMAGE_ICON_SIZE.dp),
-                            tint = redColor
-                        )
-                    }
-                    if (childImage?.value == null || childImage.value == "") {
-                        textFont.ItalyText(
-                            "${
-                                if (firstName.value.isNotEmpty()) {
-                                    firstName.value[INFORMATION_INITIAL_FIRST_NAME_INDEX]
-                                } else {
-                                    ""
-                                }
-                            } ${
-                                if (lastName.value.isNotEmpty()) {
-                                    lastName.value[INFORMATION_INITIAL_SECOND_NAME_INDEX]
-                                } else {
-                                    ""
-                                }
-                            }"
-                        )
-                    } else {
-                        childImage.value?.let { image ->
-                            if (image.isNotEmpty()) {
-                                AsyncImage(
-                                    model = image,
-                                    contentDescription = "",
-                                    modifier = Modifier.fillMaxSize(),
-                                    contentScale = ContentScale.Crop
-                                )
-                            }
                         }
                     }
                 }
             }
-            Spacer(Modifier.height(INFORMATION_IMAGE_AND_PAY_STATUS_SPACER_HEIGHT.dp))
-            Column(Modifier.fillMaxWidth(), Arrangement.Center, Alignment.CenterHorizontally) {
-                Column(
-                    Modifier
-                        .clip(
-                            RoundedCornerShape(
-                                INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_CLIP.dp
-                            )
-                        )
-                        .background(payColor)
-                ) {
-                    textFont.WhiteText(
-                        payStatus,
-                        modifier = Modifier.padding(
-                            horizontal = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_HORIZONTAL.dp,
-                            vertical = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL.dp
+        }
+        Spacer(Modifier.height(INFORMATION_IMAGE_AND_PAY_STATUS_SPACER_HEIGHT.dp))
+        Column(Modifier.fillMaxWidth(), Arrangement.Center, Alignment.CenterHorizontally) {
+            Column(
+                Modifier
+                    .clip(
+                        RoundedCornerShape(
+                            INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_CLIP.dp
                         )
                     )
-                }
+                    .background(payColor)
+            ) {
+                textFont.WhiteText(
+                    payStatus,
+                    modifier = Modifier.padding(
+                        horizontal = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_HORIZONTAL.dp,
+                        vertical = INFORMATION_IMAGE_AND_PAY_STATUS_BOX_PAY_STATUS_PADDING_VERTICAL.dp
+                    )
+                )
             }
         }
     }

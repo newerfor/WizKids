@@ -42,6 +42,8 @@ roomCommonJvm = "2.8.4"
 roomKtxVersion = "2.8.4"
 firebaseCrashlyticsBuildtools = "3.0.6"
 runtime = "1.10.4"
+navigationCompose = "2.9.7"
+navigationRuntimeKtx = "2.9.7"
 
 [libraries]
 androidx-activity-compose-v172 = { module = "androidx.activity:activity-compose", version.ref = "activityComposeVersion" }
@@ -112,6 +114,8 @@ firebase-crashlytics-buildtools = { group = "com.google.firebase", name = "fireb
 androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 ui-graphics = { module = "androidx.compose.ui:ui-graphics" }
 ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+androidx-navigation-runtime-ktx = { group = "androidx.navigation", name = "navigation-runtime-ktx", version.ref = "navigationRuntimeKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

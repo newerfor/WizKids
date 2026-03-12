@@ -33,57 +33,56 @@ import com.example.wizkids.ui.theme.payFalse
 import com.example.wizkids.ui.theme.payLater
 import com.example.wizkids.ui.theme.payTrue
 
-class ChildComingVisitsInformation {
-    @Composable
-    fun ComingVisitsInformation(
-        textFont: TextFont,
-        visit: DomainVisitModel,
-        onChangeAct: Boolean = false,
-        onClick: (DomainVisitModel) -> Unit = {},
-        onDelete: () -> Unit = {}
-    ) {
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(COMING_VISITS_INFORMATION_MAIN_CONTAINER_PADDING.dp)
-                .background(
-                    when (visit.visitStatus) {
-                        COMING_STATUS_COMING -> payTrue
-                        COMING_STATUS_NOT_COMING -> payFalse
-                        else -> payLater
-                    }
-                )
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple()
-                ) {
-                    onClick.invoke(visit)
-                }) {
-            Row(Modifier.padding(COMING_VISITS_INFORMATION_ROW_PADDING.dp)) {
-                textFont.WhiteText(
-                    "${visit.date}/${visit.time} - ${visit.visitName}",
-                    Modifier.weight(COMING_VISITS_INFORMATION_TEXT_LABEL_WEIGHT)
-                )
-                if (onChangeAct) {
-                    Row(Modifier.weight(COMING_VISITS_INFORMATION_ROW_ROW_WEIGHT)) {
-                        Box(
-                            Modifier
-                                .weight(COMING_VISITS_INFORMATION_BOX_WEIGHT)
-                                .padding(COMING_VISITS_INFORMATION_BOX_PADDING.dp)
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = rememberRipple()
-                                ) {
-                                    onDelete.invoke()
-                                }, contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                Icons.Default.Delete,
-                                "",
-                                Modifier.size(VISIT_INFORMATION_ICON_SIZE.dp),
-                                tint = blackColor
-                            )
-                        }
+
+@Composable
+fun ComingVisitsInformation(
+    textFont: TextFont,
+    visit: DomainVisitModel,
+    onChangeAct: Boolean = false,
+    onClick: (DomainVisitModel) -> Unit = {},
+    onDelete: () -> Unit = {}
+) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(COMING_VISITS_INFORMATION_MAIN_CONTAINER_PADDING.dp)
+            .background(
+                when (visit.visitStatus) {
+                    COMING_STATUS_COMING -> payTrue
+                    COMING_STATUS_NOT_COMING -> payFalse
+                    else -> payLater
+                }
+            )
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple()
+            ) {
+                onClick.invoke(visit)
+            }) {
+        Row(Modifier.padding(COMING_VISITS_INFORMATION_ROW_PADDING.dp)) {
+            textFont.WhiteText(
+                "${visit.date}/${visit.time} - ${visit.visitName}",
+                Modifier.weight(COMING_VISITS_INFORMATION_TEXT_LABEL_WEIGHT)
+            )
+            if (onChangeAct) {
+                Row(Modifier.weight(COMING_VISITS_INFORMATION_ROW_ROW_WEIGHT)) {
+                    Box(
+                        Modifier
+                            .weight(COMING_VISITS_INFORMATION_BOX_WEIGHT)
+                            .padding(COMING_VISITS_INFORMATION_BOX_PADDING.dp)
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple()
+                            ) {
+                                onDelete.invoke()
+                            }, contentAlignment = Alignment.Center
+                    ) {
+                        Icon(
+                            Icons.Default.Delete,
+                            "",
+                            Modifier.size(VISIT_INFORMATION_ICON_SIZE.dp),
+                            tint = blackColor
+                        )
                     }
                 }
             }

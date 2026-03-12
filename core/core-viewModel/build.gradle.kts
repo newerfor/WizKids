@@ -35,6 +35,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.koin.android)
+    implementation(libs.koin.core)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(project(":core:core-domain"))
     implementation(project(":core:core-util"))

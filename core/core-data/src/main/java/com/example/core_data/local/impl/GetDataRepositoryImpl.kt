@@ -3,16 +3,16 @@ package com.example.core_data.local.impl
 import com.example.core_data.local.dao.WizKidsDao
 import com.example.core_data.local.entity.VisitEntity
 import com.example.core_data.local.mapper.GetMapper
-import com.example.core_data.local.model.ChildModel
-import com.example.core_data.local.model.UserModel
-import com.example.core_data.local.model.VisitModel
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_domain.model.DomainVisitModel
 import com.example.core_domain.repository.GetDataRepository
 
 class GetDataRepositoryImpl(
     private val dao: WizKidsDao,
     private val mapper: GetMapper
 ) : GetDataRepository {
-    override suspend fun getChildByIdData(id: Int?): ChildModel? {
+    override suspend fun getChildByIdData(id: Int?): DomainChildModel? {
         return mapper.mapChildToModel(dao.getChildById(id))
     }
 
@@ -22,7 +22,7 @@ class GetDataRepositoryImpl(
         maxAge: Int?,
         balanceOperator: String?,
         hasPayStatusDebt: Boolean?,
-    ): List<ChildModel> {
+    ): List<DomainChildModel> {
         return dao.getChildren(
             searchName = searchName,
             minAge = minAge,
@@ -32,7 +32,7 @@ class GetDataRepositoryImpl(
         ).mapNotNull { child -> mapper.mapChildToModel(child) }
     }
 
-    override suspend fun getVisitData(visitsList: List<String>?): List<VisitModel> {
+    override suspend fun getVisitData(visitsList: List<String>?): List<DomainVisitModel> {
         return if (visitsList == null) {
             dao.getVisits().mapNotNull { visit -> mapper.mapVisitToModel(visit) }
         } else {
@@ -44,12 +44,14 @@ class GetDataRepositoryImpl(
         }
     }
 
-    override suspend fun getUserData(): UserModel? {
+
+    override suspend fun getUserData(): DomainUserModel? {
         return mapper.mapUserToModel(dao.getUser())
     }
 
-    override suspend fun getVisitByChildIdData(id: Int): List<VisitModel> {
+    override suspend fun getVisitByChildIdData(id: Int): List<DomainVisitModel> {
         return dao.getVisitByChildId(id).mapNotNull { visit -> mapper.mapVisitToModel(visit) }
     }
+
 
 }

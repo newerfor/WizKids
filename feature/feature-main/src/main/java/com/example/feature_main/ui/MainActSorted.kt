@@ -28,7 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.example.core_ui.ui.ButtonView
+import com.example.core_ui.ui.ButtonVisibleRow
 import com.example.core_ui.ui.TextFont
 import com.example.feature_main.R
 import com.example.feature_main.constant.MainLogicConstant.MAIN_ACTIVITY_VALUE_SORTED_LIST
@@ -47,108 +47,107 @@ import com.example.wizkids.ui.theme.ButtonAndInfoBlue
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.darkHeader
 
-class MainActSorted {
-    @Composable
-    fun WindowSorted(
-        openWindowSorted: MutableState<Boolean>,
-        textFont: TextFont,
-        selectedOptions: MutableState<String>,
-    ) {
-        var optionList by remember {
-            mutableStateOf(MAIN_ACTIVITY_VALUE_SORTED_LIST)
-        }
-        Dialog(onDismissRequest = { openWindowSorted.value = false }) {
-            Column(Modifier.background(color = cardBackground)) {
-                Column(Modifier.fillMaxWidth(), Arrangement.Center, Alignment.CenterHorizontally) {
-                    textFont.ItalyText(stringResource(R.string.main_activity_sorted_container_label))
-                }
-                Spacer(Modifier.height(MAIN_ACTIVITY_MAIN_SORTED_CONTAINER_SPACER_HEIGHT.dp))
-                Column(Modifier.padding(MAIN_ACTIVITY_MAIN_SORTED_COLUMN_OPTION_PADDING.dp)) {
-                    for (option in optionList) {
-                        OptionCard(option = option, onChoiseOption = selectedOptions, textFont) {
-                            selectedOptions.value = option
-                            openWindowSorted.value = false
-                        }
-                        Spacer(Modifier.height(MAIN_ACTIVITY_MAIN_SORTED_OPTION_SPACER_HEIGHT.dp))
-                    }
-                }
-                ButtonView().ButtonVisibleRow(
-                    mapOf(
-                        stringResource(R.string.reset_button) to {
-                            selectedOptions.value = ""
-                            openWindowSorted.value = false
-                        },
-                        stringResource(R.string.discard_button) to {
-                            openWindowSorted.value = false
-                        }
-                    ), textFont
-                )
+
+@Composable
+fun WindowSorted(
+    openWindowSorted: MutableState<Boolean>,
+    textFont: TextFont,
+    selectedOptions: MutableState<String>,
+) {
+    var optionList by remember {
+        mutableStateOf(MAIN_ACTIVITY_VALUE_SORTED_LIST)
+    }
+    Dialog(onDismissRequest = { openWindowSorted.value = false }) {
+        Column(Modifier.background(color = cardBackground)) {
+            Column(Modifier.fillMaxWidth(), Arrangement.Center, Alignment.CenterHorizontally) {
+                textFont.ItalyText(stringResource(R.string.main_activity_sorted_container_label))
             }
+            Spacer(Modifier.height(MAIN_ACTIVITY_MAIN_SORTED_CONTAINER_SPACER_HEIGHT.dp))
+            Column(Modifier.padding(MAIN_ACTIVITY_MAIN_SORTED_COLUMN_OPTION_PADDING.dp)) {
+                for (option in optionList) {
+                    OptionCard(option = option, onChoiseOption = selectedOptions, textFont) {
+                        selectedOptions.value = option
+                        openWindowSorted.value = false
+                    }
+                    Spacer(Modifier.height(MAIN_ACTIVITY_MAIN_SORTED_OPTION_SPACER_HEIGHT.dp))
+                }
+            }
+             ButtonVisibleRow(
+                mapOf(
+                    stringResource(R.string.reset_button) to {
+                        selectedOptions.value = ""
+                        openWindowSorted.value = false
+                    },
+                    stringResource(R.string.discard_button) to {
+                        openWindowSorted.value = false
+                    }
+                ), textFont
+            )
         }
     }
+}
 
-    @Composable
-    fun OptionCard(
-        option: String,
-        onChoiseOption: MutableState<String>,
-        textFont: TextFont,
-        OnClick: () -> Unit
+@Composable
+fun OptionCard(
+    option: String,
+    onChoiseOption: MutableState<String>,
+    textFont: TextFont,
+    OnClick: () -> Unit
+) {
+    Column(
+        Modifier
+            .clip(RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_CLIP))
+            .background(
+                color = darkHeader
+            )
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple()
+            ) {
+                OnClick.invoke()
+            }
+            .fillMaxWidth()
+            .padding(MAIN_ACTIVITY_MAIN_OPTION_CARD_PADDING.dp)
     ) {
-        Column(
-            Modifier
-                .clip(RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_CLIP))
-                .background(
-                    color = darkHeader
-                )
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple()
-                ) {
-                    OnClick.invoke()
-                }
-                .fillMaxWidth()
-                .padding(MAIN_ACTIVITY_MAIN_OPTION_CARD_PADDING.dp)
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                if (onChoiseOption.value != option) {
-                    Box(
-                        Modifier
-                            .size(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SIZE.dp)
-                            .border(
-                                width = MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_WIDTH.dp,
-                                color = cardBackground,
-                                shape = RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SHAPE)
-                            )
-                            .background(Color.Transparent)
-                    )
-                } else {
-                    Box(
-                        Modifier
-                            .size(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SIZE.dp)
-                            .border(
-                                width = MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_WIDTH.dp,
-                                color = ButtonAndInfoBlue,
-                                shape = RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SHAPE)
-                            )
-                            .background(Color.Transparent), contentAlignment = Alignment.Center
-                    ) {
-                        Box(
-                            Modifier
-                                .size(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_BOX_SIZE.dp)
-                                .clip(
-                                    RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_BOX_SHAPE)
-                                )
-                                .background(color = ButtonAndInfoBlue)
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            if (onChoiseOption.value != option) {
+                Box(
+                    Modifier
+                        .size(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SIZE.dp)
+                        .border(
+                            width = MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_WIDTH.dp,
+                            color = cardBackground,
+                            shape = RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SHAPE)
                         )
-                    }
-                }
-
-                textFont.WhiteText(
-                    option,
-                    modifier = Modifier.padding(start = MAIN_ACTIVITY_MAIN_OPTION_CARD_TEXT_PADDING.dp)
+                        .background(Color.Transparent)
                 )
+            } else {
+                Box(
+                    Modifier
+                        .size(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SIZE.dp)
+                        .border(
+                            width = MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_WIDTH.dp,
+                            color = ButtonAndInfoBlue,
+                            shape = RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_SHAPE)
+                        )
+                        .background(Color.Transparent), contentAlignment = Alignment.Center
+                ) {
+                    Box(
+                        Modifier
+                            .size(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_BOX_SIZE.dp)
+                            .clip(
+                                RoundedCornerShape(MAIN_ACTIVITY_MAIN_OPTION_CARD_BOX_BOX_SHAPE)
+                            )
+                            .background(color = ButtonAndInfoBlue)
+                    )
+                }
             }
 
+            textFont.WhiteText(
+                option,
+                modifier = Modifier.padding(start = MAIN_ACTIVITY_MAIN_OPTION_CARD_TEXT_PADDING.dp)
+            )
         }
+
     }
 }

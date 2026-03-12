@@ -18,13 +18,13 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.graphics.toColorInt
 import com.example.core_domain.model.DomainUserModel
-import com.example.wizkids.domain.model.DomainUserModel
 import java.io.File
 import java.io.FileOutputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+
 
 class PDFDownloader(private val context: Context) {
 
@@ -62,7 +62,7 @@ class PDFDownloader(private val context: Context) {
         )
 
         val backgroundPaint = Paint().apply {
-            Paint.setShader = gradient
+            shader = gradient
         }
         canvas.drawRect(0f, 0f, 595f, 842f, backgroundPaint)
         val stripePaint = Paint().apply {
@@ -76,7 +76,7 @@ class PDFDownloader(private val context: Context) {
         val titlePaint = Paint().apply {
             color = "#2C3E50".toColorInt() // Темно-синий
             textSize = 32f
-            Paint.setTypeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
         }
@@ -104,7 +104,7 @@ class PDFDownloader(private val context: Context) {
         val sectionTitlePaint = Paint().apply {
             color = "#2C3E50".toColorInt()
             textSize = 16f
-            Paint.setTypeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             isAntiAlias = true
         }
         canvas.drawText("ЛИЧНАЯ ИНФОРМАЦИЯ", infoStartX, infoY, sectionTitlePaint)
@@ -114,14 +114,14 @@ class PDFDownloader(private val context: Context) {
         val labelPaint = Paint().apply {
             color = "#34495E".toColorInt() // Темно-серый
             textSize = 12f
-            Paint.setTypeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             isAntiAlias = true
         }
 
         val valuePaint = Paint().apply {
             color = "#2C3E50".toColorInt() // Темно-синий
             textSize = 12f
-            Paint.setTypeface = Typeface.DEFAULT
+            typeface = Typeface.DEFAULT
             isAntiAlias = true
         }
         canvas.drawText("ФИО:", infoStartX, infoY, labelPaint)
@@ -160,7 +160,7 @@ class PDFDownloader(private val context: Context) {
         canvas.drawText("О СЕБЕ", 50f, aboutStartY, Paint().apply {
             color = Color.parseColor("#2C3E50")
             textSize = 18f
-            Paint.setTypeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             isAntiAlias = true
         })
         val aboutBgPaint = Paint().apply {
@@ -173,7 +173,7 @@ class PDFDownloader(private val context: Context) {
         val aboutPaint = Paint().apply {
             color = Color.parseColor("#2C3E50")
             textSize = 12f
-            Paint.setTypeface = Typeface.DEFAULT
+            typeface = Typeface.DEFAULT
             isAntiAlias = true
         }
         val aboutText = user.about
@@ -194,7 +194,7 @@ class PDFDownloader(private val context: Context) {
             canvas.drawText("НАВЫКИ И КОМПЕТЕНЦИИ", 50f, skillsStartY, Paint().apply {
                 color = "#2C3E50".toColorInt()
                 textSize = 18f
-                Paint.setTypeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+                typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
                 isAntiAlias = true
             })
             val skillsY = skillsStartY + 30f
@@ -211,7 +211,7 @@ class PDFDownloader(private val context: Context) {
         val footerPaint = Paint().apply {
             color = "#7F8C8D".toColorInt() // Серый
             textSize = 10f
-            Paint.setTypeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.ITALIC)
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
         }
@@ -239,7 +239,7 @@ class PDFDownloader(private val context: Context) {
         val textPaint = Paint().apply {
             color = Color.parseColor("#7F8C8D")
             textSize = 10f
-            Paint.setTypeface = Typeface.DEFAULT
+            typeface = Typeface.DEFAULT
             isAntiAlias = true
             textAlign = Paint.Align.CENTER
         }
@@ -251,7 +251,7 @@ class PDFDownloader(private val context: Context) {
             val cameraPaint = Paint().apply {
                 color = Color.parseColor("#4A6FA5")
                 textSize = 18f
-                Paint.setTypeface = Typeface.DEFAULT_BOLD
+                typeface = Typeface.DEFAULT_BOLD
                 textAlign = Paint.Align.CENTER
             }
             canvas.drawText(
@@ -264,7 +264,7 @@ class PDFDownloader(private val context: Context) {
                 Paint().apply {
                     color = "#3498DB".toColorInt()
                     textSize = 8f
-                    Paint.setTypeface = Typeface.DEFAULT
+                    typeface = Typeface.DEFAULT
                 })
         }
     }
@@ -275,7 +275,7 @@ class PDFDownloader(private val context: Context) {
         val skillPaint = Paint().apply {
             color = Color.WHITE
             textSize = 10f
-            Paint.setTypeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
+            typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
             isAntiAlias = true
         }
         val skillBgPaint = Paint().apply {

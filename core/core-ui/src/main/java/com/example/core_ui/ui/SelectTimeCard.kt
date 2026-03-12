@@ -37,83 +37,82 @@ import com.example.core_ui.constant.SharedUiViewConstant.TIME_HELPER_DIALOG_SPAC
 import com.example.core_ui.constant.SharedUiViewConstant.TIME_HELPER_SPACER_HEIGHT
 import java.time.LocalTime
 
+
 @OptIn(ExperimentalMaterial3Api::class)
-class SelectTimeCard {
-    @Composable
-    fun TimeHelper(
-        selectedTime: MutableState<LocalTime?>,
-        textFont: TextFont,
-    ) {
-        var showTimePicker by remember { mutableStateOf(false) }
-        val timePickerState = rememberTimePickerState(
-            initialHour = selectedTime.value?.hour ?: TIME_HELPER_DEFAULT_VALUE_HOUR,
-            initialMinute = selectedTime.value?.minute ?: TIME_HELPER_DEFAULT_VALUE_MINUTE,
-            is24Hour = true
+@Composable
+fun TimeHelper(
+    selectedTime: MutableState<LocalTime?>,
+    textFont: TextFont,
+) {
+    var showTimePicker by remember { mutableStateOf(false) }
+    val timePickerState = rememberTimePickerState(
+        initialHour = selectedTime.value?.hour ?: TIME_HELPER_DEFAULT_VALUE_HOUR,
+        initialMinute = selectedTime.value?.minute ?: TIME_HELPER_DEFAULT_VALUE_MINUTE,
+        is24Hour = true
+    )
+
+    Column() {
+        textFont.WhiteText(
+            text = "${stringResource(R.string.selected_time)} ${selectedTime.value.toString()}"
         )
 
-        Column() {
-            textFont.WhiteText(
-                text = "${stringResource(R.string.selected_time)} ${selectedTime.value.toString()}"
-            )
+        Spacer(modifier = Modifier.height(TIME_HELPER_SPACER_HEIGHT.dp))
+        ButtonVisibleRow(
+            mapOf(
+                stringResource(R.string.choice_time_button) to {
+                    showTimePicker = true
+                },
+            ),
+            textFont
+        )
+    }
 
-            Spacer(modifier = Modifier.height(TIME_HELPER_SPACER_HEIGHT.dp))
-            ButtonView().ButtonVisibleRow(
-                mapOf(
-                    stringResource(R.string.choice_time_button) to {
-                        showTimePicker = true
-                    },
-                ),
-                textFont
-            )
-        }
-
-        if (showTimePicker) {
-            Dialog(
-                onDismissRequest = { showTimePicker = false },
-                properties = DialogProperties(usePlatformDefaultWidth = false)
+    if (showTimePicker) {
+        Dialog(
+            onDismissRequest = { showTimePicker = false },
+            properties = DialogProperties(usePlatformDefaultWidth = false)
+        ) {
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(TIME_HELPER_DIALOG_PADDING.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                )
             ) {
-                Card(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(TIME_HELPER_DIALOG_PADDING.dp),
-                    colors = CardDefaults.cardColors(
-                        containerColor = MaterialTheme.colorScheme.surface
-                    )
+                Column(
+                    modifier = Modifier.padding(TIME_HELPER_DIALOG_COLUMN_PADDING.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Column(
-                        modifier = Modifier.padding(TIME_HELPER_DIALOG_COLUMN_PADDING.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
+                    textFont.WhiteText(
+                        text = stringResource(R.string.choice_time_text),
+                    )
+                    Spacer(modifier = Modifier.height(TIME_HELPER_DIALOG_SPACER_HEIGHT.dp))
+                    TimePicker(
+                        state = timePickerState,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
+                    Spacer(modifier = Modifier.height(TIME_HELPER_DIALOG_SPACER_HEIGHT.dp))
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
                     ) {
-                        textFont.WhiteText(
-                            text = stringResource(R.string.choice_time_text),
-                        )
-                        Spacer(modifier = Modifier.height(TIME_HELPER_DIALOG_SPACER_HEIGHT.dp))
-                        TimePicker(
-                            state = timePickerState,
-                            modifier = Modifier.fillMaxWidth(),
-                        )
-                        Spacer(modifier = Modifier.height(TIME_HELPER_DIALOG_SPACER_HEIGHT.dp))
-                        Row(
-                            modifier = Modifier.fillMaxWidth(),
-                            horizontalArrangement = Arrangement.End
+                        TextButton(
+                            onClick = { showTimePicker = false }
                         ) {
-                            TextButton(
-                                onClick = { showTimePicker = false }
-                            ) {
-                                textFont.WhiteText(stringResource(R.string.cancel_button))
+                            textFont.WhiteText(stringResource(R.string.cancel_button))
+                        }
+                        Spacer(modifier = Modifier.width(TIME_HELPER_DIALOG_SPACER_HEIGHT.dp))
+                        Button(
+                            onClick = {
+                                selectedTime.value = LocalTime.of(
+                                    timePickerState.hour,
+                                    timePickerState.minute
+                                )
+                                showTimePicker = false
                             }
-                            Spacer(modifier = Modifier.width(TIME_HELPER_DIALOG_SPACER_HEIGHT.dp))
-                            Button(
-                                onClick = {
-                                    selectedTime.value = LocalTime.of(
-                                        timePickerState.hour,
-                                        timePickerState.minute
-                                    )
-                                    showTimePicker = false
-                                }
-                            ) {
-                                textFont.WhiteText(stringResource(R.string.apply_button))
-                            }
+                        ) {
+                            textFont.WhiteText(stringResource(R.string.apply_button))
                         }
                     }
                 }

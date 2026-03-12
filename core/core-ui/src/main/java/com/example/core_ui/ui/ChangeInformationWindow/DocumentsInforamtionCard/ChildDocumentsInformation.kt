@@ -33,61 +33,60 @@ import com.example.core_ui.constant.SharedUiViewConstant.DOCUMENT_INFORMATION_CA
 import com.example.core_ui.ui.TextFont
 import com.example.wizkids.ui.theme.lightGray
 
-class ChildDocumentsInformation {
-    @Composable
-    fun DocumentsCard(
-        textFont: TextFont,
-        docs: DomainDocumentsModel,
-        onClick: (DomainDocumentsModel) -> Unit
+
+@Composable
+fun DocumentsCard(
+    textFont: TextFont,
+    docs: DomainDocumentsModel,
+    onClick: (DomainDocumentsModel) -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .width(DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_WIDTH.dp)
+            .padding(DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_PADDING.dp)
+            .background(
+                color = lightGray,
+                shape = RoundedCornerShape(
+                    DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_BACK_GROUND_SHAPE.dp
+                )
+            )
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple()
+            ) {
+                onClick.invoke(docs)
+            },
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
+        Box(
             modifier = Modifier
-                .width(DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_WIDTH.dp)
-                .padding(DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_PADDING.dp)
-                .background(
-                    color = lightGray,
-                    shape = RoundedCornerShape(
-                        DOCUMENT_INFORMATION_CARD_MAIN_CONTAINER_BACK_GROUND_SHAPE.dp
+                .fillMaxWidth()
+                .height(DOCUMENT_INFORMATION_CARD_BOX_IMAGE_HEIGHT.dp)
+                .clip(
+                    RoundedCornerShape(
+                        topStart = DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_START.dp,
+                        topEnd = DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_END.dp
                     )
                 )
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple()
-                ) {
-                    onClick.invoke(docs)
-                },
-            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(DOCUMENT_INFORMATION_CARD_BOX_IMAGE_HEIGHT.dp)
-                    .clip(
-                        RoundedCornerShape(
-                            topStart = DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_START.dp,
-                            topEnd = DOCUMENT_INFORMATION_CARD_BOX_IMAGE_CLIP_TOP_END.dp
-                        )
-                    )
-            ) {
-                AsyncImage(
-                    model = docs.imagePaths[0],
-                    contentDescription = "",
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                )
-            }
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(DOCUMENT_INFORMATION_CARD_BOX_TEXT_PADDING.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                textFont.WhiteText(
-                    text = docs.name,
-                    modifier = Modifier.wrapContentWidth(),
-                    textAlign = TextAlign.Center
-                )
-            }
+            AsyncImage(
+                model = docs.imagePaths[0],
+                contentDescription = "",
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize()
+            )
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(DOCUMENT_INFORMATION_CARD_BOX_TEXT_PADDING.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            textFont.WhiteText(
+                text = docs.name,
+                modifier = Modifier.wrapContentWidth(),
+                textAlign = TextAlign.Center
+            )
         }
     }
 }

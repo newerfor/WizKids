@@ -55,195 +55,194 @@ import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_NAME_AND_AGE
 import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_NAME_SIZE
 import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL
 import com.example.core_ui.constant.SharedUiViewConstant.CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL
-import com.example.core_ui.ui.ChangeInformationWindow.FinanceInfoWindow.ChildFinanceWindow
+import com.example.core_ui.ui.ChangeInformationWindow.FinanceInfoWindow.WindowAddFinanceInformation
+import com.example.core_util.getAgeFromDate
 import com.example.core_viewmodel.child.ChildViewModel
 import com.example.wizkids.ui.theme.blackColor
 import com.example.wizkids.ui.theme.blueColor
 import com.example.wizkids.ui.theme.cardBackground
 import com.example.wizkids.ui.theme.grayColor
 import com.example.wizkids.ui.theme.lightGray
-import com.example.core_util.AgeHelper
 
-class ChildView {
-    @Composable
-    fun ChildScreen(
-        textFont: TextFont,
-        allChild: List<DomainChildModel> = listOf(),
-        isMainActivity: Boolean,
-        context: Context,
-        childViewModel: ChildViewModel,
-        onClick: (DomainChildModel) -> Unit,
-    ) {
-        for (child in allChild) {
-            ChildCard(child, textFont, context, isMainActivity, childViewModel, onClick)
-        }
+@Composable
+fun ChildScreen(
+    textFont: TextFont,
+    allChild: List<DomainChildModel> = listOf(),
+    isMainActivity: Boolean,
+    context: Context,
+    childViewModel: ChildViewModel,
+    onClick: (Int?) -> Unit,
+) {
+    for (child in allChild) {
+        ChildCard(child, textFont, context, isMainActivity, childViewModel, onClick)
     }
+}
 
-    @Composable
-    fun ChildCard(
-        child: DomainChildModel,
-        textFont: TextFont,
-        context: Context,
-        isMainActivity: Boolean,
-        childViewModel: ChildViewModel,
-        onClick: (DomainChildModel) -> Unit
+@Composable
+fun ChildCard(
+    child: DomainChildModel,
+    textFont: TextFont,
+    context: Context,
+    isMainActivity: Boolean,
+    childViewModel: ChildViewModel,
+    onClick: (Int?) -> Unit
+) {
+    var balance = remember { mutableStateOf(child.currentBalance) }
+    val parts = child.name.trim().split(" ")
+    val initials = if (parts.size >= CHILD_CARD_INITIAL_FULL_NAME_INDEX) {
+        "${parts[CHILD_CARD_INITIAL_PARTS_INDEX_FIRST_NAME].first()}${parts[CHILD_CARD_INITIAL_PARTS_INDEX_LAST_NAME].first()}"
+    } else {
+        child.name.take(CHILD_CARD_INITIAL_PARTS_INDEX_TAKE_INDEX)
+    }
+    var openWindowChangeBalance = remember { mutableStateOf(false) }
+    val childVisitComing = remember { mutableStateListOf<DomainVisitModel>() }
+    var payStatus by remember { mutableStateOf(CHILD_CARD_DEFAULT_VALUE_PAY_STATUS) }
+    var payStatusColor by remember { mutableStateOf(grayColor) }
+    LaunchedEffect(balance.value) {
+        payStatus = calculatePayStatus(balance.value, child.visitPrice)
+        payStatusColor = colorPayStatus(payStatus)
+    }
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = CHILD_CARD_MAIN_CONTAINER_VERTICAL_PADDING.dp)
+            .clip(RoundedCornerShape(CHILD_CARD_MAIN_CONTAINER_VERTICAL_CLIP.dp))
+            .background(color = cardBackground)
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple()
+            ) {
+                onClick.invoke(child.id)
+            }
+            .border(CHILD_CARD_BORDER_WIDTH.dp, blackColor)
     ) {
-        var balance = remember { mutableStateOf(child.currentBalance) }
-        val parts = child.name.trim().split(" ")
-        val initials = if (parts.size >= CHILD_CARD_INITIAL_FULL_NAME_INDEX) {
-            "${parts[CHILD_CARD_INITIAL_PARTS_INDEX_FIRST_NAME].first()}${parts[CHILD_CARD_INITIAL_PARTS_INDEX_LAST_NAME].first()}"
-        } else {
-            child.name.take(CHILD_CARD_INITIAL_PARTS_INDEX_TAKE_INDEX)
-        }
-        var openWindowChangeBalance = remember { mutableStateOf(false) }
-        val childVisitComing = remember { mutableStateListOf<DomainVisitModel>() }
-        var payStatus by remember { mutableStateOf(CHILD_CARD_DEFAULT_VALUE_PAY_STATUS) }
-        var payStatusColor by remember { mutableStateOf(grayColor) }
-        LaunchedEffect(balance.value) {
-            payStatus = ChildPayStatusHelper().calculatePayStatus(balance.value, child.visitPrice)
-            payStatusColor = ChildPayStatusHelper().colorPayStatus(payStatus)
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = CHILD_CARD_MAIN_CONTAINER_VERTICAL_PADDING.dp)
-                .clip(RoundedCornerShape(CHILD_CARD_MAIN_CONTAINER_VERTICAL_CLIP.dp))
-                .background(color = cardBackground)
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple()
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.padding(start = CHILD_CARD_IMAGE_COLUMN_PADDING.dp)) {
+                Box(
+                    modifier = Modifier
+                        .size(CHILD_CARD_IMAGE_BOX_SIZE.dp)
+                        .clip(RoundedCornerShape(CHILD_CARD_IMAGE_BOX_CLIP.dp))
+                        .background(lightGray),
+                    contentAlignment = Alignment.Center
                 ) {
-                    onClick.invoke(child)
+                    textFont.ItalyText(initials, fontSize = CHILD_CARD_IMAGE_BOX_INITIAL_SIZE)
+                    AsyncImage(
+                        model = child.imagePath,
+                        contentDescription = "",
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = Crop
+                    )
                 }
-                .border(CHILD_CARD_BORDER_WIDTH.dp, blackColor)
-        ) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Column(Modifier.padding(start = CHILD_CARD_IMAGE_COLUMN_PADDING.dp)) {
-                    Box(
-                        modifier = Modifier.size(CHILD_CARD_IMAGE_BOX_SIZE.dp)
-                            .clip(RoundedCornerShape(CHILD_CARD_IMAGE_BOX_CLIP.dp))
-                            .background(lightGray),
-                        contentAlignment = Alignment.Center
+            }
+            Column(
+                Modifier
+                    .weight(CHILD_CARD_NAME_AND_AGE_COLUMN_WEIGHT)
+                    .padding(CHILD_CARD_NAME_AND_AGE_COLUMN_PADDING.dp)
+            ) {
+                textFont.ItalyText(child.name, fontSize = CHILD_CARD_NAME_SIZE)
+                textFont.GrayText("${getAgeFromDate(child.dateOfBirth)} • №${child.id}")
+            }
+            if (isMainActivity) {
+
+                Column(
+                    Modifier
+                        .weight(CHILD_CARD_COLUMN_PAY_STATUS_WEIGHT)
+                        .padding(CHILD_CARD_COLUMN_PAY_STATUS_PADDING.dp)
+                        .fillMaxWidth(),
+                    Arrangement.Center,
+                    Alignment.End
+                ) {
+                    Column(
+                        Modifier
+                            .fillMaxWidth(CHILD_CARD_COLUMN_COLUMN_WIDTH)
+                            .clip(RoundedCornerShape(CHILD_CARD_COLUMN_COLUMN_CLIP.dp))
+                            .padding(CHILD_CARD_COLUMN_COLUMN_PADDING.dp)
+                            .background(color = payStatusColor),
+                        Arrangement.Center,
+                        Alignment.CenterHorizontally
                     ) {
-                        textFont.ItalyText(initials, fontSize = CHILD_CARD_IMAGE_BOX_INITIAL_SIZE)
-                        AsyncImage(
-                            model = child.imagePath,
-                            contentDescription = "",
-                            modifier = Modifier.fillMaxSize(),
-                            contentScale = Crop
+                        textFont.WhiteText(
+                            payStatus,
+                            modifier = Modifier.padding(
+                                horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
+                                vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
+                            )
+                        )
+                    }
+                    Column(
+                        Modifier
+                            .fillMaxWidth(CHILD_CARD_COLUMN_COLUMN_WIDTH)
+                            .clip(RoundedCornerShape(CHILD_CARD_COLUMN_COLUMN_CLIP.dp))
+                            .padding(CHILD_CARD_COLUMN_COLUMN_PADDING.dp)
+                            .background(
+                                blueColor
+                            ), Arrangement.Center, Alignment.CenterHorizontally
+                    ) {
+                        Column {
+                            textFont.WhiteText(
+                                "${stringResource(R.string.balance)}:${balance.value}",
+                                modifier = Modifier.padding(
+                                    horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
+                                    vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
+                                )
+                            )
+                            textFont.WhiteText(
+                                "${stringResource(R.string.price_label)}:${child.visitPrice}",
+                                modifier = Modifier.padding(
+                                    horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
+                                    vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
+                                )
+                            )
+                        }
+                    }
+                    Column(
+                        Modifier
+                            .fillMaxWidth(CHILD_CARD_COLUMN_COLUMN_WIDTH)
+                            .clip(RoundedCornerShape(CHILD_CARD_COLUMN_COLUMN_CLIP.dp))
+                            .padding(CHILD_CARD_COLUMN_COLUMN_PADDING.dp)
+                            .background(
+                                lightGray
+                            )
+                            .clickable(
+                                interactionSource = remember { MutableInteractionSource() },
+                                indication = rememberRipple()
+                            ) {
+                                openWindowChangeBalance.value = true
+                            }, Arrangement.Center, Alignment.CenterHorizontally
+                    ) {
+                        textFont.WhiteText(
+                            stringResource(R.string.change_balance),
+                            modifier = Modifier.padding(
+                                horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
+                                vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
+                            )
                         )
                     }
                 }
-                Column(
-                    Modifier
-                        .weight(CHILD_CARD_NAME_AND_AGE_COLUMN_WEIGHT)
-                        .padding(CHILD_CARD_NAME_AND_AGE_COLUMN_PADDING.dp)
-                ) {
-                    textFont.ItalyText(child.name, fontSize = CHILD_CARD_NAME_SIZE)
-                    textFont.GrayText("${AgeHelper().getAgeFromDate(child.dateOfBirth)} • №${child.id}")
-                }
-                if (isMainActivity) {
-
-                    Column(
-                        Modifier
-                            .weight(CHILD_CARD_COLUMN_PAY_STATUS_WEIGHT)
-                            .padding(CHILD_CARD_COLUMN_PAY_STATUS_PADDING.dp)
-                            .fillMaxWidth(),
-                        Arrangement.Center,
-                        Alignment.End
-                    ) {
-                        Column(
-                            Modifier
-                                .fillMaxWidth(CHILD_CARD_COLUMN_COLUMN_WIDTH)
-                                .clip(RoundedCornerShape(CHILD_CARD_COLUMN_COLUMN_CLIP.dp))
-                                .padding(CHILD_CARD_COLUMN_COLUMN_PADDING.dp)
-                                .background(color = payStatusColor),
-                            Arrangement.Center,
-                            Alignment.CenterHorizontally
-                        ) {
-                            textFont.WhiteText(
-                                payStatus,
-                                modifier = Modifier.padding(
-                                    horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
-                                    vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
-                                )
-                            )
-                        }
-                        Column(
-                            Modifier
-                                .fillMaxWidth(CHILD_CARD_COLUMN_COLUMN_WIDTH)
-                                .clip(RoundedCornerShape(CHILD_CARD_COLUMN_COLUMN_CLIP.dp))
-                                .padding(CHILD_CARD_COLUMN_COLUMN_PADDING.dp)
-                                .background(
-                                    blueColor
-                                ), Arrangement.Center, Alignment.CenterHorizontally
-                        ) {
-                            Column {
-                                textFont.WhiteText(
-                                    "${stringResource(R.string.balance)}:${balance.value}",
-                                    modifier = Modifier.padding(
-                                        horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
-                                        vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
-                                    )
-                                )
-                                textFont.WhiteText(
-                                    "${stringResource(R.string.price_label)}:${child.visitPrice}",
-                                    modifier = Modifier.padding(
-                                        horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
-                                        vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
-                                    )
-                                )
-                            }
-                        }
-                        Column(
-                            Modifier
-                                .fillMaxWidth(CHILD_CARD_COLUMN_COLUMN_WIDTH)
-                                .clip(RoundedCornerShape(CHILD_CARD_COLUMN_COLUMN_CLIP.dp))
-                                .padding(CHILD_CARD_COLUMN_COLUMN_PADDING.dp)
-                                .background(
-                                    lightGray
-                                )
-                                .clickable(
-                                    interactionSource = remember { MutableInteractionSource() },
-                                    indication = rememberRipple()
-                                ) {
-                                    openWindowChangeBalance.value = true
-                                }, Arrangement.Center, Alignment.CenterHorizontally
-                        ) {
-                            textFont.WhiteText(
-                                stringResource(R.string.change_balance),
-                                modifier = Modifier.padding(
-                                    horizontal = CHILD_CARD_PAY_STATUS_TEXT_PADDING_HORIZONTAL.dp,
-                                    vertical = CHILD_CARD_PAY_STATUS_TEXT_PADDING_VERTICAL.dp
-                                )
-                            )
-                        }
-                    }
-                    if (openWindowChangeBalance.value) {
-                        ChildFinanceWindow().WindowAddFinanceInformation(
-                            openWindowChangeBalance,
-                            textFont,
-                            stringResource(R.string.balance),
-                            balance.value
-                        ) { newBalance ->
-                            Log.d("sajergnsdkejgb", newBalance.toString())
-                            balance.value = newBalance
-                            childViewModel.saveChild(
-                                DomainChildModel(
-                                    id = child.id,
-                                    imagePath = child.imagePath,
-                                    name = child.name,
-                                    additionalInfo = child.additionalInfo,
-                                    dateOfBirth = child.dateOfBirth,
-                                    documents = child.documents,
-                                    learningStages = child.learningStages,
-                                    visitPrice = child.visitPrice,
-                                    currentBalance = balance.value,
-                                    childDayOfWeekVisit = child.childDayOfWeekVisit,
-                                ), childVisitComing
-                            )
-                            openWindowChangeBalance.value = false
-                        }
+                if (openWindowChangeBalance.value) {
+                    WindowAddFinanceInformation(
+                        openWindowChangeBalance,
+                        textFont,
+                        stringResource(R.string.balance),
+                        balance.value
+                    ) { newBalance ->
+                        Log.d("sajergnsdkejgb", newBalance.toString())
+                        balance.value = newBalance
+                        childViewModel.saveChild(
+                            DomainChildModel(
+                                id = child.id,
+                                imagePath = child.imagePath,
+                                name = child.name,
+                                additionalInfo = child.additionalInfo,
+                                dateOfBirth = child.dateOfBirth,
+                                documents = child.documents,
+                                learningStages = child.learningStages,
+                                visitPrice = child.visitPrice,
+                                currentBalance = balance.value,
+                                childDayOfWeekVisit = child.childDayOfWeekVisit,
+                            ), childVisitComing
+                        )
+                        openWindowChangeBalance.value = false
                     }
                 }
             }

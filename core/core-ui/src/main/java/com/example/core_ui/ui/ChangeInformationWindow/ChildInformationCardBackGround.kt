@@ -14,19 +14,17 @@ import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_G
 import com.example.core_ui.constant.SharedUiViewConstant.INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_PADDING
 import com.example.wizkids.ui.theme.cardBackground
 
-class ChildInformationCardBackGround {
-    @Composable
-    fun InformationCardBackGround(function: @Composable () -> Unit) {
-        Column(
-            Modifier
-                .fillMaxSize()
-                .padding(INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_PADDING.dp)
-                .clip(RoundedCornerShape(INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_CLIP.dp))
-                .background(cardBackground)
-        ) {
-            Column(Modifier.padding(INFORMATION_CARD_BACK_GROUND_COLUMN.dp)) {
-                function.invoke()
-            }
+@Composable
+fun InformationCardBackGround(function: @Composable () -> Unit) {
+    Column(
+        Modifier
+            .fillMaxSize()
+            .padding(INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_PADDING.dp)
+            .clip(RoundedCornerShape(INFORMATION_CARD_BACK_GROUND_MAIN_CONTAINER_CLIP.dp))
+            .background(cardBackground)
+    ) {
+        Column(Modifier.padding(INFORMATION_CARD_BACK_GROUND_COLUMN.dp)) {
+            function.invoke()
         }
     }
 }

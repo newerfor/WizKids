@@ -3,37 +3,45 @@ package com.example.core_data.local.mapper
 import com.example.core_data.local.entity.ChildEntity
 import com.example.core_data.local.entity.UserEntity
 import com.example.core_data.local.entity.VisitEntity
-import com.example.core_data.local.model.ChildDayOfWeekVisitModel
-import com.example.core_data.local.model.ChildModel
-import com.example.core_data.local.model.UserModel
-import com.example.core_data.local.model.VisitModel
+import com.example.core_domain.model.DomainChildDayOfWeekVisit
+import com.example.core_domain.model.DomainChildModel
+import com.example.core_domain.model.DomainDocumentsModel
+import com.example.core_domain.model.DomainUserModel
+import com.example.core_domain.model.DomainVisitModel
 
 class GetMapper {
-    fun mapChildToModel(child: ChildEntity?): ChildModel? {
+    fun mapChildToModel(child: ChildEntity?): DomainChildModel? {
         return child?.let {
-            ChildModel(
+            DomainChildModel(
                 id = child.id,
                 imagePath = child.imagePath,
                 name = child.name,
                 additionalInfo = child.additionalInfo,
                 dateOfBirth = child.dateOfBirth,
-                documents = child.documents,
+                documents = child.documents.map {
+                    DomainDocumentsModel(
+                        id = it.id,
+                        name = it.name,
+                        description = it.description,
+                        imagePaths = it.imagePaths
+                    )
+                },
                 learningStages = child.learningStages,
                 visitPrice = child.visitPrice,
                 currentBalance = child.currentBalance,
-                childDayOfWeekVisit = ChildDayOfWeekVisitModel(
+                childDayOfWeekVisit = DomainChildDayOfWeekVisit(
                     dayOfWeek = child.childDayOfWeekVisit.dayOfWeek,
                     firstDate = child.childDayOfWeekVisit.firstDate,
                     secondDate = child.childDayOfWeekVisit.secondDate,
-                    time = child.childDayOfWeekVisit.time,
-                )
+                    time = child.childDayOfWeekVisit.time
+                ),
             )
         }
     }
 
-    fun mapVisitToModel(visit: VisitEntity?): VisitModel? {
+    fun mapVisitToModel(visit: VisitEntity?): DomainVisitModel? {
         return visit?.let {
-            VisitModel(
+            DomainVisitModel(
                 id = visit.id,
                 date = visit.date,
                 time = visit.time,
@@ -47,9 +55,9 @@ class GetMapper {
         }
     }
 
-    fun mapUserToModel(user: UserEntity?): UserModel? {
+    fun mapUserToModel(user: UserEntity?): DomainUserModel? {
         return user?.let {
-            UserModel(
+            DomainUserModel(
                 imagePath = user.imagePath,
                 name = user.name,
                 dateOfBirth = user.dateOfBirth,
@@ -59,7 +67,14 @@ class GetMapper {
                 email = user.email,
                 educationLevel = user.educationLevel,
                 specialization = user.specialization,
-                documents = user.documents
+                documents = user.documents.map {
+                    DomainDocumentsModel(
+                        id = it.id,
+                        name = it.name,
+                        description = it.description,
+                        imagePaths = it.imagePaths
+                    )
+                }
             )
         }
     }

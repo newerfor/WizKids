@@ -24,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.core_ui.ui.TextFont
-import com.example.core_util.IntentHelper
 import com.example.core_viewmodel.child.ChildViewModel
 import com.example.core_viewmodel.child.ChildrenUiState
 import com.example.feature_main.R
@@ -33,49 +32,48 @@ import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_BUT
 import com.example.feature_main.constant.MainViewConstant.MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_SIZE
 import com.example.wizkids.ui.theme.ButtonAndInfoBlue
 import com.example.wizkids.ui.theme.whiteColor
-import com.example.wizkids.util.ActivityKeys.KEY_ACTIVITY_CHILD_ADD_INFO
-import com.example.wizkids.util.IntentHelper
 
-class AllChildSpace {
-    @Composable
-    fun AllChild(
-        textFont: TextFont,
-        childUiState: ChildrenUiState,
-        context: Context,
-        childViewModel: ChildViewModel
-    ) {
-        Column(Modifier.padding(horizontal = MAIN_ACTIVITY_MAIN_ALL_CHILD_COLUMN_HORIZONTAL_PADDING.dp)) {
-            MainControlState().StateController(childUiState, textFont, context, childViewModel)
-            ButtonAddNewChild(textFont, context)
-        }
+
+@Composable
+fun AllChild(
+    textFont: TextFont,
+    childUiState: ChildrenUiState,
+    context: Context,
+    childViewModel: ChildViewModel,
+    onClickAddChild: (Int?) -> Unit,
+    onClickGoToChildInfo: (Int?) -> Unit
+) {
+    Column(Modifier.padding(horizontal = MAIN_ACTIVITY_MAIN_ALL_CHILD_COLUMN_HORIZONTAL_PADDING.dp)) {
+        StateController(childUiState, textFont, context, childViewModel, onClickGoToChildInfo)
+        ButtonAddNewChild(textFont, context, onClickAddChild)
     }
-
-    @Composable
-    fun ButtonAddNewChild(textFont: TextFont, context: Context) {
-        Column(
-            Modifier
-                .fillMaxWidth()
-                .clickable(
-                    interactionSource = remember { MutableInteractionSource() },
-                    indication = rememberRipple()
-                ) {
-                    IntentHelper().intentStart(KEY_ACTIVITY_CHILD_ADD_INFO, context)
-                }, Arrangement.Center, Alignment.CenterHorizontally
-        ) {
-            Box(
-                Modifier
-                    .size(MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_SIZE.dp)
-                    .clip(RoundedCornerShape(MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_CLIP))
-                    .background(color = ButtonAndInfoBlue), contentAlignment = Alignment.Center
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = stringResource(R.string.add_button),
-                    tint = whiteColor
-                )
-            }
-            textFont.BlueText(stringResource(R.string.add_button), textAlign = TextAlign.Center)
-        }
-    }
-
 }
+
+@Composable
+fun ButtonAddNewChild(textFont: TextFont, context: Context, onClickAddChild: (Int?) -> Unit) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = rememberRipple()
+            ) {
+                onClickAddChild.invoke(null)
+            }, Arrangement.Center, Alignment.CenterHorizontally
+    ) {
+        Box(
+            Modifier
+                .size(MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_SIZE.dp)
+                .clip(RoundedCornerShape(MAIN_ACTIVITY_MAIN_BUTTON_ADD_NEW_CHILD_BOX_CLIP))
+                .background(color = ButtonAndInfoBlue), contentAlignment = Alignment.Center
+        ) {
+            Icon(
+                imageVector = Icons.Default.Add,
+                contentDescription = stringResource(R.string.add_button),
+                tint = whiteColor
+            )
+        }
+        textFont.BlueText(stringResource(R.string.add_button), textAlign = TextAlign.Center)
+    }
+}
+
