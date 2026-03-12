@@ -114,7 +114,7 @@ fun ChildCard(
             ) {
                 onClick.invoke(child.id)
             }
-            .border(CHILD_CARD_BORDER_WIDTH.dp, blackColor)
+            .border(CHILD_CARD_BORDER_WIDTH.dp, blackColor,RoundedCornerShape(CHILD_CARD_MAIN_CONTAINER_VERTICAL_CLIP.dp))
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Column(Modifier.padding(start = CHILD_CARD_IMAGE_COLUMN_PADDING.dp)) {

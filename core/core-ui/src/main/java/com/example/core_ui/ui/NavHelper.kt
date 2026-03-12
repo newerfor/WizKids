@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -66,9 +67,11 @@ fun Header(
         Modifier
             .fillMaxWidth()
             .background(color = darkHeader)
+            .statusBarsPadding()
     ) {
         Row(
-            Modifier.weight(HEADER_R0W_WEIGHT)
+            Modifier
+                .weight(HEADER_R0W_WEIGHT)
         ) {
             Column(
                 Modifier
@@ -131,11 +134,12 @@ fun Footer(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(FOOTER_MAIN_CONTAINER_HEIGHT.dp)
             .background(whiteColor)
-            .border(FOOTER_MAIN_CONTAINER_BORDER_WIDTH.dp, grayColor),
+            .border(FOOTER_MAIN_CONTAINER_BORDER_WIDTH.dp, grayColor)
+            .navigationBarsPadding(),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
+
     ) {
         FooterItem(
             selectedIndex = selectedIndex,
@@ -176,6 +180,7 @@ fun Footer(
                 }
             }
         )
+
     }
 }
 
@@ -200,11 +205,12 @@ fun FooterItem(
                     FOOTER_ITEM_COLUMN_PADDING_START_IF.dp
                 } else {
                     FOOTER_ITEM_COLUMN_PADDING_START_ELSE.dp
-                }, end = if (itemIndex == FOOTER_ITEM_DEFAULT_VALUE_PADDING_END) {
+                },
+                end = if (itemIndex == FOOTER_ITEM_DEFAULT_VALUE_PADDING_END) {
                     FOOTER_ITEM_COLUMN_PADDING_END_IF.dp
                 } else {
                     FOOTER_ITEM_COLUMN_PADDING_END_ELSE.dp
-                }
+                },
             )
     ) {
         Icon(

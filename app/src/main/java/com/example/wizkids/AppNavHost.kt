@@ -46,7 +46,7 @@ fun AppNavHost() {
                 onBack = { navController.popBackStack() },
                 onClickUserProfile = {
                     navController.navigate(
-                        NavRoutes.UserProfile
+                        NavRoutes.UserProfile.routes
                     )
                 }
             )
@@ -55,7 +55,7 @@ fun AppNavHost() {
             CalendarScreen(
                 onClickUpcomingDates = {
                     navController.navigate(
-                        NavRoutes.UpcomingDates
+                        NavRoutes.UpcomingDates.routes
                     )
                 },
                 navController
@@ -79,7 +79,7 @@ fun AppNavHost() {
             UpcomingVisitMain(
                 onCLickGoToCalendar = {
                     navController.navigate(
-                        NavRoutes.Calendar
+                        NavRoutes.Calendar.routes
                     )
                 },
                 navController
@@ -89,7 +89,7 @@ fun AppNavHost() {
             UserMainScreen(
                 onClickGoToAddUserInfo = {
                     navController.navigate(
-                        NavRoutes.AddNewOrChangeInfoUser
+                        NavRoutes.AddNewOrChangeInfoUser.routes
                     )
                 },
                 navController

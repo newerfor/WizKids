@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.ripple.rememberRipple
@@ -343,55 +344,57 @@ fun UserAddInfo(
                         userDocuments.clear()
                     })
             }
-            ButtonVisibleRow(
-                mapOf(
-                    stringResource(R.string.save_button) to {
-                        if (userFirstName.value.isEmpty()) {
-                            hasUserFirstNameError.value = true
-                        }
-                        if (userLastName.value.isEmpty()) {
-                            hasUserLastNameError.value = true
-                        }
-                        if (userMiddleName.value.isEmpty()) {
-                            hasUserMiddleNameError.value = true
-                        }
-                        if (userDateOfBirth.value.isEmpty()) {
-                            hasUserDateOfBirthError.value = true
-                        }
-                        if (userPhone.value.isEmpty()) {
-                            hasUserPhoneError.value = true
-                        }
-                        if (userEmail.value.isEmpty()) {
-                            hasUserEmailError.value = true
-                        }
-                        if (userWorkExperience.value.isEmpty()) {
-                            hasWorkExperienceError.value = true
-                        }
-                        if (userDateOfBirth.value.isEmpty()) {
-                            hasUserDateOfBirthError.value = true
-                        }
-                        if (!hasUserDateOfBirthError.value && !hasWorkExperienceError.value && !hasUserFirstNameError.value && !hasUserLastNameError.value && !hasUserMiddleNameError.value && !hasUserDateOfBirthError.value && !hasUserPhoneError.value && !hasUserEmailError.value) {
-                            val user = DomainUserModel(
-                                imagePath = userImage.value
-                                    ?: ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_IMAGE,
-                                name = "${userLastName.value} ${userFirstName.value} ${userMiddleName.value}",
-                                dateOfBirth = userDateOfBirth.value,
-                                about = userAbout.value,
-                                workExperience = userWorkExperience.value,
-                                phone = userPhone.value,
-                                email = userEmail.value,
-                                educationLevel = userEducationLevel.value,
-                                specialization = userSpecialization.value,
-                                documents = userDocuments
-                            )
-                            viewModel.saveUser(user)
-                            onClickUserProfile.invoke()
-                        }
+            Column(Modifier.navigationBarsPadding()) {
+                ButtonVisibleRow(
+                    mapOf(
+                        stringResource(R.string.save_button) to {
+                            if (userFirstName.value.isEmpty()) {
+                                hasUserFirstNameError.value = true
+                            }
+                            if (userLastName.value.isEmpty()) {
+                                hasUserLastNameError.value = true
+                            }
+                            if (userMiddleName.value.isEmpty()) {
+                                hasUserMiddleNameError.value = true
+                            }
+                            if (userDateOfBirth.value.isEmpty()) {
+                                hasUserDateOfBirthError.value = true
+                            }
+                            if (userPhone.value.isEmpty()) {
+                                hasUserPhoneError.value = true
+                            }
+                            if (userEmail.value.isEmpty()) {
+                                hasUserEmailError.value = true
+                            }
+                            if (userWorkExperience.value.isEmpty()) {
+                                hasWorkExperienceError.value = true
+                            }
+                            if (userDateOfBirth.value.isEmpty()) {
+                                hasUserDateOfBirthError.value = true
+                            }
+                            if (!hasUserDateOfBirthError.value && !hasWorkExperienceError.value && !hasUserFirstNameError.value && !hasUserLastNameError.value && !hasUserMiddleNameError.value && !hasUserDateOfBirthError.value && !hasUserPhoneError.value && !hasUserEmailError.value) {
+                                val user = DomainUserModel(
+                                    imagePath = userImage.value
+                                        ?: ADD_NEW_OR_CHANGE_USER_DEFAULT_VALUE_IMAGE,
+                                    name = "${userLastName.value} ${userFirstName.value} ${userMiddleName.value}",
+                                    dateOfBirth = userDateOfBirth.value,
+                                    about = userAbout.value,
+                                    workExperience = userWorkExperience.value,
+                                    phone = userPhone.value,
+                                    email = userEmail.value,
+                                    educationLevel = userEducationLevel.value,
+                                    specialization = userSpecialization.value,
+                                    documents = userDocuments
+                                )
+                                viewModel.saveUser(user)
+                                onClickUserProfile.invoke()
+                            }
 
-                    },
-                ),
-                textFont
-            )
+                        },
+                    ),
+                    textFont
+                )
+            }
         }
     }
 }

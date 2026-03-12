@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.ripple.rememberRipple
@@ -349,46 +350,49 @@ fun AddInformation(
                         childVisitComing.clear()
                     })
             }
-            ButtonVisibleRow(
-                mapOf(
-                    stringResource(R.string.save_button) to {
-                        if (childLearningStages.value.isNotEmpty()) {
-                            childWorkStageError.value =
-                                childLearningStages.value.any { it.isEmpty() }
-                        }
-                        if (childFirstName.value.isEmpty()) {
-                            hasChildFirstNameError.value = true
-                        }
-                        if (childLastName.value.isEmpty()) {
-                            hasChildLastNameError.value = true
-                        }
-                        if (childMiddleName.value.isEmpty()) {
-                            hasChildMiddleNameError.value = true
-                        }
-                        if (childDateOfBirth.value.isEmpty()) {
-                            childDayOfBirthError.value = true
-                        }
-                        if (!hasChildFirstNameError.value && !hasChildLastNameError.value && !hasChildMiddleNameError.value && !childDayOfBirthError.value && !childWorkStageError.value) {
-                            val child = DomainChildModel(
-                                id = id,
-                                imagePath = childImage.value
-                                    ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_IMAGE_PATCH,
-                                name = "${childLastName.value} ${childFirstName.value} ${childMiddleName.value}",
-                                additionalInfo = childAdditionalInfo.value,
-                                dateOfBirth = childDateOfBirth.value,
-                                documents = childDocuments,
-                                learningStages = childLearningStages.value,
-                                visitPrice = childVisitPrice.value,
-                                currentBalance = childCurrentBalance.value,
-                                childDayOfWeekVisit = childDateOfWeek.value,
-                            )
-                            childViewModel.saveChild(child, childVisitComing)
-                            onBack.invoke()
-                        }
-                    },
-                ),
-                textFont
-            )
+            Column(Modifier.navigationBarsPadding()){
+                ButtonVisibleRow(
+                    mapOf(
+                        stringResource(R.string.save_button) to {
+                            if (childLearningStages.value.isNotEmpty()) {
+                                childWorkStageError.value =
+                                    childLearningStages.value.any { it.isEmpty() }
+                            }
+                            if (childFirstName.value.isEmpty()) {
+                                hasChildFirstNameError.value = true
+                            }
+                            if (childLastName.value.isEmpty()) {
+                                hasChildLastNameError.value = true
+                            }
+                            if (childMiddleName.value.isEmpty()) {
+                                hasChildMiddleNameError.value = true
+                            }
+                            if (childDateOfBirth.value.isEmpty()) {
+                                childDayOfBirthError.value = true
+                            }
+                            if (!hasChildFirstNameError.value && !hasChildLastNameError.value && !hasChildMiddleNameError.value && !childDayOfBirthError.value && !childWorkStageError.value) {
+                                val child = DomainChildModel(
+                                    id = id,
+                                    imagePath = childImage.value
+                                        ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_IMAGE_PATCH,
+                                    name = "${childLastName.value} ${childFirstName.value} ${childMiddleName.value}",
+                                    additionalInfo = childAdditionalInfo.value,
+                                    dateOfBirth = childDateOfBirth.value,
+                                    documents = childDocuments,
+                                    learningStages = childLearningStages.value,
+                                    visitPrice = childVisitPrice.value,
+                                    currentBalance = childCurrentBalance.value,
+                                    childDayOfWeekVisit = childDateOfWeek.value,
+                                )
+                                childViewModel.saveChild(child, childVisitComing)
+                                onBack.invoke()
+                            }
+                        },
+                    ),
+                    textFont
+                )
+            }
+
         }
     }
 }

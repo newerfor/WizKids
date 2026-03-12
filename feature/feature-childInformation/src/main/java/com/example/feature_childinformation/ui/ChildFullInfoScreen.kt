@@ -1,11 +1,14 @@
 package com.example.feature_childinformation.ui
 
 import android.content.Context
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.example.core_domain.model.DomainChildModel
 import com.example.core_domain.model.DomainDocumentsModel
@@ -147,31 +150,33 @@ fun ChildFullInfo(
                     })
             }
         }
-        ButtonVisibleColumn(
-            buttonNames = mapOf(
-                stringResource(R.string.edit_child_activity_title) to {
-                    onClickAddInfoChild.invoke()
-                },
-                stringResource(R.string.delete_icon_description) to {
-                    deleteImageByPath(child.imagePath)
-                    for (document in child.documents) {
-                        for (docImage in document.imagePaths) {
-                            deleteImageByPath(docImage)
-                        }
-                    }
-                    if (child.id != null) {
-                        viewModel.deleteChild(child.id!!)
-                        visitsInfo.map {
-                            if (it.id != null) {
-                                visitViewModel.deleteVisit(it.id!!)
+        Column(Modifier.navigationBarsPadding()) {
+            ButtonVisibleColumn(
+                buttonNames = mapOf(
+                    stringResource(R.string.edit_child_activity_title) to {
+                        onClickAddInfoChild.invoke()
+                    },
+                    stringResource(R.string.delete_icon_description) to {
+                        deleteImageByPath(child.imagePath)
+                        for (document in child.documents) {
+                            for (docImage in document.imagePaths) {
+                                deleteImageByPath(docImage)
                             }
                         }
+                        if (child.id != null) {
+                            viewModel.deleteChild(child.id!!)
+                            visitsInfo.map {
+                                if (it.id != null) {
+                                    visitViewModel.deleteVisit(it.id!!)
+                                }
+                            }
+                        }
+                        onClickBack.invoke()
                     }
-                    onClickBack.invoke()
-                }
-            ),
-            textFont,
-        )
+                ),
+                textFont,
+            )
+        }
         if (openWindowMoreVisitInfo.value) {
             ComingVisitsInformationWindow(
                 textFont = textFont,

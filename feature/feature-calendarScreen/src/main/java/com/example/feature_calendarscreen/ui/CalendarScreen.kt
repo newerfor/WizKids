@@ -30,7 +30,6 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun CalendarScreen(onClickUpcomingDates: () -> Unit, navController: NavController) {
     val context = LocalContext.current
-    Log.d("TEST","Start CalendarScreen")
     Column(Modifier.fillMaxSize()) {
         Header(
             stringResource(R.string.calendar_screen_title),
