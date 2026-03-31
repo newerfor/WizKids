@@ -137,6 +137,21 @@ fun ChildFullInfo(
             }
         }
         AddInformationCard(
+            stringResource(R.string.child_number_visit_and_generial_profit),
+            textFont
+        ) {
+            InformationCardValueGrayAndWhiteText(
+                textFont, "${
+                    stringResource(R.string.label_number_visit)
+                } :", child.numbers_visits.toString()
+            )
+            InformationCardValueGrayAndWhiteText(
+                textFont, "${
+                    stringResource(R.string.label_generial_profit)
+                } :", child.general_profit.toString()
+            )
+        }
+        AddInformationCard(
             stringResource(R.string.recent_visits_label),
             textFont
         ) {

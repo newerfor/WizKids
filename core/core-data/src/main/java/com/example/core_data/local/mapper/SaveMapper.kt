@@ -33,7 +33,9 @@ class SaveMapper {
                 firstDate = child.childDayOfWeekVisit.firstDate,
                 secondDate = child.childDayOfWeekVisit.secondDate,
                 time = child.childDayOfWeekVisit.time,
-            )
+            ),
+            numbers_visits = child.numbers_visits,
+            general_profit = child.general_profit
         )
     }
 
@@ -47,7 +49,8 @@ class SaveMapper {
             notes = visit.notes,
             payStatus = visit.payStatus,
             childId = childId,
-            childName = visit.childName
+            childName = visit.childName,
+            price_of_visit =visit.price_of_visit
         )
     }
 

@@ -65,7 +65,9 @@ fun VisitOfDayWeek(
     childId: Int?,
     childName: String,
     childVisitComing: MutableList<DomainVisitModel>,
-    onSave: (List<DomainVisitModel>) -> Unit
+    childVisitPrice:Int,
+    onSave: (List<DomainVisitModel>) -> Unit,
+
 ) {
     val formatter = DateTimeFormatter.ofPattern("HH.mm")
 
@@ -330,7 +332,9 @@ fun VisitOfDayWeek(
                                     time = timeMap,
                                     childName = childName,
                                     childId = childId,
-                                    childVisitComing
+                                    childVisitComing,
+                                    childVisitPrice
+
                                 )
                             )
 
@@ -363,7 +367,8 @@ fun getDatesByWeekdaysWithInfo(
     time: Map<String, String?>,
     childName: String,
     childId: Int?,
-    existingVisits: List<DomainVisitModel>
+    existingVisits: List<DomainVisitModel>,
+    childVisitPrice:Int
 ): List<DomainVisitModel> {
     val weekdayMap = mapOf(
         MONDAY to DayOfWeek.MONDAY,
@@ -420,7 +425,8 @@ fun getDatesByWeekdaysWithInfo(
                         notes = "",
                         payStatus = "Не оплачено",
                         childId = childId,
-                        childName = childName
+                        childName = childName,
+                        price_of_visit = childVisitPrice
                     )
                 }
             }

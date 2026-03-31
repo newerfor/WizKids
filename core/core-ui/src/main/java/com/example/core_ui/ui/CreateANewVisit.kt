@@ -23,8 +23,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_COMING
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_NOT_COMING
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_SOON
 import com.example.core_ui.constant.SharedUiLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_ID
 import com.example.core_ui.constant.SharedUiLogicConstant.CREATE_A_NEW_VISIT_DEFAULT_VALUE_CHILD_NAME
+import com.example.core_ui.constant.SharedUiLogicConstant.PAY_STATUS_PAYED
 import com.example.core_ui.constant.SharedUiViewConstant.CREATE_A_NEW_VISIT_DIALOG_CLIP
 import com.example.core_ui.constant.SharedUiViewConstant.CREATE_A_NEW_VISIT_DIALOG_HEIGHT
 import com.example.core_ui.constant.SharedUiViewConstant.CREATE_A_NEW_VISIT_DIALOG_WIDTH
@@ -94,7 +98,7 @@ fun CreateANewVisitWindow(
                     childId = childId.value,
                     childName = childName.value,
                     selectVisit,
-                    launchedTriger
+                    launchedTriger,
                 )
             }
         }

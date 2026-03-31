@@ -16,6 +16,9 @@ import com.example.core_ui.ui.TextFont
 import com.example.core_viewmodel.visit.VisitViewModel
 import com.example.feature_addneworchangeinfochild.R
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.PAY_STATUS_PAYED
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.VISIT_STATUS_COMING
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.VISIT_STATUS_NOT_COMING
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.VISIT_STATUS_SOON
 
 
 @Composable
@@ -28,6 +31,9 @@ fun AddVisitComingInfo(
     childName: String,
     price: Int?,
     balance: MutableState<Int>?,
+    childGeneralProfit: MutableState<Int>,
+    childNumbersVisits: MutableState<Int>,
+    newPriceVisit: MutableState<Int>,
 ) {
     Log.d("ChildAddVisitComingInfo", "AddVisitComingInfo: $childVisitComing")
     var openWindowAddVisit = remember { mutableStateOf(false) }
@@ -85,7 +91,8 @@ fun AddVisitComingInfo(
                 childDayWeek,
                 childId,
                 childName,
-                childVisitComing
+                childVisitComing,
+                newPriceVisit.value
             ) { newVisit ->
                 childVisitComing.addAll(newVisit)
             }
@@ -98,7 +105,7 @@ fun AddVisitComingInfo(
                 visit = VisitInfo,
                 isChangeAct = true,
                 onSave = { newVisit ->
-                    if (price != null && balance != null && VisitInfo.value?.payStatus == PAY_STATUS_PAYED) {
+                    if (price != null && balance != null && newVisit.payStatus == PAY_STATUS_PAYED && VisitInfo.value?.payStatus != PAY_STATUS_PAYED) {
                         balance.value -= price
                     }
                     if (VisitInfo.value == null) {
@@ -107,12 +114,26 @@ fun AddVisitComingInfo(
                         childVisitComing[editingIndex.value!!] = newVisit
                         VisitInfo.value = null
                     }
+                    if (newVisit.visitStatus == VISIT_STATUS_COMING && newVisit.payStatus == PAY_STATUS_PAYED) {
+                        if ((VisitInfo.value?.visitStatus == VISIT_STATUS_NOT_COMING || VisitInfo.value?.visitStatus == VISIT_STATUS_SOON)) {
+                            childGeneralProfit.value += newVisit.price_of_visit
+                            childNumbersVisits.value += 1
+                        }
+                    } else {
+                        if ((newVisit.visitStatus == VISIT_STATUS_NOT_COMING || newVisit.visitStatus == VISIT_STATUS_SOON)) {
+                            if (VisitInfo.value?.visitStatus == VISIT_STATUS_COMING && VisitInfo.value?.payStatus == PAY_STATUS_PAYED) {
+                                childGeneralProfit.value -= newVisit.price_of_visit
+                                childNumbersVisits.value -= 1
+                            }
+                        }
+                    }
                 },
                 inAddIndex = childVisitComing.size,
                 becomeCalendar = false,
                 childId = childId,
                 childName = childName,
                 selectedDate = "",
+                childVisitPrice = newPriceVisit,
             )
         }
     }

@@ -9,6 +9,8 @@ object SharedUiLogicConstant {
     const val COMING_STATUS_COMING = "Проведено"
     const val COMING_STATUS_NOT_COMING = "Отменено"
     const val COMING_STATUS_SOON = "Назначено"
+    const val PAY_STATUS_PAYED = "Оплачено"
+    const val PAY_STATUS_NOT_PAYED = "Не оплачено"
     const val COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_STATUS_VISIT = "Назначено"
     const val COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_NAME_VISIT = ""
     const val COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_PAY_STATUS = ""

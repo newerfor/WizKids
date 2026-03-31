@@ -35,6 +35,8 @@ class GetMapper {
                     secondDate = child.childDayOfWeekVisit.secondDate,
                     time = child.childDayOfWeekVisit.time
                 ),
+                numbers_visits = child.numbers_visits,
+                general_profit = child.general_profit,
             )
         }
     }
@@ -50,7 +52,8 @@ class GetMapper {
                 notes = visit.notes,
                 payStatus = visit.payStatus,
                 childId = visit.childId,
-                childName = visit.childName
+                childName = visit.childName,
+                price_of_visit = visit.price_of_visit
             )
         }
     }

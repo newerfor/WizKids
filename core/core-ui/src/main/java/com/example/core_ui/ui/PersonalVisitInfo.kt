@@ -31,6 +31,10 @@ import androidx.compose.ui.window.Dialog
 import com.example.core_domain.model.DomainChildModel
 import com.example.core_domain.model.DomainVisitModel
 import com.example.core_ui.R
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_COMING
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_NOT_COMING
+import com.example.core_ui.constant.SharedUiLogicConstant.COMING_STATUS_SOON
+import com.example.core_ui.constant.SharedUiLogicConstant.PAY_STATUS_PAYED
 import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_COMING
 import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_NOT_COMING
 import com.example.core_ui.constant.SharedUiLogicConstant.PERSONAL_VISIT_WINDOW_DEFAULT_VALUE_PAY_STATUS_NOT_PAID
@@ -227,6 +231,18 @@ fun PersonalVisitWindow(
                 ButtonVisibleColumn(
                     mapOf(
                         stringResource(R.string.apply_button) to {
+                            val updateDateInfo = DomainVisitModel(
+                                id = visitInfo.id,
+                                date = visitInfo.date,
+                                time = visitInfo.time,
+                                visitName = visitInfo.visitName,
+                                visitStatus = visitStatus.value,
+                                notes = visitInfo.notes,
+                                payStatus = payStatus.value,
+                                childId = visitInfo.childId,
+                                childName = visitInfo.childName,
+                                price_of_visit = visitInfo.price_of_visit
+                            )
                             val dataChildUpdateBalance = DomainChildModel(
                                 id = child.id,
                                 imagePath = child.imagePath,
@@ -245,19 +261,20 @@ fun PersonalVisitWindow(
                                         balance
                                     }
                                 },
-                                childDayOfWeekVisit = child.childDayOfWeekVisit
+                                childDayOfWeekVisit = child.childDayOfWeekVisit,
+                                numbers_visits = ValueCheker(
+                                    oldVisit =visitInfo,
+                                    newVisit =updateDateInfo,
+                                    value = child.numbers_visits,
+                                ),
+                                general_profit =ValueCheker(
+                                    oldVisit =visitInfo,
+                                    newVisit =updateDateInfo,
+                                    value = child.general_profit,
+                                    visitPrice = price,
+                                )
                             )
-                            val updateDateInfo = DomainVisitModel(
-                                id = visitInfo.id,
-                                date = visitInfo.date,
-                                time = visitInfo.time,
-                                visitName = visitInfo.visitName,
-                                visitStatus = visitStatus.value,
-                                notes = visitInfo.notes,
-                                payStatus = payStatus.value,
-                                childId = visitInfo.childId,
-                                childName = visitInfo.childName
-                            )
+
                             Log.d("ghjfhgfghfhgfhgfhgf", payStatus.value)
                             childViewModel.saveChild(
                                 dataChildUpdateBalance,
@@ -280,4 +297,31 @@ fun PersonalVisitWindow(
             }
         }
     }
+}
+fun ValueCheker(
+    oldVisit: DomainVisitModel,
+    newVisit: DomainVisitModel,
+    value: Int,
+    visitPrice: Int? =null):Int{
+    var newValue = value
+    if (newVisit.visitStatus == COMING_STATUS_COMING && newVisit.payStatus == PAY_STATUS_PAYED) {
+        if ((oldVisit.visitStatus == COMING_STATUS_NOT_COMING || oldVisit.visitStatus == COMING_STATUS_SOON)) {
+            if(visitPrice==null){
+                newValue+=1
+            }else{
+                newValue+=visitPrice
+            }
+        }
+    } else {
+        if ((newVisit.visitStatus == COMING_STATUS_NOT_COMING || newVisit.visitStatus == COMING_STATUS_SOON)) {
+            if (oldVisit.visitStatus == COMING_STATUS_COMING && oldVisit.payStatus == PAY_STATUS_PAYED) {
+                if(visitPrice==null){
+                    newValue-=1
+                }else{
+                    newValue-=visitPrice
+                }
+            }
+        }
+    }
+    return newValue
 }

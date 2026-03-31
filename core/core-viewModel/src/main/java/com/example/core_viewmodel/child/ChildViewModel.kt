@@ -1,5 +1,6 @@
 package com.example.core_viewmodel.child
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.core_domain.model.DomainChildModel
@@ -26,7 +27,6 @@ class ChildViewModel(
     val childByIdState: StateFlow<ChildByIdUiState> = _childByIdState.asStateFlow()
     private val _children = MutableStateFlow<List<DomainChildModel>>(emptyList())
     val children: StateFlow<List<DomainChildModel>> = _children.asStateFlow()
-
     fun getChildren(
         searchName: String?,
         minAge: Int?,
@@ -38,7 +38,6 @@ class ChildViewModel(
         viewModelScope.launch {
             try {
                 _childUiState.value = ChildrenUiState.Loading
-
                 val result = getChildrenUseCase(
                     searchName = searchName,
                     minAge = minAge,
@@ -46,12 +45,8 @@ class ChildViewModel(
                     balanceOperator = balanceOperator,
                     hasPayStatusDebt = hasPayStatusDebt
                 )
-
                 result.onSuccess { domainChildren ->
-                    // Полностью заменяем список
                     _children.value = domainChildren.filterNotNull()
-
-                    // Сортируем если нужно
                     if (selectedOptionSort != null) {
                         childrenSorted(selectedOptionSort)
                     }

@@ -16,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.ripple.rememberRipple
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -24,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
@@ -80,7 +82,8 @@ fun ComingVisitsInformationWindow(
     childId: Int?,
     childName: String,
     selectedDate: String,
-    launchedTriger: MutableState<Boolean> = mutableStateOf(false)
+    launchedTriger: MutableState<Boolean> = mutableStateOf(false),
+    childVisitPrice: MutableState<Int> = mutableStateOf(0)
 ) {
     val formatter = DateTimeFormatter.ofPattern("HH.mm")
 
@@ -120,6 +123,9 @@ fun ComingVisitsInformationWindow(
         mutableStateOf(
             visit?.value?.visitName ?: COMING_VISITS_INFORMATION_WINDOW_DEFAULT_VALUE_NAME_VISIT
         )
+    }
+    var isUsingNewPrice = remember {
+        mutableStateOf(false)
     }
 
     var infoVisit by remember {
@@ -302,6 +308,10 @@ fun ComingVisitsInformationWindow(
                 }
 
             }
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Checkbox(isUsingNewPrice.value, onCheckedChange = { isUsingNewPrice.value = it })
+                textFont.WhiteText("Использовать стоимость из профиля")
+            }
             Column {
                 if (isChangeAct) {
                     Column {
@@ -324,7 +334,8 @@ fun ComingVisitsInformationWindow(
                                             id = visit?.value?.id,
                                             childId = childId,
                                             payStatus = selectedPayStatus.value,
-                                            childName = childName
+                                            childName = childName,
+                                            price_of_visit = if(isUsingNewPrice.value == false){visit?.value?.price_of_visit ?:childVisitPrice.value}else{childVisitPrice.value}
                                         )
                                         onSave(newDocument)
                                         openVisitWindow.value = false

@@ -15,5 +15,7 @@ data class ChildEntity(
     val learningStages: List<String>,
     val visitPrice: Int,
     val currentBalance: Int,
-    val childDayOfWeekVisit: ChildDayOfWeekVisitEntity
+    val childDayOfWeekVisit: ChildDayOfWeekVisitEntity,
+    val numbers_visits:Int,
+    val general_profit:Int
 )

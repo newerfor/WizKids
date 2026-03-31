@@ -43,6 +43,7 @@ dependencies {
     val composeBom = platform("androidx.compose:compose-bom:2024.05.00")
     implementation(composeBom)
     implementation(libs.androidx.compose.ui.ui2)
+    implementation("me.saket.telephoto:zoomable:0.7.0")
     implementation(libs.androidx.compose.ui.ui.graphics)
     implementation(libs.androidx.compose.ui.ui.tooling.preview)
     implementation(libs.androidx.compose.material3.material3)

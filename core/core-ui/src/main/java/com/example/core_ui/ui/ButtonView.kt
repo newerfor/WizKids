@@ -6,13 +6,24 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.core_ui.constant.SharedUiViewConstant.BUTTON_VISIBLE_DEFAULT_PADDING
 import com.example.core_ui.constant.SharedUiViewConstant.BUTTON_VISIBLE_WEIGHT
+import com.example.wizkids.ui.theme.Inter
 import com.example.wizkids.ui.theme.buttonColor
 import com.example.wizkids.ui.theme.lightBlue
+import com.example.wizkids.ui.theme.textWhite
 
 @Composable
 fun ButtonVisibleRow(
@@ -31,7 +42,12 @@ fun ButtonVisibleRow(
                     .weight(BUTTON_VISIBLE_WEIGHT)
                     .padding(end = padding.dp)
             ) {
-                textFont.WhiteText(button.key)
+                AutoSizeText(
+                    text = button.key,
+                    maxLines = 1,
+                    minTextSize = 8.sp,
+                    maxTextSize = 14.sp
+                )
             }
         }
     }
@@ -55,11 +71,39 @@ fun ButtonVisibleColumn(
                         .weight(BUTTON_VISIBLE_WEIGHT)
                         .padding(top = padding.dp)
                 ) {
-                    textFont.WhiteText(button.key)
+                    AutoSizeText(
+                        text = button.key,
+                        maxLines = 1,
+                        minTextSize = 8.sp,
+                        maxTextSize = 14.sp
+                    )
                 }
             }
         }
     }
+}
+@Composable
+fun AutoSizeText(
+    text: String,
+    maxLines: Int = 1,
+    minTextSize: TextUnit = 8.sp,
+    maxTextSize: TextUnit = 14.sp,
+) {
+    var fontSize by remember { mutableStateOf(maxTextSize) }
+    Text(
+        text = text,
+        color = textWhite,
+        fontFamily = Inter,
+        fontWeight = FontWeight.Normal,
+        fontSize = fontSize,
+        maxLines = maxLines,
+        overflow = TextOverflow.Visible,
+        onTextLayout = { result ->
+            if (result.hasVisualOverflow && fontSize > minTextSize) {
+                fontSize = (fontSize.value - 1f).sp
+            }
+        }
+    )
 }
 
 @Composable
@@ -81,7 +125,12 @@ fun ButtonDayWeek(
                         .weight(BUTTON_VISIBLE_WEIGHT)
                         .padding(top = padding.dp)
                 ) {
-                    textFont.WhiteText(entry.key)
+                    AutoSizeText(
+                        text = entry.key,
+                        maxLines = 1,
+                        minTextSize = 8.sp,
+                        maxTextSize = 14.sp
+                    )
                 }
             }
         }

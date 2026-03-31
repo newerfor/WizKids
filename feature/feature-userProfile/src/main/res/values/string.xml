@@ -17,4 +17,7 @@
     <string name="user_profile_title">Профиль воспитателя</string>
     <string name="user_profile_subtitle">Просмотр данных</string>
     <string name="create_profile_button">Создать профиль</string>
+    <string name="total_visit_and_profit">Все посещения и общая прибыль</string>
+    <string name="total_success_visit">Успешных посещений</string>
+    <string name="total_profit">Заработано</string>
 </resources>

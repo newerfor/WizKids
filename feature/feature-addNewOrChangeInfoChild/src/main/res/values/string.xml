@@ -33,4 +33,7 @@
     <string name="reset_text">Сбросить</string>
     <string name="add_week_day_visit_button">Добавить расписание по дням недели</string>
     <string name="edit_child_activity_title">Изменение информации</string>
+    <string name="child_number_visit_and_generial_profit">Общее количество посещений и прибыль</string>
+    <string name="label_generial_profit">Общая прибыль</string>
+    <string name="label_number_visit">Проведённые занятия</string>
 </resources>

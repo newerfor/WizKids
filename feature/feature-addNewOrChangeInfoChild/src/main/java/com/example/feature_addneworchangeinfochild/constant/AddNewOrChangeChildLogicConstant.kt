@@ -6,6 +6,8 @@ object AddNewOrChangeChildLogicConstant {
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_DAY_OF_BIRTH = ""
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_PRICE = 0
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_BALANCE = 0
+    const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_GENERAL_PROFIT = 0
+    const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NUMBER_VISIT = 0
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_IMAGE_PATCH = ""
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_WORK_STAGE = ""
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_INDEX_IN_LIST = 1
@@ -13,6 +15,10 @@ object AddNewOrChangeChildLogicConstant {
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_MIDDLE_NAME = 0
     const val ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_LAST_NAME = 2
     const val PAY_STATUS_PAYED = "Оплачено"
+    const val PAY_STATUS_NOT_PAYED = "Не оплачено"
+    const val VISIT_STATUS_COMING = "Проведено"
+    const val VISIT_STATUS_NOT_COMING = "Отменено"
+    const val VISIT_STATUS_SOON = "Назанчено"
     const val MONDAY = "Понедельник"
     const val TUESDAY = "Вторник"
     const val WEDNESDAY = "Среда"

@@ -1,7 +1,9 @@
 package com.example.wizkids.presentation.UserProfile.ui
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -14,11 +16,16 @@ import com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard.A
 import com.example.core_ui.ui.ChangeInformationWindow.InformationCardBackGround
 import com.example.core_ui.ui.ChangeInformationWindow.InformationCardValueGrayAndWhiteText
 import com.example.core_ui.ui.ChangeInformationWindow.InformationImageAndPayStatus
+import com.example.core_ui.ui.RoundLoad
 import com.example.core_ui.ui.TextFont
 import com.example.core_util.deleteImageByPath
 import com.example.core_util.getAgeFromDate
+import com.example.core_viewmodel.child.ChildrenUiState
+import com.example.core_viewmodel.user.UserUiState
 import com.example.core_viewmodel.user.UserViewModel
 import com.example.feature_userprofile.R
+import com.example.feature_userprofile.constant.UserProfileLogicConstant.DEFAULT_VALUE_TOTAL_PROFIT
+import com.example.feature_userprofile.constant.UserProfileLogicConstant.DEFAULT_VALUE_TOTAL_VISITS
 import com.example.feature_userprofile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME
 import com.example.feature_userprofile.constant.UserProfileLogicConstant.USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME
 
@@ -29,7 +36,8 @@ fun UserFullInfo(
     textFont: TextFont,
     context: Context,
     userViewModel: UserViewModel,
-    onClickGoToAddUserInfo: () -> Unit
+    onClickGoToAddUserInfo: () -> Unit,
+    childUiState: ChildrenUiState
 ) {
     val mutableImage = remember { mutableStateOf<String?>(userInfo.imagePath) }
     var mutableDocs = remember { mutableStateListOf<DomainDocumentsModel>() }
@@ -38,6 +46,15 @@ fun UserFullInfo(
         remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_FIRST_NAME]) }
     val userLastName =
         remember { mutableStateOf(parts[USER_CARD_INITIAL_PARTS_INDEX_LAST_NAME]) }
+    val totalVisitsSuccess= remember { mutableStateOf(DEFAULT_VALUE_TOTAL_VISITS) }
+    val totalProfitSuccess= remember { mutableStateOf(DEFAULT_VALUE_TOTAL_PROFIT) }
+    Log.d("aejgdjkghbdghb",childUiState.toString())
+    LaunchedEffect(childUiState) {
+        if (childUiState is ChildrenUiState.Success) {
+            totalVisitsSuccess.value = childUiState.child.sumOf { it.numbers_visits }
+            totalProfitSuccess.value = childUiState.child.sumOf { it.general_profit }
+        }
+    }
     mutableDocs.addAll(userInfo.documents)
     InformationCardBackGround {
         InformationImageAndPayStatus(
@@ -104,12 +121,23 @@ fun UserFullInfo(
                 userInfo.specialization
             )
         }
-
         AddInformationCard(
             stringResource(R.string.documents),
             textFont
         ) {
             AddOrWatchDocumentInformation(textFont, mutableDocs, false)
+        }
+        AddInformationCard(stringResource(R.string.total_visit_and_profit),textFont) {
+            InformationCardValueGrayAndWhiteText(
+                textFont,
+                stringResource(R.string.total_success_visit),
+                totalVisitsSuccess.value.toString()
+            )
+            InformationCardValueGrayAndWhiteText(
+                textFont,
+                stringResource(R.string.total_profit),
+                totalProfitSuccess.value.toString()
+            )
         }
         ButtonVisibleColumn(
             mapOf(

@@ -35,4 +35,15 @@ val blackColor = Color.Black
 val greenColor = Color.Green
 val blueColor = Color.Blue
 val yellowColor = Color.Yellow
-
+val payNeutral = Color(0xFF718096)
+val cardDivider = Color(0x14FFFFFF)
+val balanceBadgeBg = Color(0x332563C4)
+val balanceBadgeText = Color(0xFF7EB3F7)
+val priceBadgeBg = Color(0x33E8732A)
+val priceBadgeText = Color(0xFFF4A96A)
+val changeBalanceBg = Color(0xFF3D4A5C)
+val changeBalanceText = Color(0xFF94A3B8)
+val nameTextColor = Color(0xFFE2E8F0)
+val metaTextColor = Color(0xFF94A3B8)
+val additionalTextColor = Color(0xFF718096)
+val dividerColor = Color(0x14FFFFFF)

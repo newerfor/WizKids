@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -16,6 +17,7 @@ import androidx.navigation.NavController
 import com.example.core_ui.ui.Footer
 import com.example.core_ui.ui.Header
 import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.child.ChildViewModel
 import com.example.core_viewmodel.user.UserViewModel
 import com.example.feature_userprofile.R
 import com.example.feature_userprofile.constant.UserProfileViewConstant.USER_PROFILE_MAIN_CONTENT_WEIGHT
@@ -47,10 +49,22 @@ fun UserMainScreen(onClickGoToAddUserInfo: () -> Unit, navController: NavControl
 @Composable
 fun UserProfileScreen(
     userViewModel: UserViewModel = koinViewModel(),
+    childViewModel: ChildViewModel = koinViewModel(),
     textFont: TextFont = TextFont(),
     context: Context,
     onClickGoToAddUserInfo: () -> Unit
 ) {
     val userUiState by userViewModel.userUiState.collectAsState()
-    ControlState(userUiState, textFont, context, userViewModel, onClickGoToAddUserInfo)
+    val childUiState by childViewModel.childUiState.collectAsState()
+    LaunchedEffect(Unit) {
+        childViewModel.getChildren(
+            searchName = null,
+            minAge = null,
+            maxAge = null,
+            balanceOperator = null,
+            hasPayStatusDebt = null,
+            selectedOptionSort = null
+        )
+    }
+    ControlState(userUiState, textFont, context, userViewModel, onClickGoToAddUserInfo,childUiState)
 }

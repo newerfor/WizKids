@@ -10,5 +10,7 @@ data class DomainChildModel(
     val learningStages: List<String>,
     val visitPrice: Int,
     val currentBalance: Int,
-    val childDayOfWeekVisit: DomainChildDayOfWeekVisit
+    val childDayOfWeekVisit: DomainChildDayOfWeekVisit,
+    val numbers_visits:Int,
+    val general_profit:Int
 )

@@ -9,5 +9,6 @@ data class DomainVisitModel(
     val notes: String,
     val payStatus: String,
     val childId: Int?,
-    val childName: String
+    val childName: String,
+    val price_of_visit:Int
 )

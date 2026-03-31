@@ -1,6 +1,7 @@
 package com.example.feature_addneworchangeinfochild.ui
 
 import android.content.Context
+import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -13,9 +14,11 @@ import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -29,6 +32,7 @@ import com.example.core_ui.ui.ButtonVisibleRow
 import com.example.core_ui.ui.ChangeInformationWindow.DocumentsInforamtionCard.AddOrWatchDocumentInformation
 import com.example.core_ui.ui.ChangeInformationWindow.FinanceInfoWindow.WindowAddFinanceInformation
 import com.example.core_ui.ui.ChangeInformationWindow.InformationCardBackGround
+import com.example.core_ui.ui.ChangeInformationWindow.InformationCardValueGrayAndWhiteText
 import com.example.core_ui.ui.ChangeInformationWindow.InformationImageAndPayStatus
 import com.example.core_ui.ui.DatePickerExample
 import com.example.core_ui.ui.TextFont
@@ -37,6 +41,7 @@ import com.example.core_viewmodel.child.ChildViewModel
 import com.example.core_viewmodel.visit.VisitViewModel
 import com.example.core_viewmodel.visit.VisitsUiState
 import com.example.feature_addneworchangeinfochild.R
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_GENERAL_PROFIT
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_FIRST_NAME
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_LAST_NAME
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_INDEX_MIDDLE_NAME
@@ -45,7 +50,10 @@ import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildL
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_DAY_OF_BIRTH
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_IMAGE_PATCH
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NAME
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NUMBER_VISIT
 import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_PRICE
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.PAY_STATUS_PAYED
+import com.example.feature_addneworchangeinfochild.constant.AddNewOrChangeChildLogicConstant.VISIT_STATUS_COMING
 import com.example.wizkids.ui.theme.redColor
 
 
@@ -60,6 +68,7 @@ fun AddInformation(
     visitViewModel: VisitViewModel,
     onBack: () -> Unit
 ) {
+
     val fullName = sampleChild?.name ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NAME
     val parts = fullName.split(" ")
     val openWindowBalance = remember { mutableStateOf(false) }
@@ -118,6 +127,16 @@ fun AddInformation(
             sampleChild?.currentBalance ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_BALANCE
         )
     }
+    var childNumbersVisits = remember {
+        mutableStateOf(
+            sampleChild?.numbers_visits ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NUMBER_VISIT
+        )
+    }
+    var childGeneralProfit = remember {
+        mutableStateOf(
+            sampleChild?.general_profit ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_GENERAL_PROFIT
+        )
+    }
     var childDocuments = remember {
         mutableStateListOf<DomainDocumentsModel>().apply {
             addAll(sampleChild?.documents ?: emptyList())
@@ -143,6 +162,27 @@ fun AddInformation(
         }
 
         is VisitsUiState.Error -> {}
+    }
+    LaunchedEffect(Unit) {
+        snapshotFlow { childVisitComing.toList() }
+            .collect { visits ->
+                var score_success_visit = 0
+                visits.forEach { visit ->
+                    if (visit.visitStatus == VISIT_STATUS_COMING && visit.payStatus == PAY_STATUS_PAYED) {
+                        score_success_visit += 1
+                    }
+                }
+                if (childNumbersVisits.value != score_success_visit) {
+                    childNumbersVisits.value = ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_NUMBER_VISIT
+                    childGeneralProfit.value = ADD_NEW_OR_CHANGE_CHILD_DEFAULT_GENERAL_PROFIT
+                    visits.forEach { visit ->
+                        if (visit.visitStatus == VISIT_STATUS_COMING && visit.payStatus == PAY_STATUS_PAYED) {
+                            childNumbersVisits.value += 1
+                            childGeneralProfit.value += visit.price_of_visit
+                        }
+                    }
+                }
+            }
     }
     InformationCardBackGround {
         InformationImageAndPayStatus(
@@ -301,6 +341,21 @@ fun AddInformation(
             )
         }
         AddInformationCard(
+            stringResource(R.string.child_number_visit_and_generial_profit),
+            textFont
+        ) {
+            InformationCardValueGrayAndWhiteText(
+                textFont, "${
+                    stringResource(R.string.label_number_visit)
+                } :", childNumbersVisits.value.toString()
+            )
+            InformationCardValueGrayAndWhiteText(
+                textFont, "${
+                    stringResource(R.string.label_generial_profit)
+                } :", childGeneralProfit.value.toString()
+            )
+        }
+        AddInformationCard(
             stringResource(R.string.recent_visits_label),
             textFont
         ) {
@@ -322,7 +377,9 @@ fun AddInformation(
                 } else {
                     childCurrentBalance
                 },
-
+                childGeneralProfit,
+                childNumbersVisits,
+                childVisitPrice
                 )
         }
         Column(Modifier.fillMaxWidth()) {
@@ -371,11 +428,12 @@ fun AddInformation(
                                 childDayOfBirthError.value = true
                             }
                             if (!hasChildFirstNameError.value && !hasChildLastNameError.value && !hasChildMiddleNameError.value && !childDayOfBirthError.value && !childWorkStageError.value) {
+                                val newName = "${childLastName.value} ${childFirstName.value} ${childMiddleName.value}"
                                 val child = DomainChildModel(
                                     id = id,
                                     imagePath = childImage.value
                                         ?: ADD_NEW_OR_CHANGE_CHILD_DEFAULT_VALUE_IMAGE_PATCH,
-                                    name = "${childLastName.value} ${childFirstName.value} ${childMiddleName.value}",
+                                    name = newName,
                                     additionalInfo = childAdditionalInfo.value,
                                     dateOfBirth = childDateOfBirth.value,
                                     documents = childDocuments,
@@ -383,8 +441,19 @@ fun AddInformation(
                                     visitPrice = childVisitPrice.value,
                                     currentBalance = childCurrentBalance.value,
                                     childDayOfWeekVisit = childDateOfWeek.value,
+                                    numbers_visits =childNumbersVisits.value,
+                                    general_profit = childGeneralProfit.value,
                                 )
-                                childViewModel.saveChild(child, childVisitComing)
+                                val hasNameChanged = childVisitComing.any { it.childName != newName }
+                                if (hasNameChanged) {
+                                    childVisitComing.forEach { visit ->
+                                        visitViewModel.deleteVisit(visit.id ?: 0)
+                                    }
+                                    childVisitComing.replaceAll { visit ->
+                                        visit.copy(childName = newName)
+                                    }
+                                }
+                                childViewModel.saveChild(child, childVisitComing.toList())
                                 onBack.invoke()
                             }
                         },

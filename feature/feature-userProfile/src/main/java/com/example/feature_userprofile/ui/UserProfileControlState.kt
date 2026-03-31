@@ -14,6 +14,7 @@ import com.example.core_ui.ui.ButtonVisibleColumn
 import com.example.core_ui.ui.ErrorMassage
 import com.example.core_ui.ui.RoundLoad
 import com.example.core_ui.ui.TextFont
+import com.example.core_viewmodel.child.ChildrenUiState
 import com.example.core_viewmodel.user.UserUiState
 import com.example.core_viewmodel.user.UserViewModel
 import com.example.feature_userprofile.R
@@ -25,7 +26,8 @@ fun ControlState(
     textFont: TextFont,
     context: Context,
     userViewModel: UserViewModel,
-    onClickGoToAddUserInfo: () -> Unit
+    onClickGoToAddUserInfo: () -> Unit,
+    childUiState: ChildrenUiState
 ) {
     when (userUiState) {
         is UserUiState.Loading -> {
@@ -36,7 +38,7 @@ fun ControlState(
             Column(Modifier.verticalScroll(rememberScrollState())) {
                 UserFullInfo(
                     userUiState.user, textFont, context, userViewModel = userViewModel,
-                    onClickGoToAddUserInfo = onClickGoToAddUserInfo
+                    onClickGoToAddUserInfo = onClickGoToAddUserInfo,childUiState
                 )
             }
         }
