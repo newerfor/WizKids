@@ -23,13 +23,13 @@
 
 <div align="center">
 
-| Главный экран | Профиль ребёнка | Финансы |
-|:---:|:---:|:---:|
-| <img src="pictures/image (6).png" width="200"/> | <img src="pictures/image (7).png" width="200"/> | <img src="pictures/image (8).png" width="200"/> |
+| Главный экран | Профиль ребёнка |
+|:---:|:---:|
+| <img src="pictures/mainScreen.png" width="200"/> | <img src="pictures/firstChildProfile.png" width="200"/> <img src="pictures/SecondProfile.png" width="200"/>|
 
 | Календарь | Документы | Профиль специалиста |
 |:---:|:---:|:---:|
-| <img src="pictures/image (9).png" width="200"/> | <img src="pictures/image (10).png" width="200"/> | <img src="pictures/image (11).png" width="200"/> |
+| <img src="pictures/Calendar.png" width="200"/> | <img src="pictures/viewDocs.png" width="200"/> | <img src="pictures/First_teacher_info.png" width="200"/> <img src="pictures/SecondTeacherInfo.png" width="200"/>|
 
 </div>
 
